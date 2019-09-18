@@ -59,12 +59,12 @@ public class MATRIKS{
         }
 
         /* OBE */
-        public void KurangiRow(int i, int j, double faktor){
+        public void KurangiRow(int i, int j,int startCol, double faktor){
         /* Mengurangi elemen baris i dengan faktor dikali elemen baris j */
             /* Kamus */
             int k;
             /* Algoritma */
-            for(k=GetFirstIdxKol(); k<=GetLastIdxKol(); k++){
+            for(k=startCol; k<=GetLastIdxKol(); k++){
                 KurangiElmt(i,k,faktor*GetElmt(j, k));
             }
             
@@ -170,7 +170,33 @@ public class MATRIKS{
             Swap(j, idxBrsMax);
         }
         
-
+        public void Gauss(){
+            /* 1. Melakukan pivoting mulai dari kolom pertama, buat index baris = baris pertama
+               2. Jika elemen tersebut 0, majukan kolom,sambil lakukan pivoting
+               3. Jika ketemu elemen di baris yg tidak 0 bagi row tersebut dengan nilai elemen tsb,tambah index baris
+               4. Lakukan traversal dengan index baris baru mulai dari baris 1 s/d baris terakhir
+               5. Traversal no 4 mengurangi row pada index baris baru dengan faktor bernilai elemen pada baris dan kolom tsb
+             */
+                /* Kamus */
+                int i1,i2,j;
+                /* Algoritma */
+                i1 = GetFirstIdxBrs();
+                j = GetFirstIdxKol();
+                while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
+                   Pivotting(j);
+                   while(GetElmt(i1, j)==0){ // langkah 2
+                       j++;
+                       Pivotting(j);
+                   }
+                   KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
+                   i1 ++; //langkah3
+                   for(i2=i1; i2<=GetLastIdxBrs(); i2++){
+                       KurangiRow(i2,i1-1,j,GetElmt(i2, j)); // langkah 4 dan 5
+                   }
+                   j++; // ulangi dr langkah 1 untuk kolom selanjutnya
+                   
+                }
+            }
 }
 
 
