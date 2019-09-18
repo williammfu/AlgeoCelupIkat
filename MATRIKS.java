@@ -205,6 +205,13 @@ public class MATRIKS{
                    
                 }
             }
+
+
+            public void Jordan ()
+            /*Melakukan Eliminasi Jordan*/
+            {
+
+            }
 }
 
 
