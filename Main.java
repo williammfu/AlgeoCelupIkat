@@ -1,6 +1,6 @@
 public class Main{
     public static void main(String args[]){
-        MATRIKS M1 = new MATRIKS(2,3);
+        MATRIKS M1 = new MATRIKS(3,4);
         int i;
         i =  M1.GetFirstIdxBrs();
         System.out.println(i);
