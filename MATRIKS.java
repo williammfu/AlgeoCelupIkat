@@ -133,6 +133,26 @@ public class MATRIKS{
             }
         }
 
+        public void Transpose (){
+            /* I.S. M terdefinisi, pasti berukuran persegi */
+            /* F.S. M "di-transpose", yaitu setiap elemen M(i,j) ditukar nilainya dengan elemen M(j,i) */
+
+            /* KAMUS */
+            int i, j;
+            double temp;
+
+            /* ALGORITMA */
+
+            for (i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+                for (j=GetFirstIdxKol()+i; j <= GetLastIdxKol(); j++){
+                    temp = GetElmt(i, j); 
+                    SetElmt( i, j, GetElmt(j, i));
+                    SetElmt(j, i, temp);
+                }
+            }
+
+        }
+
         public void Pivotting (int j){
             /* Mencari nilai terbesar dari kolom j dari baris j s/d GetLastBrs(), lalu menaruh nilai terbesar di baris j (dengan swap) */
             /* Kamus */
