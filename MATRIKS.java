@@ -52,7 +52,15 @@ public class MATRIKS{
         }
 
         public void KurangiElmt(int i, int j, double X){
-            SetElmt(i, j, GetElmt(i,j)-X);
+            /* Kamus */
+            double a;
+            /* Algoritma */
+            a = GetElmt(i,j)-X;
+            if(a == -0){
+                a *= -1;
+            }
+            SetElmt(i, j, a);
+
         }
         public void KaliElmt(int i, int j, double X){
             SetElmt(i, j, GetElmt(i,j)*X);
@@ -132,7 +140,7 @@ public class MATRIKS{
                 System.out.println("");
             }
         }
-
+        
         public void Transpose (){
             /* I.S. M terdefinisi, pasti berukuran persegi */
             /* F.S. M "di-transpose", yaitu setiap elemen M(i,j) ditukar nilainya dengan elemen M(j,i) */

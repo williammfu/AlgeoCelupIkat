@@ -5,9 +5,13 @@ import java.util.Scanner; // untuk proses scan
 public class Main{
     
     public static void main(String args[]){
+<<<<<<< HEAD
         public Scanner in = new Scanner(System.in); 
 
         MATRIKS M1 = new MATRIKS(2,3);
+=======
+        MATRIKS M1 = new MATRIKS(3,4);
+>>>>>>> 84992338214e04ca673ce3d66722b415abd80f87
         int i;
         i =  M1.GetFirstIdxBrs();
         
