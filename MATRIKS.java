@@ -212,6 +212,64 @@ public class MATRIKS{
             {
 
             }
+	
+            /*Blok Kofaktor-Adjoint*/
+            public MATRIKS Minor (int m, int n){
+
+                /*Menghasilkan matriks untuk menghitung nilai Minor ke(m,n)*/
+                /*Kamus*/
+                MATRIKS MMin;
+                int i,j;
+                int skipBrs, skipKol;
+
+                /*Algoritma*/
+                
+                MMin.NBrsEff = this.NBrsEff - 1;
+                MMin.NKolEff = this.NKolEff - 1;
+                skipBrs = 0;
+                for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+
+                    skipKol =0;
+                    for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
+
+                        if(i==m){
+                            skipBrs =1;
+                        }
+                        if(j==n){
+                            skipKol =1;
+                        }
+
+                        MMin[i][j] = GetElmt(i+skipBrs, j+skipKol);
+                    }
+                }
+                return MMin;
+                
+            }
+	
+            public double DetCof(){
+                
+                /*Menghasilkan determinan dari suatu matriks*/
+                /*Prekondisi: Matriks bujur sangkar*/
+                /*Metode: Cofactor Expansion*/
+
+                /*Kamus*/
+                double sum;
+                MATRIKS MKof;
+                int i,j,k,skipBrs;
+
+                /*Algoritma*/
+                if(NBrsEff()==1){
+                    return GetElmt(GetFirstIdxBrs(),GetFirstIdxKol());
+                }
+                else{
+                    sum = 0;
+                    for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+
+                        
+                    }
+                }
+
+            }	
 }
 
 
