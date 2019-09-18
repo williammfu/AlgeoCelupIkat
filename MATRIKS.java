@@ -264,8 +264,9 @@ public class MATRIKS{
                 else{
                     sum = 0;
                     for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
-
-                        
+			for(j=GetLastIdxKol(); j<=GetLastIdxKol(); j++){
+			
+			}
                     }
                 }
 
