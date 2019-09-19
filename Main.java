@@ -1,18 +1,12 @@
-
 import java.util.Scanner; // untuk proses scan
-
 
 public class Main{
     
     public static void main(String args[]){
-<<<<<<< HEAD
-        public Scanner in = new Scanner(System.in); 
+        Scanner in = new Scanner(System.in); 
 
         MATRIKS M1 = new MATRIKS(2,3);
-=======
-        MATRIKS M1 = new MATRIKS(3,4);
->>>>>>> 84992338214e04ca673ce3d66722b415abd80f87
-        int i;
+        int i, pilihan;
         i =  M1.GetFirstIdxBrs();
         
         System.out.println(i);
@@ -43,20 +37,57 @@ public class Main{
         System.out.println(" ");
         System.out.print("Masukkan pilihan Anda: ");
         
-    	
-    	int pilihan = in.nextInt();
+    	pilihan = in.nextInt();
 
 
         System.out.println(" ");
 
         while (pilihan != 7) {
-            switch (pilihan){
-                case 1 :
-                    System.out.println("1");
-                
-                break;
+            if (pilihan ==1){
+                System.out.println("Pilih cara yang ingin Anda gunakan:");
+                System.out.println("a. ");
+                System.out.println("b. ");
+                System.out.println("c. ");
+                System.out.println("d. ");
+            } 
+
+            else if (pilihan == 2) {
+                System.out.println("Pilih cara yang ingin Anda gunakan:");
+                System.out.println("a. ");
+                System.out.println("b. ");
+                System.out.println("c. ");
+                System.out.println("d. ");
             }
+
+            else if (pilihan ==3) {
+                System.out.println("Pilih cara yang ingin Anda gunakan:");
+                System.out.println("a. ");
+                System.out.println("b. ");
+            }
+            
+            else if (pilihan == 4) {
+                System.out.println("4");
+            }
+
+            else if (pilihan == 5) {
+                System.out.println("5");
+
+            }
+
+            else if (pilihan == 6) {
+                System.out.println("6");
+            
+            }
+
+            System.out.println(" ");
+            System.out.print("Masukkan pilihan Anda: ");
+        
+    	    pilihan = in.nextInt();
+            System.out.println(" ");
+
         }
+
+        
 
         
 
