@@ -250,10 +250,10 @@ public class MATRIKS{
                 
                 /*Menghasilkan determinan dari suatu matriks*/
                 /*Prekondisi: Matriks bujur sangkar*/
-                /*Metode: Cofactor Expansion*/
+                /*Metode: Cofactor Expansion - Kolom pertama*/
 
                 /*Kamus*/
-                double sum;
+                double det;
                 MATRIKS MKof;
                 int i,j,k,skipBrs;
 
@@ -262,12 +262,18 @@ public class MATRIKS{
                     return GetElmt(GetFirstIdxBrs(),GetFirstIdxKol());
                 }
                 else{
-                    sum = 0;
+                    det = 0;
                     for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
-			for(j=GetLastIdxKol(); j<=GetLastIdxKol(); j++){
-			
-			}
+                        
+                        if(i%2==0){
+                            det += (-1)*Elmt(i,1)*DetCof(Minor(i,1));
+                        }
+                        else{
+                            det += Elmt(i,1)*DefCof(Minor(i,1));
+                        }
                     }
+
+                    return det;
                 }
 
             }	
