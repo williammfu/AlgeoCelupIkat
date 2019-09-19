@@ -258,17 +258,17 @@ public class MATRIKS{
                 int i,j,k,skipBrs;
 
                 /*Algoritma*/
-                if(NBrsEff()==1){
+                if(NBrsEff()==1){ /*basis*/
                     return GetElmt(GetFirstIdxBrs(),GetFirstIdxKol());
                 }
-                else{
+                else{ 
                     det = 0;
                     for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
                         
-                        if(i%2==0){
+                        if(i%2==0){/*rekurens 1*/
                             det += (-1)*Elmt(i,1)*DetCof(Minor(i,1));
                         }
-                        else{
+                        else{/*rekurens 2*/
                             det += Elmt(i,1)*DefCof(Minor(i,1));
                         }
                     }
@@ -276,7 +276,56 @@ public class MATRIKS{
                     return det;
                 }
 
-            }	
+            }
+            
+            public double Kofaktor(int m, int n) {
+
+                /*Menghasilkan nilai kofaktor dari elemen ke(m,n)*/
+                /*Memanfaatkan method Minor*/
+
+                /*Kamus*/
+                double kof;
+
+                /*Algoritma*/
+                if((m+n)%2==0){
+                    kof = DetCof(Minor(m,n));
+                }
+                else{
+                    kof = (-1)*DetCof(Minor(m,n));
+                }
+
+                return kof;
+            }
+
+            public double MakeKofaktor(){
+
+                /*Menghasilkan sebuah matriks kofaktor dari matriks*/
+                /*Prekondisi: Matriks bujur sangkar*/
+
+                /*Kamus*/
+                double MKof[][];
+                int i,j;
+
+                /*Algoritma*/
+                for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+                    for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
+                        MKof[i][j] = Kofaktor(i,j);                        
+                    }
+                }
+
+                return MKof;
+            }
+
+            public void MakeAdjoint(){
+
+                /*Menghasilkan matriks adjoint*/
+                /*Matriks adjoint merupakan 
+                transpose dari matriks kofaktor*/
+
+                /*Kamus*/
+                /*Algoritma*/
+                Transpose(MakeKofaktor());
+            }
 }
 
 
