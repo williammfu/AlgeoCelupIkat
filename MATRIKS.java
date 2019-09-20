@@ -233,8 +233,24 @@ public class MATRIKS{
             public void Jordan ()
             /*Melakukan Eliminasi Jordan*/
             {
-
+                int i,j, k;
+                boolean found = false;
+                /* Algoritma */
+                    for (i = GetLastIdxBrs(); i >= GetFirstIdxBrs(); i--){
+                        j = GetFirstIdxKol();
+                        while (Mem[i][j] != 1 && j<= GetLastIdxKol()){
+                            j ++;
+                        }
+                        
+                        if (j< GetLastIdxKol()){
+                            for (k = GetLastIdxBrs()-1; k >= GetFirstIdxBrs(); k--){
+                                KurangiRow(k, i , 1, Mem[k][j]);
+                            }
+                        }
+                            
+                    }
             }
+                        
 	
             /*Blok Kofaktor-Adjoint*/
             public MATRIKS Minor (int m, int n){
