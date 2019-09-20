@@ -175,13 +175,17 @@ public class MATRIKS{
             //if(j<=this.GetLastIdxKol() && iM<=this.GetLastIdxBrs()){
                 max = Math.abs(this.Mem[iM][j]);
                 idxBrsMax = iM;
-                for (i= iM; i<=this.GetLastIdxBrs(); i++){
+                for (i= iM+1; i<=this.GetLastIdxBrs(); i++){
                     if(Math.abs(this.Mem[i][j]) > max){
                         max = Math.abs(this.Mem[i][j]);
                         idxBrsMax = i;
                     }
                 }
-                this.Swap(iM, idxBrsMax);
+                if(idxBrsMax > iM){
+                    //System.out.println("Swapp! SwappSOng");
+                    this.Swap(iM, idxBrsMax);
+                }
+                
             //}
             
         }
@@ -202,20 +206,24 @@ public class MATRIKS{
                 //this.Pivotting(j,i1);
                 /* Kamus */
                     int i1,i2,j;
+                    String temp;
                     boolean found = false;
                 /* Algoritma */
                     i1 = GetFirstIdxBrs();
                     j = GetFirstIdxKol();
                     while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
                         do{
-                            //Pivotting(j,i1);
-                            found = Mem[i1][j]!=0;
+                            Pivotting(j,i1);
+                            //System.out.printf("%.2f\n",Mem[i1][j]);
+                            found = Math.round(Mem[i1][j] * 100.0)/100.0 != 0.0;
+                            //System.out.println(found);
                             if(!found){
+                                //System.out.println("lala");
                                 j++;
                             }
                         } while(j<=GetLastIdxKol() && !found);
                         if (found){
-                            System.out.println("qbcf");
+                            //System.out.println("qbcf");
                             //KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
                             //i1 ++; //langkah3
                             for(i2=i1+1; i2<=GetLastIdxBrs(); i2++){
