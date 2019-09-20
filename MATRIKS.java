@@ -224,13 +224,12 @@ public class MATRIKS{
 
                 /*Algoritma*/
                 
-                MMin.NBrsEff = this.NBrsEff - 1;
-                MMin.NKolEff = this.NKolEff - 1;
+                MMin = new MATRIKS(this.NBrsEff-1, this.NKolEff-1);
                 skipBrs = 0;
-                for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+                for(i=MMin.GetFirstIdxBrs(); i<=MMin.GetLastIdxBrs(); i++){
 
                     skipKol =0;
-                    for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
+                    for(j=MMin.GetFirstIdxKol(); j<=MMin.GetLastIdxKol(); j++){
 
                         if(i==m){
                             skipBrs =1;
@@ -239,14 +238,14 @@ public class MATRIKS{
                             skipKol =1;
                         }
 
-                        MMin[i][j] = GetElmt(i+skipBrs, j+skipKol);
+                        MMin.Mem[i][j] = this.GetElmt(i+skipBrs, j+skipKol);
                     }
                 }
                 return MMin;
                 
             }
 	
-            public double DetCof(){
+            public double DetCof(MATRIKS M){
                 
                 /*Menghasilkan determinan dari suatu matriks*/
                 /*Prekondisi: Matriks bujur sangkar*/
@@ -254,22 +253,21 @@ public class MATRIKS{
 
                 /*Kamus*/
                 double det;
-                MATRIKS MKof;
-                int i,j,k,skipBrs;
+                int i;
 
                 /*Algoritma*/
-                if(NBrsEff()==1){ /*basis*/
-                    return GetElmt(GetFirstIdxBrs(),GetFirstIdxKol());
+                if(M.NBrsEff()==1){ /*basis*/
+                    return M.GetElmt(GetFirstIdxBrs(),GetFirstIdxKol());
                 }
                 else{ 
                     det = 0;
-                    for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+                    for(i=M.GetFirstIdxBrs(); i<=M.GetLastIdxBrs(); i++){
                         
                         if(i%2==0){/*rekurens 1*/
-                            det += (-1)*Elmt(i,1)*DetCof(Minor(i,1));
+                            det += (-1)*M.Mem[i][1]*DetCof(M.Minor(i,1));
                         }
                         else{/*rekurens 2*/
-                            det += Elmt(i,1)*DefCof(Minor(i,1));
+                            det += M.Mem[i][1]*DefCof(M.Minor(i,1));
                         }
                     }
 
@@ -288,28 +286,29 @@ public class MATRIKS{
 
                 /*Algoritma*/
                 if((m+n)%2==0){
-                    kof = DetCof(Minor(m,n));
+                    kof = this.DetCof(Minor(m,n));
                 }
                 else{
-                    kof = (-1)*DetCof(Minor(m,n));
+                    kof = (-1)*this.DetCof(Minor(m,n));
                 }
 
                 return kof;
             }
 
-            public double MakeKofaktor(){
+            public MATRIKS MakeKofaktor(){
 
                 /*Menghasilkan sebuah matriks kofaktor dari matriks*/
                 /*Prekondisi: Matriks bujur sangkar*/
 
                 /*Kamus*/
-                double MKof[][];
+                MATRIKS MKof;
                 int i,j;
 
                 /*Algoritma*/
+		MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
                 for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
                     for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
-                        MKof[i][j] = Kofaktor(i,j);                        
+                        MKof.SetElmt(i,j,Kofaktor(i,j));                        
                     }
                 }
 
@@ -323,9 +322,13 @@ public class MATRIKS{
                 transpose dari matriks kofaktor*/
 
                 /*Kamus*/
+		MATRIKS MKof;
+		    
                 /*Algoritma*/
-                Transpose(MakeKofaktor());
-            }
+                MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
+		MKof = this.MakeKofaktor();
+		MKof.Transpose();
+		MKof.TulisMATRIKS();
 }
 
 
