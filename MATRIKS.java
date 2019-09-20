@@ -279,7 +279,7 @@ public class MATRIKS{
                 int i;
 
                 /*Algoritma*/
-                if(M.NBrsEff()==1){ /*basis*/
+                if(M.NBrsEff==1){ /*basis*/
                     return M.GetElmt(GetFirstIdxBrs(),GetFirstIdxKol());
                 }
                 else{ 
