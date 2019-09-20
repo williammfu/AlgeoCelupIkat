@@ -10,12 +10,11 @@ public class Main{
         /* Algoritma */
 
         MATRIKS M1 = new MATRIKS(3,3);
-        /*SPL S1 = new SPL(3,3);
+        //SPL S1 = new SPL(3,3);
         //S1.BacaKeyBoard();
-        S1.Mtrx.TulisMATRIKS();
-        System.out.println(S1.Solusi.length);
-        System.out.println(S1.Solved.length);
-        */
+        //S1.Mtrx.TulisMATRIKS();
+        //System.out.println(S1.Solusi.length);
+        //System.out.println(S1.Solved.length);
         //System.out.println();
        
         i =  M1.GetFirstIdxBrs();
@@ -66,24 +65,23 @@ public class Main{
         while (pilihan != 7) {
             if (pilihan ==1){
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
-                System.out.println("a. ");
-                System.out.println("b. ");
-                System.out.println("c. ");
-                System.out.println("d. ");
+                System.out.println("a. Metode Eliminasi Gauss ");
+                System.out.println("b. Metode Eliminasi Gauss-Jordan");
+                System.out.println("c. Metode Matriks Balikan ");
+                System.out.println("d. Kaidah Cramer");
             } 
 
             else if (pilihan == 2) {
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
-                System.out.println("a. ");
-                System.out.println("b. ");
-                System.out.println("c. ");
-                System.out.println("d. ");
+                System.out.println("a. Metode OBE");
+                System.out.println("b. Metode Matriks Kofaktor");
+                System.out.println("c. Menggunakan Matriks Adjoin");
             }
 
             else if (pilihan ==3) {
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
-                System.out.println("a. ");
-                System.out.println("b. ");
+                System.out.println("a. Metode OBE");
+                System.out.println("b. Menggunakan Adjoin");
             }
             
             else if (pilihan == 4) {
