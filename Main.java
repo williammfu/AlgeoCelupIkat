@@ -21,8 +21,8 @@ public class Main{
         
         System.out.println(i);
 
-
         M1.BacaMATRIKS();
+        //M2.BacaMATRIKS();
         //M1.TulisMATRIKS();
         //M1.KurangiRow(2,1,1,M1.Mem[2][1]);
         //M1.KurangiRow(3, 1,1,M1.Mem[3][1]);
@@ -34,6 +34,7 @@ public class Main{
         //M1.TulisMATRIKS();
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
+<<<<<<< HEAD
         M1.Gauss();
         //M1.Pivotting(2,2);
         M1.TulisMATRIKS();
@@ -41,6 +42,15 @@ public class Main{
         M1.TulisMATRIKS();
         //System.out.println();
        // System.out.printf("%.2f",M1.DetCof(M1));       
+=======
+        //M1.BotTriangular();
+        M1.Gauss();
+        //M1.Pivotting(2,2);
+        M1.TulisMATRIKS();
+        //M2.TulisMATRIKS();
+        System.out.println();
+        System.out.printf("%.2f",M1.DetCof(M1));       
+>>>>>>> b96d41fc85074cdd96ffadd5238f82aacdc4e3eb
         /*
         System.out.println("--------*** TUGAS BESAR 1 ALJABAR LINEAR & GEOMETRI ***--------");
         System.out.println("----*** Sistem Persamaan Linier, Determinan, dan Aplikasinya ***----");
