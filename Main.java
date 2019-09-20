@@ -9,7 +9,7 @@ public class Main{
 
         /* Algoritma */
 
-        MATRIKS M1 = new MATRIKS(2,3);
+        MATRIKS M1 = new MATRIKS(3,3);
         
         i =  M1.GetFirstIdxBrs();
         
@@ -28,10 +28,12 @@ public class Main{
         //M1.TulisMATRIKS();
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
-        M1.Gauss();
+        //M1.Gauss();
         //M1.Pivotting(2,2);
         M1.TulisMATRIKS();
-
+        System.out.println();
+        System.out.printf("%.2f",M1.DetCof(M1));        
+        /*
         System.out.println("--------*** TUGAS BESAR 1 ALJABAR LINEAR & GEOMETRI ***--------");
         System.out.println("----*** Sistem Persamaan Linier, Determinan, dan Aplikasinya ***----");
 
@@ -96,6 +98,6 @@ public class Main{
             System.out.println(" ");
 
         }
-        in.close();
+        in.close();*/
     }
 }
