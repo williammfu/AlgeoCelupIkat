@@ -4,8 +4,9 @@ public class Main{
     
     public static void main(String args[]){
         /* Kamus */
-        int i, pilihan;
+        int i, pilihan, pilihan1;[[[]]]
         Scanner in = new Scanner(System.in); 
+        MATRIKS M;
 
         /* Algoritma */
 
@@ -34,7 +35,6 @@ public class Main{
         //M1.TulisMATRIKS();
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
-<<<<<<< HEAD
         M1.Gauss();
         //M1.Pivotting(2,2);
         M1.TulisMATRIKS();
@@ -42,16 +42,7 @@ public class Main{
         M1.TulisMATRIKS();
         //System.out.println();
        // System.out.printf("%.2f",M1.DetCof(M1));       
-=======
-        //M1.BotTriangular();
-        M1.Gauss();
-        //M1.Pivotting(2,2);
-        M1.TulisMATRIKS();
-        //M2.TulisMATRIKS();
-        System.out.println();
-        System.out.printf("%.2f",M1.DetCof(M1));       
->>>>>>> b96d41fc85074cdd96ffadd5238f82aacdc4e3eb
-        /*
+        
         System.out.println("--------*** TUGAS BESAR 1 ALJABAR LINEAR & GEOMETRI ***--------");
         System.out.println("----*** Sistem Persamaan Linier, Determinan, dan Aplikasinya ***----");
 
@@ -75,31 +66,100 @@ public class Main{
         while (pilihan != 7) {
             if (pilihan ==1){
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
-                System.out.println("a. Metode Eliminasi Gauss ");
-                System.out.println("b. Metode Eliminasi Gauss-Jordan");
-                System.out.println("c. Metode Matriks Balikan ");
-                System.out.println("d. Kaidah Cramer");
+                System.out.println("1. Metode Eliminasi Gauss ");
+                System.out.println("2. Metode Eliminasi Gauss-Jordan");
+                System.out.println("3. Metode Matriks Balikan ");
+                System.out.println("4. Kaidah Cramer");
+
+                pilihan1 = in.nextInt();
+                
+                System.out.println("Masukkan SPL dalam bentuk matriks augmented");
+                M.BacaMATRIKS();
+
+                if (pilihan1 == 1){
+                    M.Gauss();
+                    
+                }
+
+                else if (pilihan1 == 2){
+                    M.Gauss();
+                    M.Jordan();
+                }
+
+                else if (pilihan == 3){
+
+
+                }
+
+                else if (pilihan1 == 4){
+
+                }
+
             } 
 
             else if (pilihan == 2) {
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
-                System.out.println("a. Metode OBE");
-                System.out.println("b. Metode Matriks Kofaktor");
-                System.out.println("c. Menggunakan Matriks Adjoin");
+                System.out.println("1. Metode OBE");
+                System.out.println("2. Metode Matriks Kofaktor");
+                System.out.println("3. Menggunakan Matriks Adjoin");
+
+                pilihan1 = in.nextInt();
+                
+                System.out.println("Masukkan matriks yang ingin dicari matriks determinannya");
+                M.BacaMATRIKS();
+
+                if (pilihan1 == 1){
+                    
+                }
+
+                else if (pilihan == 2) {
+
+                }
+
+                else if (pilihan == 3){
+
+                }
+
             }
 
             else if (pilihan ==3) {
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
-                System.out.println("a. Metode OBE");
-                System.out.println("b. Menggunakan Adjoin");
+                System.out.println("1. Metode OBE");
+                System.out.println("2. Menggunakan Adjoin");
+
+                pilihan1 = in.nextInt();
+                
+                System.out.println("Masukkan matriks yang ingin dicari inversnya");
+                M.BacaMATRIKS();
+
+                if (pilihan1 == 1){
+
+
+                }
+
+                else if (pilihan1 == 2){
+
+
+                }
             }
             
             else if (pilihan == 4) {
-                System.out.println("4");
+                
+                System.out.println("Masukkan matriks yang ingin dicari matriks kofaktornya");
+                M.BacaMATRIKS();
+
+
+
             }
 
             else if (pilihan == 5) {
-                System.out.println("5");
+
+                System.out.println("Masukkan matriks yang ingin dicari matriks adjoinnya");
+                M.BacaMATRIKS();
+
+                M.MakeAdjoint();
+                System.out.println("Matriks Adjointnya:")
+                M.TulisMATRIKS();
 
             }
 

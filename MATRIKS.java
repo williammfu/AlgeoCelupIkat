@@ -46,6 +46,7 @@ public class MATRIKS{
         /* Mengirimkan elemen M(i,i) */
             return GetElmt(i,i);
         }
+
         // Mengubah elemen dari matriks
         public void SetElmt(int i, int j, double X){
             this.Mem[i][j] = X;
@@ -102,6 +103,7 @@ public class MATRIKS{
             }
         }
 
+        
         public void BacaMATRIKS (){
         /* I.S. IsIdxValid(NB,NK) */
         /* F.S. M terdefinisi nilai elemen efektifnya, berukuran NB x NK */
@@ -238,15 +240,15 @@ public class MATRIKS{
                 int i,j, k;
                 boolean found = false;
                 /* Algoritma */
-                    for (i = GetLastIdxBrs(); i >= GetFirstIdxBrs(); i--){
+                    for (i = GetLastIdxBrs(); i > GetFirstIdxBrs(); i--){
                         j = GetFirstIdxKol();
-                        while (Mem[i][j] != 1 && j<= GetLastIdxKol()){
+                        while (j <= GetLastIdxKol() && Mem[i][j] != 1){
                             j ++;
                         }
                         
-                        if (j< GetLastIdxKol()){
-                            for (k = GetLastIdxBrs()-1; k >= GetFirstIdxBrs(); k--){
-                                KurangiRow(k, i , 1, Mem[k][j]);
+                        if (j <= GetLastIdxKol()){
+                            for (k = i-1; k >= GetFirstIdxBrs(); k--){
+                                KurangiRow(k, i, 1, Mem[k][j]);
                             }
                         }
                             
@@ -254,7 +256,7 @@ public class MATRIKS{
             }
                         
 	
-            /*Blok Kofaktor-Adjoint*/
+            /***Blok Kofaktor-Adjoint***/
             public MATRIKS Minor (int m, int n){
 
                 /*Menghasilkan matriks untuk menghitung nilai Minor ke(m,n)*/
@@ -401,6 +403,31 @@ public class MATRIKS{
                 }
                 Inv.TulisMATRIKS();
             }
+
+
+            /*** CRAMMER'S RULE ***/
+            public float CariMCrammer(){
+            /* Mengganti 1 kolom i dengan kolom terakhir matriks augmented lalu mencari determinan 
+            dari matriks baru tersebut*/
+                int i, j;
+
+                MATRIKS Mtemp;
+
+                Mtemp = new MATRIKS(this.NBrsEff, this.NKolEff-1);
+                for (i = Mtemp.GetFirstIdxBrs(); i <= Mtemp.GetLastIdxBrs(); i++){
+                    for (j = Mtemp.GetFirstIdxKol(); j <= Mtemp.GetLastIdxKol(); j++){
+                        k = this.Elmt(i,this.GetLastIdxKol())
+                        Mtemp.Elmt(i,j) = this.Elmt(i,k);
+                    }
+
+                }
+
+                //determinan matriks pake obe huhu :()
+
+            }
+
     }
+
+
 
 
