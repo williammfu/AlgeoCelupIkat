@@ -279,8 +279,8 @@ public class MATRIKS{
                 int i;
 
                 /*Algoritma*/
-                if(M.NBrsEff()==1){ /*basis*/
-                    return M.GetElmt(GetFirstIdxBrs(),GetFirstIdxKol());
+                if(M.NBrsEff==1){ /*basis*/
+                    return M.GetElmt(1,1);
                 }
                 else{ 
                     det = 0;
@@ -290,7 +290,7 @@ public class MATRIKS{
                             det += (-1)*M.Mem[i][1]*DetCof(M.Minor(i,1));
                         }
                         else{/*rekurens 2*/
-                            det += M.Mem[i][1]*DefCof(M.Minor(i,1));
+                            det += M.Mem[i][1]*DetCof(M.Minor(i,1));
                         }
                     }
 
