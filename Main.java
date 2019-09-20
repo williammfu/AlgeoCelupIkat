@@ -4,13 +4,13 @@ public class Main{
     
     public static void main(String args[]){
         /* Kamus */
-        int i, pilihan, pilihan1;[[[]]]
+        int i, pilihan, pilihan1;
         Scanner in = new Scanner(System.in); 
         MATRIKS M;
 
         /* Algoritma */
 
-        MATRIKS M1 = new MATRIKS(3,3);
+        MATRIKS M1 = new MATRIKS(2,3);
         //SPL S1 = new SPL(3,3);
         //S1.BacaKeyBoard();
         //S1.Mtrx.TulisMATRIKS();
@@ -35,25 +35,19 @@ public class Main{
         //M1.TulisMATRIKS();
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
-<<<<<<< HEAD
-        M1.Gauss();
+        //M1.Gauss();
         //M1.Pivotting(2,2);
-        M1.TulisMATRIKS();
-        M1.Jordan();
-        M1.TulisMATRIKS();
+        //M1.TulisMATRIKS();
+        //M1.Jordan();
+        //M1.TulisMATRIKS();
+
+        M1.CariMCrammer();
+
+
         //System.out.println();
        // System.out.printf("%.2f",M1.DetCof(M1));       
         
-=======
-        //M1.BotTriangular();
-        M1.Gauss();
-        //M1.Pivotting(2,2);
-        M1.TulisMATRIKS();
-        //M2.TulisMATRIKS();
-        System.out.println();
-        System.out.printf("%.2f",M1.DetCof(M1));       
         /*
->>>>>>> bf467c125fafdb3d89cde4aef6ac405d46f76f15
         System.out.println("--------*** TUGAS BESAR 1 ALJABAR LINEAR & GEOMETRI ***--------");
         System.out.println("----*** Sistem Persamaan Linier, Determinan, dan Aplikasinya ***----");
 
@@ -104,6 +98,7 @@ public class Main{
 
                 else if (pilihan1 == 4){
 
+                    //jangan lupa tolak kalo matriksnya det = 0 ato ga square
                 }
 
             } 

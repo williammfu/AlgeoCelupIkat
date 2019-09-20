@@ -414,24 +414,47 @@ public class MATRIKS{
 
 
             /*** CRAMMER'S RULE ***/
-            public float CariMCrammer(){
+            public void CariMCrammer(){
             /* Mengganti 1 kolom i dengan kolom terakhir matriks augmented lalu mencari determinan 
             dari matriks baru tersebut*/
-                int i, j;
+                int i, j, n, k;
+                double hasil;
 
-                MATRIKS Mtemp;
+                MATRIKS Mtemp, Mtemp2;
 
                 Mtemp = new MATRIKS(this.NBrsEff, this.NKolEff-1);
-                for (i = Mtemp.GetFirstIdxBrs(); i <= Mtemp.GetLastIdxBrs(); i++){
-                    for (j = Mtemp.GetFirstIdxKol(); j <= Mtemp.GetLastIdxKol(); j++){
-                        k = this.Elmt(i,this.GetLastIdxKol())
-                        Mtemp.Elmt(i,j) = this.Elmt(i,k);
+                Mtemp2 = new MATRIKS(this.NBrsEff, this.NKolEff-1);
+
+                for (i=Mtemp2.GetFirstIdxBrs(); i <= Mtemp2.GetLastIdxBrs(); i++){
+                    for (j = Mtemp2.GetFirstIdxKol(); j<= Mtemp2.GetLastIdxKol(); j++){
+                        Mtemp2.Mem[i][j] = this.Mem[i][j];
                     }
+                }
+
+
+                for (n = 1; n < this.GetLastIdxKol(); n++){
+                    for (i = Mtemp.GetFirstIdxBrs(); i <= Mtemp.GetLastIdxBrs(); i++){
+                        for (j = Mtemp.GetFirstIdxKol(); j <= Mtemp.GetLastIdxKol(); j++){
+                            k = this.GetLastIdxKol();
+                            if (j == n){
+                                Mtemp.Mem[i][j] = this.Mem[i][k];
+                            }
+                            else{
+                                Mtemp.Mem[i][j] = this.Mem[i][j];
+                            }
+
+                        }
+                    }
+                    hasil = DetCof(Mtemp)/DetCof(Mtemp2);
+                    System.out.print("X");
+                    System.out.print(n);
+                    System.out.print(" = ");
+                    System.out.println(hasil);
+
 
                 }
 
-                //determinan matriks pake obe huhu :()
-
+                
             }
 
     }
