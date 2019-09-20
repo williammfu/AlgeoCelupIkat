@@ -10,11 +10,12 @@ public class Main{
         /* Algoritma */
 
         MATRIKS M1 = new MATRIKS(3,3);
-        SPL S1 = new SPL(3,3);
+        /*SPL S1 = new SPL(3,3);
         //S1.BacaKeyBoard();
         S1.Mtrx.TulisMATRIKS();
         System.out.println(S1.Solusi.length);
         System.out.println(S1.Solved.length);
+        */
         //System.out.println();
        
         i =  M1.GetFirstIdxBrs();
