@@ -228,7 +228,131 @@ public class MATRIKS{
                 //KurangiRow(2,1,1,GetElmt(2, 1));
                 //KurangiRow(3,1,1,GetElmt(3, 1));
                 //KurangiRow(2,2,2,GetElmt(3,2));
+
+
+            public void Jordan ()
+            /*Melakukan Eliminasi Jordan*/
+            {
+
+            }
+	
+            /*Blok Kofaktor-Adjoint*/
+            public MATRIKS Minor (int m, int n){
+
+                /*Menghasilkan matriks untuk menghitung nilai Minor ke(m,n)*/
+                /*Kamus*/
+                MATRIKS MMin;
+                int i,j;
+                int skipBrs, skipKol;
+
+                /*Algoritma*/
+                
+                MMin = new MATRIKS(this.NBrsEff-1, this.NKolEff-1);
+                skipBrs = 0;
+                for(i=MMin.GetFirstIdxBrs(); i<=MMin.GetLastIdxBrs(); i++){
+
+                    skipKol =0;
+                    for(j=MMin.GetFirstIdxKol(); j<=MMin.GetLastIdxKol(); j++){
+
+                        if(i==m){
+                            skipBrs =1;
+                        }
+                        if(j==n){
+                            skipKol =1;
+                        }
+
+                        MMin.Mem[i][j] = this.GetElmt(i+skipBrs, j+skipKol);
+                    }
+                }
+                return MMin;
+                
+            }
+	
+            public double DetCof(MATRIKS M){
+                
+                /*Menghasilkan determinan dari suatu matriks*/
+                /*Prekondisi: Matriks bujur sangkar*/
+                /*Metode: Cofactor Expansion - Kolom pertama*/
+
+                /*Kamus*/
+                double det;
+                int i;
+
+                /*Algoritma*/
+                if(M.NBrsEff()==1){ /*basis*/
+                    return M.GetElmt(GetFirstIdxBrs(),GetFirstIdxKol());
+                }
+                else{ 
+                    det = 0;
+                    for(i=M.GetFirstIdxBrs(); i<=M.GetLastIdxBrs(); i++){
+                        
+                        if(i%2==0){/*rekurens 1*/
+                            det += (-1)*M.Mem[i][1]*DetCof(M.Minor(i,1));
+                        }
+                        else{/*rekurens 2*/
+                            det += M.Mem[i][1]*DefCof(M.Minor(i,1));
+                        }
+                    }
+
+                    return det;
+                }
+
+            }
             
+            public double Kofaktor(int m, int n) {
+
+                /*Menghasilkan nilai kofaktor dari elemen ke(m,n)*/
+                /*Memanfaatkan method Minor*/
+
+                /*Kamus*/
+                double kof;
+
+                /*Algoritma*/
+                if((m+n)%2==0){
+                    kof = this.DetCof(Minor(m,n));
+                }
+                else{
+                    kof = (-1)*this.DetCof(Minor(m,n));
+                }
+
+                return kof;
+            }
+
+            public MATRIKS MakeKofaktor(){
+
+                /*Menghasilkan sebuah matriks kofaktor dari matriks*/
+                /*Prekondisi: Matriks bujur sangkar*/
+
+                /*Kamus*/
+                MATRIKS MKof;
+                int i,j;
+
+                /*Algoritma*/
+		MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
+                for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+                    for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
+                        MKof.SetElmt(i,j,Kofaktor(i,j));                        
+                    }
+                }
+
+                return MKof;
+            }
+
+            public void MakeAdjoint(){
+
+                /*Menghasilkan matriks adjoint*/
+                /*Matriks adjoint merupakan 
+                transpose dari matriks kofaktor*/
+
+                /*Kamus*/
+		MATRIKS MKof;
+		    
+                /*Algoritma*/
+                MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
+		MKof = this.MakeKofaktor();
+		MKof.Transpose();
+		MKof.TulisMATRIKS();
+    }
 }
 
 
