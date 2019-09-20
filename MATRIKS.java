@@ -183,7 +183,7 @@ public class MATRIKS{
             //}
             
         }
-        
+
         public void Gauss(){
             /* 1. Melakukan pivoting mulai dari kolom pertama, buat index baris = baris pertama
                2. Jika elemen tersebut 0, majukan kolom,sambil lakukan pivoting
@@ -198,33 +198,35 @@ public class MATRIKS{
                 //i1 = 1;
                 //j = 1;
                 //this.Pivotting(j,i1);
-                                /* Kamus */
-                                int i1,i2,j;
-                                boolean found = false;
-                                /* Algoritma */
-                                i1 = GetFirstIdxBrs();
-                                j = GetFirstIdxKol();
-                                while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
-                                    do{
-                                        Pivotting(j,i1);
-                                        found = Mem[i1][j]!=0;
-                                        if(!found){
-                                            j++;
-                                        }
-                                    } while(j<=GetLastIdxKol() && !found);
-                                   if (found){
-                                   KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
-                                   //i1 ++; //langkah3
-                                   for(i2=i1+1; i2<=GetLastIdxBrs(); i2++){
-                                       KurangiRow(i2,i1,j,GetElmt(i2, j)); // langkah 4 dan 5
-                                   }
-                                   i1 ++; //langkah3
-                                   j++; // ulangi dr langkah 1 untuk kolom selanjutnya
-                
-                                }
-                                
+                /* Kamus */
+                    int i1,i2,j;
+                    boolean found = false;
+                /* Algoritma */
+                    i1 = GetFirstIdxBrs();
+                    j = GetFirstIdxKol();
+                    while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
+                        do{
+                            //Pivotting(j,i1);
+                            found = Mem[i1][j]!=0;
+                            if(!found){
+                                j++;
                             }
-        }
+                        } while(j<=GetLastIdxKol() && !found);
+                        if (found){
+                            System.out.println("qbcf");
+                            //KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
+                            //i1 ++; //langkah3
+                            for(i2=i1+1; i2<=GetLastIdxBrs(); i2++){
+                                KurangiRow(i2,i1,j,GetElmt(i2, j)/GetElmt(i1,j)); // langkah 4 dan 5
+                            }
+                            KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
+                            i1 ++; //langkah3
+                            j++; // ulangi dr langkah 1 untuk kolom selanjutnya
+                
+                        }
+                                
+                    }
+            }
                 //KurangiRow(2,1,1,GetElmt(2, 1));
                 //KurangiRow(3,1,1,GetElmt(3, 1));
                 //KurangiRow(2,2,2,GetElmt(3,2));

@@ -10,7 +10,8 @@ public class Main{
         /* Algoritma */
 
         MATRIKS M1 = new MATRIKS(3,3);
-        SPL S1 = new SPL(3,3);
+        //MATRIKS M2 = new MATRIKS(3,3);
+       /* SPL S1 = new SPL(3,3);
         S1.BacaKeyBoard();
         S1.Mtrx.TulisMATRIKS();
         System.out.println(S1.Solusi.length);
@@ -20,9 +21,10 @@ public class Main{
         i =  M1.GetFirstIdxBrs();
         
         System.out.println(i);
-
+        */
 
         M1.BacaMATRIKS();
+        //M2.BacaMATRIKS();
         //M1.TulisMATRIKS();
         //M1.KurangiRow(2,1,1,M1.Mem[2][1]);
         //M1.KurangiRow(3, 1,1,M1.Mem[3][1]);
@@ -34,9 +36,11 @@ public class Main{
         //M1.TulisMATRIKS();
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
-        //M1.Gauss();
+        //M1.BotTriangular();
+        M1.Gauss();
         //M1.Pivotting(2,2);
         M1.TulisMATRIKS();
+        //M2.TulisMATRIKS();
         System.out.println();
         System.out.printf("%.2f",M1.DetCof(M1));        
         /*

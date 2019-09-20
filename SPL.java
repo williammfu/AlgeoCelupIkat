@@ -10,16 +10,28 @@ public class SPL{
      /* Konstruktor */
      public SPL(int nb, int nk){
          this.Mtrx = new MATRIKS(nb, nk+1);
-         Solusi = new double [nk];
-         Solved = new int [nk];
+         Solusi = new double [nk+1];
+         Solved = new int [nk+1];
      }
 
      /* Baca SPL */
-     public void BacaKeyBoard(){
+     public void BacaSPLKeyBoard(){
          this.Mtrx.BacaMATRIKS();
      }
 
-     
+     public void BacaSPLFile(){
+         /* Membaca SPL dari file eksternal */
+         /* Kamus */
+         MATRIKS temp;
+         /* Algoritma */
+         temp = new MATRIKS(100, 101); // asumsi masukan matriks dari file tidak akan melebihi 100 baris dan 101 kolom
+         temp.BacaMATRIKSFile();
+         this.Mtrx = temp;
+         this.Solusi = new double [temp.NKolEff+1];
+         this.Solved = new int [temp.NKolEff+1];
+
+
+     }
 
 
 }
