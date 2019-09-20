@@ -328,7 +328,7 @@ public class MATRIKS{
                 int i,j;
 
                 /*Algoritma*/
-		MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
+		        MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
                 for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
                     for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
                         MKof.SetElmt(i,j,Kofaktor(i,j));                        
@@ -345,14 +345,44 @@ public class MATRIKS{
                 transpose dari matriks kofaktor*/
 
                 /*Kamus*/
-		MATRIKS MKof;
+                MATRIKS MKof;
+                int i,j;
 		    
                 /*Algoritma*/
                 MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
-		MKof = this.MakeKofaktor();
-		MKof.Transpose();
-		MKof.TulisMATRIKS();
-    }
+		        MKof = this.MakeKofaktor();
+                MKof.Transpose();
+                for(i=1; i<=this.GetLastIdxBrs(); i++){
+                    for(j=1; j<=this.GetLastIdxKol(); j++){
+                        this.Mem[i][j] = MKof.Mem[i][j];
+                    }
+                }
+            }
+
+            public void InvAdj(){
+                
+                /*Menampilkan Invers Matriks*/
+                /*Metode Adjoint*/
+
+                /*Kamus*/
+                MATRIKS Inv;
+                int i,j;
+                double det;
+
+                /*Algoritma*/
+                det = this.DetCof(this);
+                this.MakeAdjoint();
+                Inv = new MATRIKS(this.NBrsEff, this.NKolEff);
+                for(i=1; i<=Inv.GetLastIdxBrs(); i++){
+                    for(j=1; j<=Inv.GetLastIdxKol(); j++){
+                        Inv.Mem[i][j] = this.Mem[i][j]/det;
+                        if (Inv.Mem[i][j]==-0){
+                            Inv.Mem[i][j] = 0;
+                        }
+                    }
+                }
+                Inv.TulisMATRIKS();
+            }
 }
 
 
