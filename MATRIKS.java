@@ -1,12 +1,12 @@
 import java.util.Scanner; // untuk proses scan
-import java.text.DecimalFormat; // untuk menampilkan 2 digit desimal
+import java.text.DecimalFormat; // untuk menampilkan 2(sbnrnya gk hrs 2) digit desimal
 import java.lang.Math; // untuk fungsi absolute
 
 public class MATRIKS{
     // Define konstanta
     public static int BrsMin = 1;
     public static int KolMin = 1;
-    public Scanner in = new Scanner(System.in); // shortcut untuk input co in.nextInt()
+    Scanner in = new Scanner(System.in); // shortcut untuk input co in.nextInt()
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
     // Define atribut class
@@ -40,7 +40,7 @@ public class MATRIKS{
         }
         public double GetElmt (int i,int j){
             /* Mengirimkan elemen M(i,j) */
-            return Mem[i][j];
+            return this.Mem[i][j];
         }
         public double GetElmtDiagonal (int i){
         /* Mengirimkan elemen M(i,i) */
@@ -48,22 +48,25 @@ public class MATRIKS{
         }
         // Mengubah elemen dari matriks
         public void SetElmt(int i, int j, double X){
-            Mem[i][j] = X;
+            this.Mem[i][j] = X;
         }
 
         public void KurangiElmt(int i, int j, double X){
             /* Kamus */
             double a;
             /* Algoritma */
-            a = GetElmt(i,j)-X;
+            a = this.GetElmt(i,j)-X;
             if(a == -0){
-                a *= -1;
+                a = 0;
             }
-            SetElmt(i, j, a);
+            this.SetElmt(i, j, a);
 
         }
         public void KaliElmt(int i, int j, double X){
-            SetElmt(i, j, GetElmt(i,j)*X);
+            if(this.GetElmt(i,j)!=0){
+                this.SetElmt(i, j, this.GetElmt(i,j)*X);
+            }
+            
         }
 
         /* OBE */
@@ -72,8 +75,8 @@ public class MATRIKS{
             /* Kamus */
             int k;
             /* Algoritma */
-            for(k=startCol; k<=GetLastIdxKol(); k++){
-                KurangiElmt(i,k,faktor*GetElmt(j, k));
+            for(k=startCol; k<=this.GetLastIdxKol(); k++){
+                this.KurangiElmt(i,k,faktor*this.GetElmt(j, k));
             }
             
         }
@@ -81,8 +84,8 @@ public class MATRIKS{
             /* Kamus */
             int j;
             /* Algoritma */
-            for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
-                KaliElmt(i, j, x);
+            for(j=this.GetFirstIdxKol(); j<=this.GetLastIdxKol(); j++){
+                this.KaliElmt(i, j, x);
             }
             
         }
@@ -140,7 +143,7 @@ public class MATRIKS{
                 System.out.println("");
             }
         }
-        
+
         public void Transpose (){
             /* I.S. M terdefinisi, pasti berukuran persegi */
             /* F.S. M "di-transpose", yaitu setiap elemen M(i,j) ditukar nilainya dengan elemen M(j,i) */
@@ -161,21 +164,24 @@ public class MATRIKS{
 
         }
 
-        public void Pivotting (int j){
-            /* Mencari nilai terbesar dari kolom j dari baris j s/d GetLastBrs(), lalu menaruh nilai terbesar di baris j (dengan swap) */
+        public void Pivotting (int j, int iM){
+            /* Mencari nilai terbesar dari kolom j dari baris iM s/d GetLastBrs(), lalu menaruh nilai terbesar di baris iM (dengan swap) */
             /* Kamus */
             int i, idxBrsMax;
             double max;
             /* Algoritma */
-            max = Math.abs(GetElmt(j, j));
-            idxBrsMax = j;
-            for (i= j+1; i<=GetLastIdxBrs(); i++){
-                if(Math.abs(GetElmt(i, j)) > max){
-                    max = Math.abs(GetElmt(i,j));
-                    idxBrsMax = i;
+            //if(j<=this.GetLastIdxKol() && iM<=this.GetLastIdxBrs()){
+                max = Math.abs(this.Mem[iM][j]);
+                idxBrsMax = iM;
+                for (i= iM; i<=this.GetLastIdxBrs(); i++){
+                    if(Math.abs(this.Mem[i][j]) > max){
+                        max = Math.abs(this.Mem[i][j]);
+                        idxBrsMax = i;
+                    }
                 }
-            }
-            Swap(j, idxBrsMax);
+                this.Swap(iM, idxBrsMax);
+            //}
+            
         }
         
         public void Gauss(){
@@ -185,26 +191,43 @@ public class MATRIKS{
                4. Lakukan traversal dengan index baris baru mulai dari baris 1 s/d baris terakhir
                5. Traversal no 4 mengurangi row pada index baris baru dengan faktor bernilai elemen pada baris dan kolom tsb
              */
-                /* Kamus */
-                int i1,i2,j;
+                /*/* Kamus */
+                //int i1,i2,j;
+                //boolean found = false;
                 /* Algoritma */
-                i1 = GetFirstIdxBrs();
-                j = GetFirstIdxKol();
-                while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
-                   Pivotting(j);
-                   while(GetElmt(i1, j)==0){ // langkah 2
-                       j++;
-                       Pivotting(j);
-                   }
-                   KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
-                   i1 ++; //langkah3
-                   for(i2=i1; i2<=GetLastIdxBrs(); i2++){
-                       KurangiRow(i2,i1-1,j,GetElmt(i2, j)); // langkah 4 dan 5
-                   }
-                   j++; // ulangi dr langkah 1 untuk kolom selanjutnya
-                   
-                }
-            }
+                //i1 = 1;
+                //j = 1;
+                //this.Pivotting(j,i1);
+                                /* Kamus */
+                                int i1,i2,j;
+                                boolean found = false;
+                                /* Algoritma */
+                                i1 = GetFirstIdxBrs();
+                                j = GetFirstIdxKol();
+                                while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
+                                    do{
+                                        Pivotting(j,i1);
+                                        found = Mem[i1][j]!=0;
+                                        if(!found){
+                                            j++;
+                                        }
+                                    } while(j<=GetLastIdxKol() && !found);
+                                   if (found){
+                                   KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
+                                   //i1 ++; //langkah3
+                                   for(i2=i1+1; i2<=GetLastIdxBrs(); i2++){
+                                       KurangiRow(i2,i1,j,GetElmt(i2, j)); // langkah 4 dan 5
+                                   }
+                                   i1 ++; //langkah3
+                                   j++; // ulangi dr langkah 1 untuk kolom selanjutnya
+                
+                                }
+                                
+                            }
+        }
+                //KurangiRow(2,1,1,GetElmt(2, 1));
+                //KurangiRow(3,1,1,GetElmt(3, 1));
+                //KurangiRow(2,2,2,GetElmt(3,2));
 
 
             public void Jordan ()
@@ -224,13 +247,12 @@ public class MATRIKS{
 
                 /*Algoritma*/
                 
-                MMin.NBrsEff = this.NBrsEff - 1;
-                MMin.NKolEff = this.NKolEff - 1;
+                MMin = new MATRIKS(this.NBrsEff-1, this.NKolEff-1);
                 skipBrs = 0;
-                for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+                for(i=MMin.GetFirstIdxBrs(); i<=MMin.GetLastIdxBrs(); i++){
 
                     skipKol =0;
-                    for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
+                    for(j=MMin.GetFirstIdxKol(); j<=MMin.GetLastIdxKol(); j++){
 
                         if(i==m){
                             skipBrs =1;
@@ -239,14 +261,14 @@ public class MATRIKS{
                             skipKol =1;
                         }
 
-                        MMin[i][j] = GetElmt(i+skipBrs, j+skipKol);
+                        MMin.Mem[i][j] = this.GetElmt(i+skipBrs, j+skipKol);
                     }
                 }
                 return MMin;
                 
             }
 	
-            public double DetCof(){
+            public double DetCof(MATRIKS M){
                 
                 /*Menghasilkan determinan dari suatu matriks*/
                 /*Prekondisi: Matriks bujur sangkar*/
@@ -254,22 +276,21 @@ public class MATRIKS{
 
                 /*Kamus*/
                 double det;
-                MATRIKS MKof;
-                int i,j,k,skipBrs;
+                int i;
 
                 /*Algoritma*/
-                if(NBrsEff()==1){ /*basis*/
-                    return GetElmt(GetFirstIdxBrs(),GetFirstIdxKol());
+                if(M.NBrsEff==1){ /*basis*/
+                    return M.GetElmt(1,1);
                 }
                 else{ 
                     det = 0;
-                    for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+                    for(i=M.GetFirstIdxBrs(); i<=M.GetLastIdxBrs(); i++){
                         
                         if(i%2==0){/*rekurens 1*/
-                            det += (-1)*Elmt(i,1)*DetCof(Minor(i,1));
+                            det += (-1)*M.Mem[i][1]*DetCof(M.Minor(i,1));
                         }
                         else{/*rekurens 2*/
-                            det += Elmt(i,1)*DefCof(Minor(i,1));
+                            det += M.Mem[i][1]*DetCof(M.Minor(i,1));
                         }
                     }
 
@@ -288,28 +309,29 @@ public class MATRIKS{
 
                 /*Algoritma*/
                 if((m+n)%2==0){
-                    kof = DetCof(Minor(m,n));
+                    kof = this.DetCof(Minor(m,n));
                 }
                 else{
-                    kof = (-1)*DetCof(Minor(m,n));
+                    kof = (-1)*this.DetCof(Minor(m,n));
                 }
 
                 return kof;
             }
 
-            public double MakeKofaktor(){
+            public MATRIKS MakeKofaktor(){
 
                 /*Menghasilkan sebuah matriks kofaktor dari matriks*/
                 /*Prekondisi: Matriks bujur sangkar*/
 
                 /*Kamus*/
-                double MKof[][];
+                MATRIKS MKof;
                 int i,j;
 
                 /*Algoritma*/
+		MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
                 for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
                     for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
-                        MKof[i][j] = Kofaktor(i,j);                        
+                        MKof.SetElmt(i,j,Kofaktor(i,j));                        
                     }
                 }
 
@@ -323,9 +345,14 @@ public class MATRIKS{
                 transpose dari matriks kofaktor*/
 
                 /*Kamus*/
+		MATRIKS MKof;
+		    
                 /*Algoritma*/
-                Transpose(MakeKofaktor());
-            }
+                MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
+		MKof = this.MakeKofaktor();
+		MKof.Transpose();
+		MKof.TulisMATRIKS();
+    }
 }
 
 

@@ -3,25 +3,37 @@ import java.util.Scanner; // untuk proses scan
 public class Main{
     
     public static void main(String args[]){
+        /* Kamus */
+        int i, pilihan;
         Scanner in = new Scanner(System.in); 
 
-        MATRIKS M1 = new MATRIKS(2,3);
-        int i, pilihan;
+        /* Algoritma */
+
+        MATRIKS M1 = new MATRIKS(3,3);
+        
         i =  M1.GetFirstIdxBrs();
         
         System.out.println(i);
 
+
         M1.BacaMATRIKS();
         //M1.TulisMATRIKS();
-        //M1.KurangiRow(2, 1,2);
+        //M1.KurangiRow(2,1,1,M1.Mem[2][1]);
+        //M1.KurangiRow(3, 1,1,M1.Mem[3][1]);
+        //M1.KaliRow(2, 1/M1.Mem[2][2]);
+        //M1.KurangiRow(3, 2,1,M1.Mem[3][2]);
+        //M1.KaliRow(3,1/M1.Mem[3][3]);
+        //M1.KurangiRow(3, 2, 2, );
         //M1.KaliRow(2, 2);
         //M1.TulisMATRIKS();
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
-        M1.Gauss();
-        //M1.Pivotting(1);
+        //M1.Gauss();
+        //M1.Pivotting(2,2);
         M1.TulisMATRIKS();
-
+        System.out.println();
+        System.out.printf("%.2f",M1.DetCof(M1));        
+        /*
         System.out.println("--------*** TUGAS BESAR 1 ALJABAR LINEAR & GEOMETRI ***--------");
         System.out.println("----*** Sistem Persamaan Linier, Determinan, dan Aplikasinya ***----");
 
@@ -85,15 +97,6 @@ public class Main{
             System.out.println(" ");
 
         }
-
-        
-
-        
-
-
-
-
-
-        
+        in.close();*/
     }
 }
