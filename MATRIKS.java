@@ -365,7 +365,10 @@ public class MATRIKS{
 		        MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
                 for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
                     for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
-                        MKof.SetElmt(i,j,Kofaktor(i,j));                        
+                        MKof.SetElmt(i,j,Kofaktor(i,j));
+                        if(MKof.GetElmt(i, j)== -0){/*Penanganan nilai -0*/
+                            MKof.SetElmt(i, j, 0);
+                        }                        
                     }
                 }
 
