@@ -6,26 +6,47 @@ public class Main{
     
     public static void main(String args[]) throws FileNotFoundException{
         /* Kamus */
-        int i, pilihan, pilihan1;
+        int i,j,k, pilihan, pilihan1;
         Scanner in = new Scanner(System.in); 
         MATRIKS M;
 
         /* Algoritma */
 
-        MATRIKS M1 = new MATRIKS(3,3);
-        /*SPL S1 = new SPL(100,101);
-        S1.BacaSPLFile("chinese.txt");
-        //S1.BacaKeyBoard();
-        S1.Mtrx.TulisMATRIKS();
-        System.out.println(S1.Solusi.length);
-        System.out.println(S1.Solved.length);*/
+        //MATRIKS M1 = new MATRIKS(3,3);
+        //SPL S1 = new SPL(3);
+        SPL S2 = new SPL(4);
+        //S1.BacaSPLFile("chinese.txt");
+        //S1.BacaSPLKeyBoard();
+        //S1.CekSolveAndBebas();
+        S2.BacaSPLKeyBoard();
+        // Inisialisasi matriks solusi
+        /*for(j = S1.Solusi.GetFirstIdxBrs(); j<=S1.Solusi.GetLastIdxBrs(); j++){
+            for(k = S1.Solusi.GetFirstIdxKol(); k<=S1.Solusi.GetLastIdxKol(); k++){
+                S1.Solusi.SetElmt(j, k, 0);
+            }
+        }
+        S1.SolusiPerBaris(3);
+        S1.Solusi.TulisMATRIKS();
+        System.out.println("Lalalala");
+        S1.SolusiPerBaris(2);
+        S1.Solusi.TulisMATRIKS();
+        S1.SolusiPerBaris(1);
+        S1.Solusi.TulisMATRIKS();*/
+        S2.SolusiByGauss();
+        S2.Solusi.TulisMATRIKS();
+        S2.TulisSPL();
+        //S1.Mtrx.Gauss();
+        //S1.Mtrx.TulisMATRIKS();
+        //System.out.println(S1.Solusi.length);
+        //System.out.println(S1.Bebas.length);
+        //S1.CekSolveAndBebas();
         //System.out.println();
        
         //i =  M1.GetFirstIdxBrs();
         
         //System.out.println(i);
         //M1.BacaFileMatrix("chinese.txt");
-        M1.BacaMATRIKS();
+        //M1.BacaMATRIKS();
         //M1.TulisMATRIKS();
         //M1.KurangiRow(2,1,1,M1.Mem[2][1]);
         //M1.KurangiRow(3, 1,1,M1.Mem[3][1]);
@@ -38,12 +59,19 @@ public class Main{
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
         //M1.BotTriangular();
-        M1.Gauss();
+        //S1.Mtrx.Gauss();
+        //S1.Mtrx.TulisMATRIKS();
+        //S1.CekSolved();
         //M1.Pivotting(2,2);
-        M1.TulisMATRIKS();
+        //M1.TulisMATRIKS();
         //M2.TulisMATRIKS();
-        System.out.println(M1.detByGauss);
-        System.out.println();
+        //System.out.println(M1.detByGauss);
+        //System.out.println(M1.CekBrsNolSemua(3));
+        //System.out.println();
+        /*for(i=1; i<=S1.Bebas.length-1; i++){
+            System.out.println(S1.Bebas[i]);
+        }
+        System.out.println(S1.solveable);*/
         //System.out.printf("%.2f",M1.DetCof(M1));       
         //M1.Gauss();
         //M1.Pivotting(2,2);

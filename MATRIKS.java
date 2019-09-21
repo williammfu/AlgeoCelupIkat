@@ -200,13 +200,7 @@ public class MATRIKS{
                4. Lakukan traversal dengan index baris baru mulai dari baris 1 s/d baris terakhir
                5. Traversal no 4 mengurangi row pada index baris baru dengan faktor bernilai elemen pada baris dan kolom tsb
              */
-                /*/* Kamus */
-                //int i1,i2,j;
-                //boolean found = false;
-                /* Algoritma */
-                //i1 = 1;
-                //j = 1;
-                //this.Pivotting(j,i1);
+                
                 /* Kamus */
                     int i1,i2,j;
                     boolean found = false;
@@ -218,7 +212,7 @@ public class MATRIKS{
                         do{
                             Pivotting(j,i1);
                             //System.out.printf("%.2f\n",Mem[i1][j]);
-                            found = Math.round(Mem[i1][j] * 100.0)/100.0 != 0.0;
+                            found = Math.round(Mem[i1][j] * 100000.0)/100000.0 != 0.0;
                             //System.out.println(found);
                             if(!found){
                                 //System.out.println("lala");
@@ -234,7 +228,7 @@ public class MATRIKS{
                                 KurangiRow(i2,i1,j,GetElmt(i2, j)/GetElmt(i1,j)); // langkah 4 dan 5
                             }
                             detByGauss *= GetElmt(i1,j); // sblm dibikin 1 elemen diagonalnya detnya dikali dulu dgn elemen diagonal tsb.
-                            System.out.println(detByGauss);
+                            //System.out.println(detByGauss);
                             KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
                             i1 ++; //langkah3
                             j++; // ulangi dr langkah 1 untuk kolom selanjutnya
@@ -498,6 +492,21 @@ public class MATRIKS{
                 }
 
                 
+            }
+
+            public boolean CekBrsNolSemua(int brs,int finalKol){
+                /* Menghasilkan true jika elemen matriks pada baris i bernilai 0 semua */
+                /* Kamus */
+                boolean cek=true;
+                int j=GetFirstIdxKol();
+                /* Algoritma */
+                //System.out.println(finalKol);
+                while(cek && j<=finalKol){
+                    cek = Math.round(GetElmt(brs, j)*100000.0)/100000.0 == 0;
+                    j++;
+                }
+                return cek;
+
             }
 
     }
