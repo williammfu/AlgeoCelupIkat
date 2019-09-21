@@ -12,8 +12,9 @@ public class Interpolasi{
         Scanner input = new Scanner(System.in);
         MATRIKS Temp, Pol;
         int n;
-        int p,q; /*variabel untuk looping*/
-        double xi;
+        int i,j; /*variabel untuk looping*/
+        double xi,yi; /*titik yang ingin ditaksir nilainya*/
+        double a[];
 
         /*Algoritma*/
         n = input.nextInt();
@@ -28,19 +29,31 @@ public class Interpolasi{
         
         /*Mengisi matriks augmented sesuai titik 
         yang tersimpan pada MATRIKS Temp*/
-        for(p=1; p<=Pol.GetLastIdxBrs(); p++){
-            for(q=1; q<Pol.GetLastIdxKol(); q++){
-                Pol.Mem[p][q] = Math.pow(Temp.Mem[p][1],(q-1));
+        for(i=1; i<=Pol.GetLastIdxBrs(); i++){
+            for(j=1; j<Pol.GetLastIdxKol(); j++){
+                Pol.Mem[i][j] = Math.pow(Temp.Mem[i][1],(j-1));
             }
-            Pol.Mem[p][q] = Temp.Mem[p][2];
+            Pol.Mem[i][j] = Temp.Mem[i][2];
         }
         
         /*Melakukan operasi Gauss*/
         Pol.Gauss();
+        Pol.Jordan();
 
         /*Nilai koefisien polinom a0,a1,...,an 
         akan disimpan pada sebuah array a*/
+        a = new double[n+1];
+        for(i=1; i<a.length; i++){
+            a[i] = Pol.Mem[i][Pol.GetLastIdxKol()];
+        }
 
-        /*Backward subtitution*/
-    } 
+        /*Menghitung nilai polinom untuk xi*/
+        /*Hasil disimpan pada yi*/
+        yi = 0;
+        for(i=1; i<=n; i++){
+            yi += Math.pow(xi,i-1)*a[i];
+        }
+        /*Output*/ System.out.printf("%.4f", yi);
+        /*Empat angka setelah desimal*/
+    }
 }
