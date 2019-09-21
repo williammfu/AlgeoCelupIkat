@@ -1,15 +1,17 @@
+import java.io.*;
+import java.util.*;
 import java.util.Scanner; // untuk proses scan
 
 public class Main{
     
-    public static void main(String args[]){
+    public static void main(String args[]) throws FileNotFoundException{
         /* Kamus */
         int i, pilihan;
         Scanner in = new Scanner(System.in); 
 
         /* Algoritma */
 
-        MATRIKS M1 = new MATRIKS(3,3);
+        MATRIKS M1 = new MATRIKS(10,10);
         //SPL S1 = new SPL(3,3);
         //S1.BacaKeyBoard();
         //S1.Mtrx.TulisMATRIKS();
@@ -20,8 +22,7 @@ public class Main{
         i =  M1.GetFirstIdxBrs();
         
         System.out.println(i);
-
-        M1.BacaMATRIKS();
+        M1.BacaFileMatrix("chinese.txt");
         //M2.BacaMATRIKS();
         //M1.TulisMATRIKS();
         //M1.KurangiRow(2,1,1,M1.Mem[2][1]);
@@ -35,12 +36,12 @@ public class Main{
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
         //M1.BotTriangular();
-        M1.Gauss();
+        //M1.Gauss();
         //M1.Pivotting(2,2);
         M1.TulisMATRIKS();
         //M2.TulisMATRIKS();
         System.out.println();
-        System.out.printf("%.2f",M1.DetCof(M1));       
+        //System.out.printf("%.2f",M1.DetCof(M1));       
         /*
         System.out.println("--------*** TUGAS BESAR 1 ALJABAR LINEAR & GEOMETRI ***--------");
         System.out.println("----*** Sistem Persamaan Linier, Determinan, dan Aplikasinya ***----");

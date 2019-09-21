@@ -3,7 +3,7 @@ class apples{
 
         readfile r = new readfile();
         r.openFile();
-        r.readFile();
+        r.readMatriks();
         r.closeFile();
 
     }

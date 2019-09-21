@@ -1,3 +1,5 @@
+import java.io.*;
+import java.util.*;
 import java.util.Scanner; // untuk proses scan
 import java.text.DecimalFormat; // untuk menampilkan 2(sbnrnya gk hrs 2) digit desimal
 import java.lang.Math; // untuk fungsi absolute
@@ -409,6 +411,56 @@ public class MATRIKS{
                 }
                 Inv.TulisMATRIKS();
             }
+
+            public void BacaFileMatrix(String fileName) throws FileNotFoundException{
+                /*Scanner x = new Scanner (new File(fileName));
+
+                while(x.hasNext()){
+                    int a = x.nextInt();
+                    int b = x.nextInt();
+                    //int c = x.next();
+                    int sum = a+b;
+        
+                    System.out.printf("%d\n", sum);
+                }
+
+                x.close();*/
+		        Scanner input = new Scanner (new File(fileName));
+		        int rows = 0;
+		        int columns = 0;
+		
+	            //Hitung jumlah kolom matrix
+		        Scanner eachLine = new Scanner(input.nextLine());
+	            while(eachLine.hasNextDouble())
+	            {
+	    	        eachLine.nextDouble();
+	                ++columns;
+	            }
+	            eachLine.close();
+	    
+	            //Hitung jumlah baris matrix
+	            input = new Scanner (new File(fileName));
+		        while(input.hasNextLine())
+		        {
+		            ++rows;
+		            input.nextLine();
+		        }
+		        input.close();
+		
+		        NBrsEff=rows;
+		        NKolEff=columns;
+	
+		        //Baca data
+		        input = new Scanner(new File(fileName));
+		        for(int i = 1; i <= rows; ++i)
+		        {
+		            for(int j = 1; j <= columns; ++j)
+		            {
+		    	        Mem[i][j] = input.nextDouble();
+		            }
+		        }
+		        input.close();
+	        }
     }
 
 
