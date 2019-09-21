@@ -108,8 +108,7 @@ public class Main{
                 }
 
                 else if (pilihan1 == 4){
-
-                    //jangan lupa tolak kalo matriksnya det = 0 ato ga square
+                    M.CariMCrammer()
                 }
 
             } 

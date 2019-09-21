@@ -459,7 +459,7 @@ public class MATRIKS{
 		        input.close();
 	        }
 
-            /*** CRAMMER'S RULE ***/
+            /*** CRAMER'S RULE ***/
             public void CariMCrammer(){
             /* Mengganti 1 kolom i dengan kolom terakhir matriks augmented lalu mencari determinan 
             dari matriks baru tersebut*/
@@ -477,7 +477,11 @@ public class MATRIKS{
                     }
                 }
 
+                if ((DetCof(Mtemp2) == 0) || (Mtemp2.NBrsEff != Mtemp2.NKolEff)) {
+                    System.out.println("Solusi SPL tidak bisa dicari menggunakan metode ini");
+                }
 
+                else {
                 for (n = 1; n < this.GetLastIdxKol(); n++){
                     for (i = Mtemp.GetFirstIdxBrs(); i <= Mtemp.GetLastIdxBrs(); i++){
                         for (j = Mtemp.GetFirstIdxKol(); j <= Mtemp.GetLastIdxKol(); j++){
@@ -497,6 +501,8 @@ public class MATRIKS{
                     System.out.print(" = ");
                     System.out.println(hasil);
 
+
+                }
 
                 }
 
