@@ -14,11 +14,20 @@ public class Main{
 
         //MATRIKS M1 = new MATRIKS(3,3);
         //SPL S1 = new SPL(3);
-        SPL S2 = new SPL(4);
+        SPL S2 = new SPL(6,6);
         //S1.BacaSPLFile("chinese.txt");
         //S1.BacaSPLKeyBoard();
         //S1.CekSolveAndBebas();
         S2.BacaSPLKeyBoard();
+        System.out.println("Lalala");
+        S2.Mtrx.TulisMATRIKS();
+        System.out.println("Lalala");
+        S2.Mtrx.Gauss();
+        S2.Mtrx.TulisMATRIKS();
+        System.out.println("Lalala");
+        S2.UrutinGauss();
+        S2.Mtrx.TulisMATRIKS();
+        System.out.println("Lalala");
         // Inisialisasi matriks solusi
         /*for(j = S1.Solusi.GetFirstIdxBrs(); j<=S1.Solusi.GetLastIdxBrs(); j++){
             for(k = S1.Solusi.GetFirstIdxKol(); k<=S1.Solusi.GetLastIdxKol(); k++){

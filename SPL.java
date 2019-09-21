@@ -11,16 +11,34 @@ public class SPL{
     false jika tidak */
 
      /* Konstruktor */
-     public SPL(int n){
-         this.Mtrx = new MATRIKS(n, n+1);
+     public SPL(int m,int n){
+         this.Mtrx = new MATRIKS(m, n+1);
          this.Solusi = new MATRIKS(n, n);
          Bebas = new boolean [n+1];
      }
 
      /* Baca SPL */
      public void BacaSPLKeyBoard(){
+         /* Kamus */
+         int i,j;
+         MATRIKS MTemp;
+         /* Algoritma */
          this.Mtrx.BacaMATRIKS();
-     }
+         if(Mtrx.GetLastIdxKol()-1>Mtrx.GetLastIdxBrs()){
+            MTemp = new MATRIKS(Mtrx.GetLastIdxKol()-1, Mtrx.GetLastIdxKol());
+            for(i=Mtrx.GetFirstIdxBrs(); i<=Mtrx.GetLastIdxBrs(); i++){
+                for(j=Mtrx.GetFirstIdxKol(); j<=Mtrx.GetLastIdxKol(); j++){
+                    MTemp.SetElmt(i, j, Mtrx.GetElmt(i, j));
+                }
+            }
+            for(i=Mtrx.GetLastIdxBrs()+1; i<=MTemp.GetLastIdxBrs(); i++){
+                for(j=Mtrx.GetFirstIdxKol(); j<=Mtrx.GetLastIdxKol(); j++){
+                    MTemp.SetElmt(i, j, 0);
+                }
+            }
+            Mtrx = MTemp;
+        }
+    }
 
      public void BacaSPLFile(String fileName) throws FileNotFoundException{
          /* Membaca SPL dari file eksternal */
@@ -84,11 +102,35 @@ public class SPL{
             Solusi.SetElmt(i, j, temp);
         }
     }
+
+    public void UrutinGauss(){
+        /* Kamus */
+        int i,k;
+        boolean found;
+        /* Algoritma */
+        for(i=Mtrx.GetLastIdxBrs(); i>= Mtrx.GetFirstIdxBrs(); i--){
+            if(Mtrx.GetElmt(i, i)==0){
+                //cari 1
+                found = false;
+                k = i+1;
+                while(k<=Mtrx.GetLastIdxKol() && !found){
+                    found = Math.round(Mtrx.GetElmt(i, k)*100000.0)/100000.0 == 1;
+                    k++;
+                }
+                if(found){
+                    Mtrx.Swap(i, k-1);
+                }
+               
+            }
+        }
+    }
+
      public void SolusiByGauss(){
         // Kamus
         int i,j;
         // Algoritma
         Mtrx.Gauss();
+        UrutinGauss();
         CekSolveAndBebas();
         if(!solveable){
             System.out.println("Solusi tidak ada bro!");
