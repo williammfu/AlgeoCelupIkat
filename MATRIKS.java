@@ -149,6 +149,7 @@ public class MATRIKS{
             }
         }
 
+        /***MODIFIKASI MATRIKS ***/
         public void Transpose (){
             /* I.S. M terdefinisi, pasti berukuran persegi */
             /* F.S. M "di-transpose", yaitu setiap elemen M(i,j) ditukar nilainya dengan elemen M(j,i) */
@@ -167,6 +168,10 @@ public class MATRIKS{
                 }
             }
 
+        }
+
+        public void KaliMatriks(){
+            
         }
 
         public void Pivotting (int j, int iM){
