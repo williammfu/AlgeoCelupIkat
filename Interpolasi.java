@@ -1,8 +1,57 @@
 import java.util.Scanner;
 import java.lang.Math;
+import java.text.DecimalFormat;
 
 public class Interpolasi{
 
+    private static DecimalFormat df2 = new DecimalFormat("#.###");
+
+    /***OUTPUT POLINOM HASIL INTERPOLASI***/
+    public void PrintPolinom(double a[]){
+        /*I.S. Array a tidak kosong*/
+        /*F.S. Mencetak string persamaan polinom dari elemen-elemen
+        sebuah array koefisien polinom*/
+    
+            /*Kamus*/
+            String polinom;
+            int i; 
+    
+            /*Algoritma*/
+            polinom = new String();
+            
+            /*Elemen a^0*/
+            polinom += df2.format(a[1]);
+            polinom += " ";
+    
+            /*Elemen selanjutnya*/
+            for(i=2; i<=a.length-1; i++){
+                
+                if(a[i]<0){ /*Elemen negatif*/
+                    polinom += df2.format(a[i]);
+                    polinom += "a";
+    
+                    if((i-1)>1){
+                        polinom += "^";
+                        polinom += Integer.toString(i-1);
+                    }
+                }
+                else{ /*Elemen positif atau nol*/
+                    polinom += "+";
+                    polinom += df2.format(a[i]);
+                    polinom += "a";
+    
+                    if((i-1)>1){
+                        polinom += "^";
+                        polinom += Integer.toString(i-1);
+                    }
+                }
+    
+                polinom += " ";
+            }
+            System.out.println(polinom);
+        }    
+
+    /***INPUT DARI KEYBOARD***/
     public void IntPolKey(){
     /*Prosedur untuk menghitung nilai (xi,yi) dari
     sejumlah n titik(x,y) dengan interpolasi polinom*/
@@ -53,7 +102,12 @@ public class Interpolasi{
         for(i=1; i<=n; i++){
             yi += Math.pow(xi,i-1)*a[i];
         }
-        /*Output*/ System.out.printf("%.4f", yi);
+        /*Output*/
+        System.out.println("Polinom hasil interpolasi adalah: ");
+        PrintPolinom(a);
+        System.out.println();
         /*Empat angka setelah desimal*/
+        System.out.print("Taksiran nilai xi="); System.out.printf("%.4f",xi);
+        System.out.print("adalah"); System.out.printf("%.4f", yi);
     }
 }
