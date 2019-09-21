@@ -62,6 +62,7 @@ public class Main{
         //S1.Mtrx.Gauss();
         //S1.Mtrx.TulisMATRIKS();
         //S1.CekSolved();
+        //M1.Gauss();
         //M1.Pivotting(2,2);
         //M1.TulisMATRIKS();
         //M2.TulisMATRIKS();
@@ -72,6 +73,8 @@ public class Main{
             System.out.println(S1.Bebas[i]);
         }
         System.out.println(S1.solveable);*/
+        //System.out.println();
+        //M1.InvOBE(M1);
         //System.out.printf("%.2f",M1.DetCof(M1));       
         //M1.Gauss();
         //M1.Pivotting(2,2);
@@ -135,8 +138,7 @@ public class Main{
                 }
 
                 else if (pilihan1 == 4){
-
-                    //jangan lupa tolak kalo matriksnya det = 0 ato ga square
+                    M.CariMCrammer()
                 }
 
             } 
