@@ -12,23 +12,20 @@ public class Main{
 
         /* Algoritma */
 
-<<<<<<< HEAD
-        MATRIKS M1 = new MATRIKS(10,10);
-=======
-        MATRIKS M1 = new MATRIKS(2,3);
->>>>>>> 6c8da85f1de84ec80d928f61c5a8da6cd35b8aea
-        //SPL S1 = new SPL(3,3);
+        MATRIKS M1 = new MATRIKS(3,3);
+        /*SPL S1 = new SPL(100,101);
+        S1.BacaSPLFile("chinese.txt");
         //S1.BacaKeyBoard();
-        //S1.Mtrx.TulisMATRIKS();
-        //System.out.println(S1.Solusi.length);
-        //System.out.println(S1.Solved.length);
+        S1.Mtrx.TulisMATRIKS();
+        System.out.println(S1.Solusi.length);
+        System.out.println(S1.Solved.length);*/
         //System.out.println();
        
-        i =  M1.GetFirstIdxBrs();
+        //i =  M1.GetFirstIdxBrs();
         
-        System.out.println(i);
-        M1.BacaFileMatrix("chinese.txt");
-        //M2.BacaMATRIKS();
+        //System.out.println(i);
+        //M1.BacaFileMatrix("chinese.txt");
+        M1.BacaMATRIKS();
         //M1.TulisMATRIKS();
         //M1.KurangiRow(2,1,1,M1.Mem[2][1]);
         //M1.KurangiRow(3, 1,1,M1.Mem[3][1]);
@@ -40,28 +37,26 @@ public class Main{
         //M1.TulisMATRIKS();
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
-<<<<<<< HEAD
         //M1.BotTriangular();
-        //M1.Gauss();
+        M1.Gauss();
         //M1.Pivotting(2,2);
         M1.TulisMATRIKS();
         //M2.TulisMATRIKS();
+        System.out.println(M1.detByGauss);
         System.out.println();
         //System.out.printf("%.2f",M1.DetCof(M1));       
-=======
         //M1.Gauss();
         //M1.Pivotting(2,2);
         //M1.TulisMATRIKS();
         //M1.Jordan();
         //M1.TulisMATRIKS();
 
-        M1.CariMCrammer();
+        //M1.CariMCrammer();
 
 
         //System.out.println();
        // System.out.printf("%.2f",M1.DetCof(M1));       
         
->>>>>>> 6c8da85f1de84ec80d928f61c5a8da6cd35b8aea
         /*
         System.out.println("--------*** TUGAS BESAR 1 ALJABAR LINEAR & GEOMETRI ***--------");
         System.out.println("----*** Sistem Persamaan Linier, Determinan, dan Aplikasinya ***----");

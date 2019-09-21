@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 public class SPL{
     // Atribut
     public MATRIKS Mtrx; // untuk memasukkan persamaan
@@ -19,19 +21,20 @@ public class SPL{
          this.Mtrx.BacaMATRIKS();
      }
 
-     public void BacaSPLFile(){
+     public void BacaSPLFile(String fileName) throws FileNotFoundException{
          /* Membaca SPL dari file eksternal */
          /* Kamus */
          MATRIKS temp;
          /* Algoritma */
          temp = new MATRIKS(100, 101); // asumsi masukan matriks dari file tidak akan melebihi 100 baris dan 101 kolom
-         temp.BacaMATRIKSFile();
+         temp.BacaFileMatrix(fileName);
          this.Mtrx = temp;
          this.Solusi = new double [temp.NKolEff+1];
          this.Solved = new int [temp.NKolEff+1];
 
-
      }
+     
+
 
 
 }

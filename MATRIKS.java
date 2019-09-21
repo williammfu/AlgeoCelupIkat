@@ -15,6 +15,7 @@ public class MATRIKS{
     public double [][] Mem;
     public int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
     public int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
+    public double detByGauss;
 
     //Konstruktor
     public MATRIKS(int x, int y) {
@@ -210,6 +211,7 @@ public class MATRIKS{
                     int i1,i2,j;
                     boolean found = false;
                 /* Algoritma */
+                    detByGauss = 1;
                     i1 = GetFirstIdxBrs();
                     j = GetFirstIdxKol();
                     while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
@@ -221,6 +223,7 @@ public class MATRIKS{
                             if(!found){
                                 //System.out.println("lala");
                                 j++;
+                                detByGauss *= 0; // karena elemen  diagonal ditemukan 0
                             }
                         } while(j<=GetLastIdxKol() && !found);
                         if (found){
@@ -230,6 +233,8 @@ public class MATRIKS{
                             for(i2=i1+1; i2<=GetLastIdxBrs(); i2++){
                                 KurangiRow(i2,i1,j,GetElmt(i2, j)/GetElmt(i1,j)); // langkah 4 dan 5
                             }
+                            detByGauss *= GetElmt(i1,j); // sblm dibikin 1 elemen diagonalnya detnya dikali dulu dgn elemen diagonal tsb.
+                            System.out.println(detByGauss);
                             KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
                             i1 ++; //langkah3
                             j++; // ulangi dr langkah 1 untuk kolom selanjutnya
@@ -414,18 +419,6 @@ public class MATRIKS{
             }
 
             public void BacaFileMatrix(String fileName) throws FileNotFoundException{
-                /*Scanner x = new Scanner (new File(fileName));
-
-                while(x.hasNext()){
-                    int a = x.nextInt();
-                    int b = x.nextInt();
-                    //int c = x.next();
-                    int sum = a+b;
-        
-                    System.out.printf("%d\n", sum);
-                }
-
-                x.close();*/
 		        Scanner input = new Scanner (new File(fileName));
 		        int rows = 0;
 		        int columns = 0;
