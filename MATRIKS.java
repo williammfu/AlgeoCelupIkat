@@ -215,33 +215,25 @@ public class MATRIKS{
                     while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
                         do{
                             Pivotting(j,i1);
-                            //System.out.printf("%.2f\n",Mem[i1][j]);
                             found = Math.round(Mem[i1][j] * 100000.0)/100000.0 != 0.0;
-                            //System.out.println(found);
                             if(!found){
-                                //System.out.println("lala");
                                 j++;
                                 detByGauss *= 0; // karena elemen  diagonal ditemukan 0
                             }
                         } while(j<=GetLastIdxKol() && !found);
                         if (found){
-                            //System.out.println("qbcf");
-                            //KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
-                            //i1 ++; //langkah3
+                            //ketemu elemen tak 0 di baris itu, langkah3
+                            //langkah3
                             for(i2=i1+1; i2<=GetLastIdxBrs(); i2++){
                                 KurangiRow(i2,i1,j,GetElmt(i2, j)/GetElmt(i1,j)); // langkah 4 dan 5
                             }
                             detByGauss *= GetElmt(i1,j); // sblm dibikin 1 elemen diagonalnya detnya dikali dulu dgn elemen diagonal tsb.
-                            //System.out.println(detByGauss);
                             KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
                             i1 ++; //langkah3
                             j++; // ulangi dr langkah 1 untuk kolom selanjutnya
-                
-                        }
-                                
+                        }       
                     }
             }
-
 
             public void Jordan ()
             /*Melakukan Eliminasi Jordan*/
