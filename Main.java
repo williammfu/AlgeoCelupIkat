@@ -6,56 +6,21 @@ public class Main{
     
     public static void main(String args[]) throws FileNotFoundException{
         /* Kamus */
-<<<<<<< HEAD
-        int i, pilihan, pilihan1, lanjut;
+        int i, pilihan, pilihan1, lanjut, baris, kolom;
         double hasilDet;
         MATRIKS Mkof;
-=======
-        int i,j,k, pilihan, pilihan1;
->>>>>>> a476c7a0f458df478f76206ad5bffe5ea46c5037
         Scanner in = new Scanner(System.in); 
         //MATRIKS M;
 
         /* Algoritma */
 
-<<<<<<< HEAD
-        MATRIKS M = new MATRIKS(3,3);
+        
         /*SPL S1 = new SPL(100,101);
         S1.BacaSPLFile("chinese.txt");
         //S1.BacaKeyBoard();
         S1.Mtrx.TulisMATRIKS();
         System.out.println(S1.Solusi.length);
         System.out.println(S1.Solved.length);*/
-=======
-        //MATRIKS M1 = new MATRIKS(3,3);
-        //SPL S1 = new SPL(3);
-        SPL S2 = new SPL(4);
-        //S1.BacaSPLFile("chinese.txt");
-        //S1.BacaSPLKeyBoard();
-        //S1.CekSolveAndBebas();
-        S2.BacaSPLKeyBoard();
-        // Inisialisasi matriks solusi
-        /*for(j = S1.Solusi.GetFirstIdxBrs(); j<=S1.Solusi.GetLastIdxBrs(); j++){
-            for(k = S1.Solusi.GetFirstIdxKol(); k<=S1.Solusi.GetLastIdxKol(); k++){
-                S1.Solusi.SetElmt(j, k, 0);
-            }
-        }
-        S1.SolusiPerBaris(3);
-        S1.Solusi.TulisMATRIKS();
-        System.out.println("Lalalala");
-        S1.SolusiPerBaris(2);
-        S1.Solusi.TulisMATRIKS();
-        S1.SolusiPerBaris(1);
-        S1.Solusi.TulisMATRIKS();*/
-        S2.SolusiByGauss();
-        S2.Solusi.TulisMATRIKS();
-        S2.TulisSPL();
-        //S1.Mtrx.Gauss();
-        //S1.Mtrx.TulisMATRIKS();
-        //System.out.println(S1.Solusi.length);
-        //System.out.println(S1.Bebas.length);
-        //S1.CekSolveAndBebas();
->>>>>>> a476c7a0f458df478f76206ad5bffe5ea46c5037
         //System.out.println();
        
         //i =  M1.GetFirstIdxBrs();
@@ -83,15 +48,6 @@ public class Main{
         //M1.TulisMATRIKS();
         //M2.TulisMATRIKS();
         //System.out.println(M1.detByGauss);
-<<<<<<< HEAD
-=======
-        //System.out.println(M1.CekBrsNolSemua(3));
-        //System.out.println();
-        /*for(i=1; i<=S1.Bebas.length-1; i++){
-            System.out.println(S1.Bebas[i]);
-        }
-        System.out.println(S1.solveable);*/
->>>>>>> a476c7a0f458df478f76206ad5bffe5ea46c5037
         //System.out.println();
         //M1.InvOBE(M1);
         //System.out.printf("%.2f",M1.DetCof(M1));       
@@ -141,6 +97,13 @@ public class Main{
 
                 pilihan1 = in.nextInt();
                 
+
+                System.out.println("Anda harus memasukan SPL dalam bentuk matriks augemented");
+                System.out.print("Masukkan jumlah baris matriks Anda = ");
+                baris = in.nextInt();
+                System.out.print("Masukkan jumlah kolom matriks Anda = ");
+                kolom = in.nextInt();
+                MATRIKS M = new MATRIKS(baris, kolom);
                 System.out.println("Masukkan SPL dalam bentuk matriks augmented");
                 M.BacaMATRIKS();
 
@@ -177,13 +140,16 @@ public class Main{
 
                 System.out.println(" ");
                 
+                System.out.print("Masukkan jumlah baris dan kolom matriks Anda = ");
+                kolom = in.nextInt();
+                MATRIKS M = new MATRIKS(kolom, kolom);
                 System.out.println("Masukkan matriks yang ingin dicari matriks determinannya");
                 M.BacaMATRIKS();
 
                 System.out.println(" ");
                 System.out.print("Nilai determinan dari matriks tersebut = ");
                 if (pilihan1 == 1){
-
+                    M.Gauss();
                 }
 
                 else if (pilihan == 2) {
@@ -207,6 +173,9 @@ public class Main{
                 pilihan1 = in.nextInt();
                 
                 System.out.println(" ");
+                System.out.print("Masukkan jumlah baris dan kolom matriks Anda = ");
+                kolom = in.nextInt();
+                MATRIKS M = new MATRIKS(kolom, kolom);
                 System.out.println("Masukkan matriks yang ingin dicari matriks balikannya");
                 M.BacaMATRIKS();
 
@@ -227,6 +196,9 @@ public class Main{
 
                 System.out.println(" ");
                 System.out.println("/****MENCARI MATRIKS KOFAKTOR****/");
+                System.out.print("Masukkan jumlah baris dan kolom matriks Anda = ");
+                kolom = in.nextInt();
+                MATRIKS M = new MATRIKS(kolom, kolom);
                 System.out.println("Masukkan matriks yang ingin dicari matriks kofaktornya");
 
                 M.BacaMATRIKS();
@@ -242,6 +214,9 @@ public class Main{
             else if (pilihan == 5) {
                 System.out.println(" ");
                 System.out.println("/****MENCARI MATRIKS ADJOIN****/");
+                System.out.print("Masukkan jumlah baris dan kolom matriks Anda = ");
+                kolom = in.nextInt();
+                MATRIKS M = new MATRIKS(kolom, kolom);
                 System.out.println("Masukkan matriks yang ingin dicari matriks adjoinnya");
 
                 M.BacaMATRIKS();
