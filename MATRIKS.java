@@ -5,25 +5,26 @@ import java.text.DecimalFormat; // untuk menampilkan 2(sbnrnya gk hrs 2) digit d
 import java.lang.Math; // untuk fungsi absolute
 
 public class MATRIKS{
-    // Define konstanta
+
+    /*DEKLARASI KONSTANTA*/
     public static int BrsMin = 1;
     public static int KolMin = 1;
     Scanner in = new Scanner(System.in); // shortcut untuk input co in.nextInt()
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
-    // Define atribut class
+    /*DEKLARASI ATTRIBUTE KELAS*/
     public double [][] Mem;
     public int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
     public int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
     public double detByGauss;
 
-    //Konstruktor
+    /*BLOK KONSTRUKTOR*/
     public MATRIKS(int x, int y) {
         Mem = new double [x+1][y+1];
         NBrsEff=x;
 		NKolEff=y;
       }
-    //Selektor
+    /*BLOK SELEKTOR*/
         /* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
         public int GetFirstIdxBrs (){
         /* Mengirimkan indeks baris terkecil M */
@@ -42,7 +43,7 @@ public class MATRIKS{
             return this.NKolEff;
         }
         public double GetElmt (int i,int j){
-            /* Mengirimkan elemen M(i,j) */
+        /* Mengirimkan elemen M(i,j) */
             return this.Mem[i][j];
         }
         public double GetElmtDiagonal (int i){
@@ -50,7 +51,7 @@ public class MATRIKS{
             return GetElmt(i,i);
         }
 
-        // Mengubah elemen dari matriks
+    /* Mengubah elemen dari matriks */
         public void SetElmt(int i, int j, double X){
             this.Mem[i][j] = X;
         }
@@ -73,7 +74,7 @@ public class MATRIKS{
             
         }
 
-        /* OBE */
+    /* BLOK METHOD UNTUK OPERASI BARIS ELEMENTER */
         public void KurangiRow(int i, int j,int startCol, double faktor){
         /* Mengurangi elemen baris i dengan faktor dikali elemen baris j */
             /* Kamus */
@@ -106,7 +107,8 @@ public class MATRIKS{
             }
         }
 
-        
+    /***BLOK METHOD INPUT/OUTPUT MATRIKS***/
+
         public void BacaMATRIKS (){
         /* I.S. IsIdxValid(NB,NK) */
         /* F.S. M terdefinisi nilai elemen efektifnya, berukuran NB x NK */
@@ -149,7 +151,8 @@ public class MATRIKS{
             }
         }
 
-        /***MODIFIKASI MATRIKS ***/
+    /***MODIFIKASI MATRIKS ***/
+
         public void Transpose (){
             /* I.S. M terdefinisi, pasti berukuran persegi */
             /* F.S. M "di-transpose", yaitu setiap elemen M(i,j) ditukar nilainya dengan elemen M(j,i) */
@@ -198,6 +201,7 @@ public class MATRIKS{
             
         }
 
+    /***GAUSS-JORDAN***/
         public void Gauss(){
             /* 1. Melakukan pivoting mulai dari kolom pertama, buat index baris = baris pertama
                2. Jika elemen tersebut 0, majukan kolom,sambil lakukan pivoting
@@ -205,13 +209,6 @@ public class MATRIKS{
                4. Lakukan traversal dengan index baris baru mulai dari baris 1 s/d baris terakhir
                5. Traversal no 4 mengurangi row pada index baris baru dengan faktor bernilai elemen pada baris dan kolom tsb
              */
-                /*/* Kamus */
-                //int i1,i2,j;
-                //boolean found = false;
-                /* Algoritma */
-                //i1 = 1;
-                //j = 1;
-                //this.Pivotting(j,i1);
                 /* Kamus */
                     int i1,i2,j;
                     boolean found = false;
@@ -248,16 +245,13 @@ public class MATRIKS{
                                 
                     }
             }
-                //KurangiRow(2,1,1,GetElmt(2, 1));
-                //KurangiRow(3,1,1,GetElmt(3, 1));
-                //KurangiRow(2,2,2,GetElmt(3,2));
 
 
             public void Jordan ()
             /*Melakukan Eliminasi Jordan*/
             {
                 int i,j, k;
-                boolean found = false;
+                
                 /* Algoritma */
                     for (i = GetLastIdxBrs(); i > GetFirstIdxBrs(); i--){
                         j = GetFirstIdxKol();
@@ -401,31 +395,6 @@ public class MATRIKS{
                 }
             }
 
-            public void InvAdj(){
-                
-                /*Menampilkan Invers Matriks*/
-                /*Metode Adjoint*/
-
-                /*Kamus*/
-                MATRIKS Inv;
-                int i,j;
-                double det;
-
-                /*Algoritma*/
-                det = this.DetCof(this);
-                this.MakeAdjoint();
-                Inv = new MATRIKS(this.NBrsEff, this.NKolEff);
-                for(i=1; i<=Inv.GetLastIdxBrs(); i++){
-                    for(j=1; j<=Inv.GetLastIdxKol(); j++){
-                        Inv.Mem[i][j] = (this.Mem[i][j]/det);
-                        if (Inv.Mem[i][j]== -0){
-                            Inv.Mem[i][j] = 0;
-                        }
-                    }
-                }
-                Inv.TulisMATRIKS();
-            }
-
             public void BacaFileMatrix(String fileName) throws FileNotFoundException{
 		        Scanner input = new Scanner (new File(fileName));
 		        int rows = 0;
@@ -514,7 +483,9 @@ public class MATRIKS{
                 
             }
 
-            /**INVERS OBE**/
+        /**INVERS MATRIKS**/
+            
+            /*METODE OBE*/
             public void InvOBE(MATRIKS M){
             /*Menampilkan invers dari matriks*/
             /*I.S. Matriks bujur sangkar*/
@@ -577,6 +548,32 @@ public class MATRIKS{
                     /*Menampilkan matriks invers*/
                     Inv.TulisMATRIKS();
                 }
+            }
+
+            /*METODE ADJOINT*/
+            public void InvAdj(){
+                
+                /*Menampilkan Invers Matriks*/
+                /*Metode Adjoint*/
+
+                /*Kamus*/
+                MATRIKS Inv;
+                int i,j;
+                double det;
+
+                /*Algoritma*/
+                det = this.DetCof(this);
+                this.MakeAdjoint();
+                Inv = new MATRIKS(this.NBrsEff, this.NKolEff);
+                for(i=1; i<=Inv.GetLastIdxBrs(); i++){
+                    for(j=1; j<=Inv.GetLastIdxKol(); j++){
+                        Inv.Mem[i][j] = (this.Mem[i][j]/det);
+                        if (Inv.Mem[i][j]== -0){
+                            Inv.Mem[i][j] = 0;
+                        }
+                    }
+                }
+                Inv.TulisMATRIKS();
             }
 
     }
