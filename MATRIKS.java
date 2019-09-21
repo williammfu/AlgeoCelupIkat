@@ -182,10 +182,10 @@ public class MATRIKS{
             /* Kamus */
             int i, idxBrsMax;
             double max;
+		
             /* Algoritma */
-            //if(j<=this.GetLastIdxKol() && iM<=this.GetLastIdxBrs()){
-                max = Math.abs(this.Mem[iM][j]);
-                idxBrsMax = iM;
+            max = Math.abs(this.Mem[iM][j]);
+            idxBrsMax = iM;
                 for (i= iM+1; i<=this.GetLastIdxBrs(); i++){
                     if(Math.abs(this.Mem[i][j]) > max){
                         max = Math.abs(this.Mem[i][j]);
@@ -193,12 +193,8 @@ public class MATRIKS{
                     }
                 }
                 if(idxBrsMax > iM){
-                    //System.out.println("Swapp! SwappSOng");
                     this.Swap(iM, idxBrsMax);
-                }
-                
-            //}
-            
+                }            
         }
 
     /***GAUSS-JORDAN***/
@@ -207,9 +203,9 @@ public class MATRIKS{
                2. Jika elemen tersebut 0, majukan kolom,sambil lakukan pivoting
                3. Jika ketemu elemen di baris yg tidak 0 bagi row tersebut dengan nilai elemen tsb,tambah index baris
                4. Lakukan traversal dengan index baris baru mulai dari baris 1 s/d baris terakhir
-               5. Traversal no 4 mengurangi row pada index baris baru dengan faktor bernilai elemen pada baris dan kolom tsb
-             */
-                /* Kamus */
+               5. Traversal no 4 mengurangi row pada index baris baru dengan faktor bernilai elemen pada baris dan kolom tsb*/
+                
+		/* Kamus */
                     int i1,i2,j;
                     boolean found = false;
                 /* Algoritma */
