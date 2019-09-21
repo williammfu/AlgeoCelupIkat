@@ -173,9 +173,48 @@ public class MATRIKS{
 
         }
 
-        public void KaliMatriks(){
-            
+
+        public MATRIKS KaliMatriks(MATRIKS M2){
+            /* Prekondisi : Ukuran kolom efektif M1 = ukuran baris efektif M2 */
+            /* Mengirim hasil perkalian matriks: salinan M1 * M2 */
+            /*KAMUS*/
+            MATRIKS Mhasil;
+            int i, j, k;
+            double temphasil;
+
+            /*ALGORITMA*/
+            Mhasil = new MATRIKS(this.NBrsEff, M2.NKolEff);
+           
+            for(i=this.GetFirstIdxBrs(); i<= this.GetLastIdxBrs(); i++){
+        
+                for(j= M2.GetFirstIdxKol(); j<= M2.GetLastIdxKol(); j++){
+                    temphasil = 0;
+                    for (k= this.GetFirstIdxKol(); k<= this.GetLastIdxKol(); k++){
+                        temphasil += this.Mem[i][k] * M2.Mem[k][j];
+                        }
+                    Mhasil.Mem[i][j] = temphasil;
+                }
+            }
+            return Mhasil;
         }
+
+        public void KaliKons (double K){
+            /* I.S. M terdefinisi, K terdefinisi */
+            /* F.S. Mengalikan setiap elemen M dengan K */
+        
+            /*KAMUS*/
+            int i, j;
+
+            /*ALGORITMA*/
+
+            for (i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
+                for (j=GetFirstIdxKol(); j <= GetLastIdxKol(); j++){
+                    Mem[i][j] = K * Mem[i][j];
+                }
+            }
+
+
+        }       
 
         public void Pivotting (int j, int iM){
             /* Mencari nilai terbesar dari kolom j dari baris iM s/d GetLastBrs(), lalu menaruh nilai terbesar di baris iM (dengan swap) */
