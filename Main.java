@@ -38,12 +38,13 @@ public class Main{
         //M1.Swap(2, 3);
         //M1.TulisMATRIKS(); 
         //M1.BotTriangular();
-        M1.Gauss();
+        //M1.Gauss();
         //M1.Pivotting(2,2);
         M1.TulisMATRIKS();
         //M2.TulisMATRIKS();
-        System.out.println(M1.detByGauss);
+        //System.out.println(M1.detByGauss);
         System.out.println();
+        M1.InvOBE(M1);
         //System.out.printf("%.2f",M1.DetCof(M1));       
         //M1.Gauss();
         //M1.Pivotting(2,2);

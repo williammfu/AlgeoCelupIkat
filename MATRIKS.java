@@ -503,8 +503,69 @@ public class MATRIKS{
                 
             }
 
+            /**INVERS OBE**/
+            public void InvOBE(MATRIKS M){
+            /*Menampilkan invers dari matriks*/
+            /*I.S. Matriks bujur sangkar*/
+            /*F.S. Menampilkan invers dari matriks
+                dengan metode eliminasi Gauss*/
+
+                /*Kamus*/
+                MATRIKS Aug, Inv;
+                int i,j,k;
+                int p,q,r;
+
+                /*Algoritma*/
+                if(this.DetCof(M)!=0){
+
+                    /*Membuat augmented matriks*/
+                    Aug = new MATRIKS(M.NBrsEff, 2*M.NKolEff);
+
+                    /*Matriks identitas ditambahkan pada sebelah kanan matriks M*/
+                    for(i=1; i<=Aug.GetLastIdxBrs(); i++){//baris
+                        for(j=1; j<=Aug.GetLastIdxKol(); j++){//kolom
+                            
+                            if(i<=M.GetLastIdxBrs() && j<=M.GetLastIdxKol()){
+                                Aug.Mem[i][j] = M.Mem[i][j];
+                            }
+                            else{
+                                if((i+M.GetLastIdxBrs())==j){//elemen diagonal
+                                    Aug.Mem[i][j] = 1;
+                                }
+                                else{//bukan elemen diagonal
+                                    Aug.Mem[i][j] = 0;
+                                }
+                            } 
+                        }
+                    }
+
+                    /*Melakukan eliminasi Gauss*/
+                    Aug.Gauss();
+
+                    /*Matriks M telah menjadi upper triangle, 
+                    M akan dijadikan matriks identitas*/
+                    for(p=Aug.GetLastIdxBrs()-1; p>=1; p--){
+                        for(r=Aug.GetLastIdxBrs(); r>p; r--){
+                            q = r;
+                            if(Aug.Mem[r][q]!=0){
+                                Aug.KurangiRow(p, r, q, Aug.Mem[p][q]/Aug.Mem[r][q]);
+                            }
+                        }
+                    }
+
+                    /*Mengambil matriks invers dari 
+                    matriks augmented*/
+                    Inv = new MATRIKS(M.NBrsEff, M.NKolEff);
+                    for(i=1; i<=M.GetLastIdxBrs(); i++){
+                        for(j=M.GetLastIdxKol()+1; j<=Aug.GetLastIdxKol();j++){
+                            k = j-M.GetLastIdxKol();
+                            Inv.Mem[i][k] = Aug.Mem[i][j];
+                        }
+                    }
+
+                    /*Menampilkan matriks invers*/
+                    Inv.TulisMATRIKS();
+                }
+            }
+
     }
-
-
-
-
