@@ -118,7 +118,7 @@ public class Interpolasi{
         System.out.print("Taksiran nilai Yi hasil interpolasi= "); System.out.printf("%.4f",yi);
     }
 
-    public void IntPolFile(String filename) throws FileNotFoundException {
+    public void IntPolFile(String filename) throws IOException {
     /*Method untuk menentukan interpolasi dari File Eksternal*/
     /*Prekondisi: Sudah harus ada input nama file txt dari pengguna*/
 
@@ -190,21 +190,40 @@ public class Interpolasi{
         polinom = MakePolinom(a);
         System.out.println(polinom);
         
-        /*Masukin ke file*/
+        /*Menghitung nilai polinom untuk xi*/
+        /*Hasil disimpan pada yi*/
+        yi = 0;
+        for(i=1; i<=countBaris; i++){
+            yi += Math.pow(xi,i-1)*a[i];
+        }
+
+        /*Nama file output*/
         String namaBaru = "hasil" + filename;
+
+        /*Masukin ke file external Hasil*/
+        input.close();
+        this.outputPol(namaBaru, polinom, xi, yi);
+        System.out.println();
+        System.out.println("*** OUTPUT SUKSES ***");
+        System.out.print("Hasil telah disimpan pada file");
+        System.out.print(" '"); System.out.print(namaBaru + "'\n");
         
     }
 
-    public void outputPol(String a) throws IOException{
+    public void outputPol(String a, String polinom, double xi, double yi) throws IOException{
     /*Ini apa yatuhan*/
         
-        
+        FileWriter fw = new FileWriter(a);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter out = new PrintWriter(bw);
+
+        out.println("Persamaan polinom hasil interpolasi:");
+        out.println(polinom);
+
+        out.printf("Nilai xi yang ingin dicari = %.5f", xi);
+        out.println();
+        out.printf("Nilai yi taksiran = %.5f", yi);
+        out.close();
     }
 
-/*    public static void main(String[] args) throws IOException{
-
-        Interpolasi i = new Interpolasi();
-
-        i.IntPolFile("Ariana.txt");
-    }*/
 }
