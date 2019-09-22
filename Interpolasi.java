@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 import java.lang.Math;
 import java.text.DecimalFormat;
 
@@ -7,10 +8,8 @@ public class Interpolasi{
     private static DecimalFormat df2 = new DecimalFormat("#.###");
 
     /***OUTPUT POLINOM HASIL INTERPOLASI***/
-    public void PrintPolinom(double a[]){
-        /*I.S. Array a tidak kosong*/
-        /*F.S. Mencetak string persamaan polinom dari elemen-elemen
-        sebuah array koefisien polinom*/
+    public String MakePolinom(double a[]){
+        /*Membuat string polinom p(x) dari elemen pada array*/
     
             /*Kamus*/
             String polinom;
@@ -28,7 +27,8 @@ public class Interpolasi{
             for(i=2; i<=a.length-1; i++){
                 
                 if(a[i]<0){ /*Elemen negatif*/
-                    polinom += df2.format(a[i]);
+                    polinom += " - ";
+                    polinom += df2.format(Math.abs(a[i]));
                     polinom += "x";
     
                     if((i-1)>1){
@@ -37,7 +37,7 @@ public class Interpolasi{
                     }
                 }
                 else{ /*Elemen positif atau nol*/
-                    polinom += "+";
+                    polinom += " + ";
                     polinom += df2.format(a[i]);
                     polinom += "x";
     
@@ -46,10 +46,8 @@ public class Interpolasi{
                         polinom += Integer.toString(i-1);
                     }
                 }
-    
-                polinom += " ";
             }
-            System.out.println(polinom);
+            return polinom;
         }    
 
     /***INPUT DARI KEYBOARD***/
@@ -109,24 +107,104 @@ public class Interpolasi{
         for(i=1; i<=n; i++){
             yi += Math.pow(xi,i-1)*a[i];
         }
+
         /*Output*/
         System.out.println();
         System.out.println("***** HASIL INTERPOLASI *****");
         System.out.println("Polinom hasil interpolasi adalah: ");
-        PrintPolinom(a);
+        String polinom = MakePolinom(a);
+        System.out.println(polinom);
         /*Empat angka setelah desimal*/
         System.out.print("Taksiran nilai Yi hasil interpolasi= "); System.out.printf("%.4f",yi);
     }
 
-    public void IntPolFile(String filename){
+    public void IntPolFile(String filename) throws FileNotFoundException {
     /*Method untuk menentukan interpolasi dari File Eksternal*/
+    /*Prekondisi: Sudah harus ada input nama file txt dari pengguna*/
 
+        /*Kamus*/
+        double xi,yi;
+        double a[]; /*Untuk menampung koefisien polinom*/
+        Scanner input = new Scanner(System.in);
+        MATRIKS Temp,Pol;
+        int i,j;
+        String polinom;
+
+        /*Algoritma*/
+        System.out.print("Masukan nilai xi yang ingin dicari= ");
+        xi = input.nextDouble();
+
+        /*Membaca file "filename.txt"*/
+        Scanner inFile = new Scanner(new File(filename));
+
+        /*Hitung jumlah baris matrix*/
+        int countBaris = 0;
+        while(inFile.hasNextLine())
+        {
+            ++countBaris;
+            inFile.nextLine();
+        }
+        inFile.close();
+
+
+        /*Membuat matriks dari data masukan*/
+        inFile = new Scanner (new File(filename));
+
+        Temp = new MATRIKS(countBaris,2);
+        for(i = 1; i <= countBaris; ++i){
+            for(j = 1; j <= 2; ++j){
+                Temp.Mem[i][j] = inFile.nextDouble();
+            }
+        }
+        inFile.close();
+        
+        /*Membuat matriks augmented sebesar n x (n+1)*/
+        Pol = new MATRIKS(countBaris, countBaris+1);
+        for(i=1; i<=Pol.GetLastIdxBrs(); i++){
+            for(j=1; j<Pol.GetLastIdxKol(); j++){
+                Pol.Mem[i][j] = Math.pow(Temp.Mem[i][1],(j-1));
+            }
+            Pol.Mem[i][j] = Temp.Mem[i][2];
+        }
+
+        /*Melakukan operasi Gauss*/
+        Pol.Gauss();
+
+        /*Back Subtition, untuk mengisi array a*/
+        for(i=Pol.GetLastIdxBrs()-1; i>=1; i--){
+            for(j=Pol.GetLastIdxBrs(); j>i; j--){
+                int k = j;
+                if(Pol.Mem[j][k] != 0){
+                    Pol.KurangiRow(i,j,k,Pol.Mem[i][k]/Pol.Mem[j][k]);
+                }
+            }
+        }
+        
+        /*Mengisi array a*/
+        a = new double[countBaris+1];
+        for(i=1; i<=Pol.GetLastIdxBrs(); i++){
+            a[i] = Pol.Mem[i][Pol.GetLastIdxKol()];
+        }
+
+        /*Polinom akan ditulis pada file output*/
+        polinom = MakePolinom(a);
+        System.out.println(polinom);
+        
+        /*Masukin ke file*/
+        String namaBaru = "hasil" + filename;
+        
     }
 
-/*  public static void main(String[] args){
+    public void outputPol(String a) throws IOException{
+    /*Ini apa yatuhan*/
+        
+        
+    }
+
+/*    public static void main(String[] args) throws IOException{
 
         Interpolasi i = new Interpolasi();
 
-        i.IntPolKey();
+        i.IntPolFile("Ariana.txt");
     }*/
 }
