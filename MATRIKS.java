@@ -402,7 +402,7 @@ public class MATRIKS{
             }
 
             public void MakeAdjoint(){
-
+            /*Prekondisi: matriks bujur sangkar*/
                 /*Menghasilkan matriks adjoint*/
                 /*Matriks adjoint merupakan 
                 transpose dari matriks kofaktor*/
@@ -423,6 +423,8 @@ public class MATRIKS{
             }
 
             public void BacaFileMatrix(String fileName) throws FileNotFoundException{
+
+                /*Membuat matriks dari input file external*/
 		        Scanner input = new Scanner (new File(fileName));
 		        int rows = 0;
 		        int columns = 0;
@@ -483,31 +485,26 @@ public class MATRIKS{
                 }
 
                 else {
-                for (n = 1; n < this.GetLastIdxKol(); n++){
-                    for (i = Mtemp.GetFirstIdxBrs(); i <= Mtemp.GetLastIdxBrs(); i++){
-                        for (j = Mtemp.GetFirstIdxKol(); j <= Mtemp.GetLastIdxKol(); j++){
-                            k = this.GetLastIdxKol();
-                            if (j == n){
-                                Mtemp.Mem[i][j] = this.Mem[i][k];
-                            }
-                            else{
-                                Mtemp.Mem[i][j] = this.Mem[i][j];
-                            }
+                    for (n = 1; n < this.GetLastIdxKol(); n++){
+                        for (i = Mtemp.GetFirstIdxBrs(); i <= Mtemp.GetLastIdxBrs(); i++){
+                            for (j = Mtemp.GetFirstIdxKol(); j <= Mtemp.GetLastIdxKol(); j++){
+                                k = this.GetLastIdxKol();
+                                if (j == n){
+                                    Mtemp.Mem[i][j] = this.Mem[i][k];
+                                }
+                                else{
+                                    Mtemp.Mem[i][j] = this.Mem[i][j];
+                                }
 
+                            }
                         }
+                        hasil = DetCof(Mtemp)/DetCof(Mtemp2);
+                        System.out.print("X");
+                        System.out.print(n);
+                        System.out.print(" = ");
+                        System.out.println(hasil);
                     }
-                    hasil = DetCof(Mtemp)/DetCof(Mtemp2);
-                    System.out.print("X");
-                    System.out.print(n);
-                    System.out.print(" = ");
-                    System.out.println(hasil);
-
-
-                }
-
-                }
-
-                
+                }   
             }
 
             public boolean CekBrsNolSemua(int brs,int finalKol){
@@ -540,7 +537,7 @@ public class MATRIKS{
                 int p,q,r;
 
                 /*Algoritma*/
-                if(this.DetCof(M)!=0){
+                if(this.DetCof(this)!=0){
 
                     /*Membuat augmented matriks*/
                     Aug = new MATRIKS(M.NBrsEff, 2*M.NKolEff);
@@ -594,7 +591,7 @@ public class MATRIKS{
 
             /*METODE ADJOINT*/
             public void InvAdj(){
-                
+            /*Prekondisi: MATRIKS BUJUR SANGKAR (n x n)*/                
                 /*Menampilkan Invers Matriks*/
                 /*Metode Adjoint*/
 
@@ -604,17 +601,26 @@ public class MATRIKS{
                 double det;
 
                 /*Algoritma*/
-                det = this.DetCof(this);
-                this.MakeAdjoint();
-                Inv = new MATRIKS(this.NBrsEff, this.NKolEff);
-                for(i=1; i<=Inv.GetLastIdxBrs(); i++){
-                    for(j=1; j<=Inv.GetLastIdxKol(); j++){
-                        Inv.Mem[i][j] = (this.Mem[i][j]/det);
-                        if (Inv.Mem[i][j]== -0){
-                            Inv.Mem[i][j] = 0;
+                if(this.DetCof(this)!=0){
+                    
+                    /*Membuat matriks Adjoint dan
+                    menghitung determinan Matriks*/
+                    det = this.DetCof(this);
+                    this.MakeAdjoint();
+                    
+                    /*Mengisi matriks Invers*/
+                    Inv = new MATRIKS(this.NBrsEff, this.NKolEff);
+                    for(i=1; i<=Inv.GetLastIdxBrs(); i++){
+                        for(j=1; j<=Inv.GetLastIdxKol(); j++){
+                            Inv.Mem[i][j] = (this.Mem[i][j]/det);
+                            if (Inv.Mem[i][j]== -0){
+                                Inv.Mem[i][j] = 0;
+                            }
                         }
                     }
+                    
+                    /*Output Invers Matriks*/
+                    Inv.TulisMATRIKS();
                 }
-                Inv.TulisMATRIKS();
             }
     }
