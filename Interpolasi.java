@@ -18,6 +18,7 @@ public class Interpolasi{
     
             /*Algoritma*/
             polinom = new String();
+            polinom += "p(x) = ";
             
             /*Elemen a^0*/
             polinom += df2.format(a[1]);
@@ -28,7 +29,7 @@ public class Interpolasi{
                 
                 if(a[i]<0){ /*Elemen negatif*/
                     polinom += df2.format(a[i]);
-                    polinom += "a";
+                    polinom += "x";
     
                     if((i-1)>1){
                         polinom += "^";
@@ -38,7 +39,7 @@ public class Interpolasi{
                 else{ /*Elemen positif atau nol*/
                     polinom += "+";
                     polinom += df2.format(a[i]);
-                    polinom += "a";
+                    polinom += "x";
     
                     if((i-1)>1){
                         polinom += "^";
@@ -66,10 +67,16 @@ public class Interpolasi{
         double a[];
 
         /*Algoritma*/
+        System.out.print("Masukan banyaknya titik= ");
         n = input.nextInt();
+        System.out.print("Masukan nilai Xi yang ingin diketahui nilai interpolasinya= ");
         xi = input.nextDouble(); /*nilai xi yang ingin dicari yi nya*/
 
         /*Membuat sebuah matriks Temp berukuran (n x 2)*/
+        System.out.println();
+        System.out.printf("Masukan %d  buah titik\n", n);
+        System.out.println("Antara x dan y dipisahkan dengan spasi");
+        System.out.println("Setiap titik dipisahkan dengan ENTER");
         Temp = new MATRIKS(n,2);
         Temp.BacaMATRIKS();
 
@@ -103,11 +110,23 @@ public class Interpolasi{
             yi += Math.pow(xi,i-1)*a[i];
         }
         /*Output*/
+        System.out.println();
+        System.out.println("***** HASIL INTERPOLASI *****");
         System.out.println("Polinom hasil interpolasi adalah: ");
         PrintPolinom(a);
-        System.out.println();
         /*Empat angka setelah desimal*/
-        System.out.print("Taksiran nilai xi="); System.out.printf("%.4f",xi);
-        System.out.print("adalah"); System.out.printf("%.4f", yi);
+        System.out.print("Taksiran nilai Yi hasil interpolasi= "); System.out.printf("%.4f",yi);
     }
+
+    public void IntPolFile(String filename){
+    /*Method untuk menentukan interpolasi dari File Eksternal*/
+
+    }
+
+/*  public static void main(String[] args){
+
+        Interpolasi i = new Interpolasi();
+
+        i.IntPolKey();
+    }*/
 }
