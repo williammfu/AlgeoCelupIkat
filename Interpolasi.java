@@ -51,7 +51,7 @@ public class Interpolasi{
         }    
 
     /***INPUT DARI KEYBOARD***/
-    public void IntPolKey(){
+    public void IntPolKey() throws IOException{
     /*Prosedur untuk menghitung nilai (xi,yi) dari
     sejumlah n titik(x,y) dengan interpolasi polinom*/
     /*Input dari keyboard*/
@@ -60,7 +60,7 @@ public class Interpolasi{
         Scanner input = new Scanner(System.in);
         MATRIKS Temp, Pol;
         int n;
-        int i,j; /*variabel untuk looping*/
+        int i,j,k; /*variabel untuk looping*/
         double xi,yi; /*titik yang ingin ditaksir nilainya*/
         double a[];
 
@@ -92,7 +92,18 @@ public class Interpolasi{
         
         /*Melakukan operasi Gauss*/
         Pol.Gauss();
-        Pol.Jordan();
+
+        /*Langkah 1 back sub*/
+        a = new double[n+1] ;
+         
+        for(i=Pol.GetLastIdxBrs()-1; i>=1; i--){
+            for(j=Pol.GetLastIdxBrs(); j>i; j--){
+                k = j;
+                if(Pol.Mem[j][k] != 0){
+                    Pol.KurangiRow(i,j,k,Pol.Mem[i][k]/Pol.Mem[j][k]);
+                }
+            }
+        }
 
         /*Nilai koefisien polinom a0,a1,...,an 
         akan disimpan pada sebuah array a*/
@@ -107,15 +118,12 @@ public class Interpolasi{
         for(i=1; i<=n; i++){
             yi += Math.pow(xi,i-1)*a[i];
         }
+        String polinom = MakePolinom(a);
 
         /*Output*/
-        System.out.println();
-        System.out.println("***** HASIL INTERPOLASI *****");
-        System.out.println("Polinom hasil interpolasi adalah: ");
-        String polinom = MakePolinom(a);
-        System.out.println(polinom);
-        /*Empat angka setelah desimal*/
-        System.out.print("Taksiran nilai Yi hasil interpolasi= "); System.out.printf("%.4f",yi);
+        String namafile = "Hasil_Interpolasi.txt";
+        outputPol(namafile, polinom, xi, yi);
+
     }
 
     public void IntPolFile(String filename) throws IOException {
@@ -134,32 +142,13 @@ public class Interpolasi{
         System.out.print("Masukan nilai xi yang ingin dicari= ");
         xi = input.nextDouble();
 
+        Temp = new MATRIKS(100,101);
+
         /*Membaca file "filename.txt"*/
-        Scanner inFile = new Scanner(new File(filename));
-
-        /*Hitung jumlah baris matrix*/
-        int countBaris = 0;
-        while(inFile.hasNextLine())
-        {
-            ++countBaris;
-            inFile.nextLine();
-        }
-        inFile.close();
-
-
-        /*Membuat matriks dari data masukan*/
-        inFile = new Scanner (new File(filename));
-
-        Temp = new MATRIKS(countBaris,2);
-        for(i = 1; i <= countBaris; ++i){
-            for(j = 1; j <= 2; ++j){
-                Temp.Mem[i][j] = inFile.nextDouble();
-            }
-        }
-        inFile.close();
+        Temp.BacaFileMatrix(filename);
         
         /*Membuat matriks augmented sebesar n x (n+1)*/
-        Pol = new MATRIKS(countBaris, countBaris+1);
+        Pol = new MATRIKS(Temp.NBrsEff, Temp.NKolEff+1);
         for(i=1; i<=Pol.GetLastIdxBrs(); i++){
             for(j=1; j<Pol.GetLastIdxKol(); j++){
                 Pol.Mem[i][j] = Math.pow(Temp.Mem[i][1],(j-1));
@@ -181,7 +170,7 @@ public class Interpolasi{
         }
         
         /*Mengisi array a*/
-        a = new double[countBaris+1];
+        a = new double[Temp.NBrsEff+1];
         for(i=1; i<=Pol.GetLastIdxBrs(); i++){
             a[i] = Pol.Mem[i][Pol.GetLastIdxKol()];
         }
@@ -193,25 +182,20 @@ public class Interpolasi{
         /*Menghitung nilai polinom untuk xi*/
         /*Hasil disimpan pada yi*/
         yi = 0;
-        for(i=1; i<=countBaris; i++){
+        for(i=1; i<=Pol.GetLastIdxBrs(); i++){
             yi += Math.pow(xi,i-1)*a[i];
         }
 
         /*Nama file output*/
-        String namaBaru = "hasil" + filename;
+        String namaBaru = "hasil_" + filename;
 
         /*Masukin ke file external Hasil*/
         input.close();
-        this.outputPol(namaBaru, polinom, xi, yi);
-        System.out.println();
-        System.out.println("*** OUTPUT SUKSES ***");
-        System.out.print("Hasil telah disimpan pada file");
-        System.out.print(" '"); System.out.print(namaBaru + "'\n");
-        
+        this.outputPol(namaBaru, polinom, xi, yi);        
     }
 
     public void outputPol(String a, String polinom, double xi, double yi) throws IOException{
-    /*Ini apa yatuhan*/
+    /*Mencetak hasil interpolasi dalam sebuah file txt*/
         
         FileWriter fw = new FileWriter(a);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -224,6 +208,26 @@ public class Interpolasi{
         out.println();
         out.printf("Nilai yi taksiran = %.5f", yi);
         out.close();
+
+        System.out.println();
+        System.out.println("======== OUTPUT SUKSES ========");
+        System.out.println("Polinom hasil interpolasi adalah: ");
+        System.out.println(polinom);
+        System.out.printf("Nilai xi yang ingin dicari = %.5f", xi);
+        System.out.println();
+        System.out.printf("Nilai yi taksiran = %.5f", yi);
+        System.out.println();
+        System.out.print("Hasil telah disimpan pada file");
+        System.out.print(" '"); System.out.print(a + "'\n");
+        System.out.println();
+        System.out.println("======== TERIMA KASIH ========");
+        System.out.close();
     }
 
+    public static void main(String[] args) throws IOException{
+
+        Interpolasi i = new Interpolasi();
+
+        i.IntPolKey();
+    }
 }
