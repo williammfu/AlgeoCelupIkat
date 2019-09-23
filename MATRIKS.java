@@ -82,18 +82,18 @@ public class MATRIKS{
             /* Algoritma */
             for(k=startCol; k<=this.GetLastIdxKol(); k++){
                 this.KurangiElmt(i,k,faktor*this.GetElmt(j, k));
-            }
-            
+            }  
         }
+
         public void KaliRow(int i, double x){
             /* Kamus */
             int j;
             /* Algoritma */
             for(j=this.GetFirstIdxKol(); j<=this.GetLastIdxKol(); j++){
                 this.KaliElmt(i, j, x);
-            }
-            
+            }   
         }
+
         public void Swap(int i, int j){
             /* menukar semua elemen pada baris i dengan semua elemen pada baris j*/
             /* Kamus */
@@ -126,9 +126,9 @@ public class MATRIKS{
                 for (j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
                     SetElmt(i, j, in.nextDouble());
                 }
-            }
-            
+            }   
         }
+
         public void TulisMATRIKS (){
         /* I.S. M terdefinisi */
         /* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
@@ -170,7 +170,6 @@ public class MATRIKS{
                     SetElmt(j, i, temp);
                 }
             }
-
         }
 
 
@@ -212,12 +211,11 @@ public class MATRIKS{
                     Mem[i][j] = K * Mem[i][j];
                 }
             }
-
-
         }       
 
         public void Pivotting (int j, int iM){
-            /* Mencari nilai terbesar dari kolom j dari baris iM s/d GetLastBrs(), lalu menaruh nilai terbesar di baris iM (dengan swap) */
+        /* Mencari nilai terbesar dari kolom j dari baris iM s/d GetLastBrs(), 
+        lalu menaruh nilai terbesar di baris iM (dengan swap) */
             /* Kamus */
             int i, idxBrsMax;
             double max;
@@ -244,10 +242,11 @@ public class MATRIKS{
                4. Lakukan traversal dengan index baris baru mulai dari baris 1 s/d baris terakhir
                5. Traversal no 4 mengurangi row pada index baris baru dengan faktor bernilai elemen pada baris dan kolom tsb*/
                 
-		/* Kamus */
-                    int i1,i2,j;
-                    boolean found = false;
-                /* Algoritma */
+		    /* Kamus */
+            int i1,i2,j;
+            boolean found = false;
+                
+            /* Algoritma */
                     detByGauss = 1;
                     i1 = GetFirstIdxBrs();
                     j = GetFirstIdxKol();
@@ -290,8 +289,7 @@ public class MATRIKS{
                             for (k = i-1; k >= GetFirstIdxBrs(); k--){
                                 KurangiRow(k, i, 1, Mem[k][j]);
                             }
-                        }
-                            
+                        }        
                     }
             }
                         
@@ -324,8 +322,7 @@ public class MATRIKS{
                         MMin.Mem[i][j] = this.GetElmt(i+skipBrs, j+skipKol);
                     }
                 }
-                return MMin;
-                
+                return MMin;    
             }
 	
             public double DetCof(MATRIKS M){
@@ -395,7 +392,6 @@ public class MATRIKS{
                         }                        
                     }
                 }
-
                 return MKof;
             }
 
@@ -460,21 +456,26 @@ public class MATRIKS{
 		        input.close();
             }
             
-            public void TulisFileMatrix(String FileName) throws IOException{
+            public void TulisFileMatrix(String FileName, String Pesan) throws IOException{
 
                 FileWriter fw = new FileWriter(FileName);
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter out = new PrintWriter(bw);
                 
+                out.println(Pesan);
                 for(int i=1; i<=this.NBrsEff; i++){
                     for(int j=1; j<=this.NKolEff; j++){
                         out.printf("%.3f   ", this.Mem[i][j]);
                     }
                     out.println();
                 }
-
                 out.close();
                 
+                System.out.println("======== OUTPUT FILE ========");
+                System.out.println();
+                System.out.println("Hasil telah berhasil ditulis pada file: ");
+                System.out.println(FileName); System.out.println();
+                System.out.println("======== TERIMA KASIH ========");
             }
 
             /*** CRAMER'S RULE ***/
@@ -552,7 +553,7 @@ public class MATRIKS{
                 int p,q,r;
 
                 /*Algoritma*/
-                if(this.DetCof(this)!=0){
+                if((this.DetCof(this)!=0)&&(this.NBrsEff==this.NKolEff)){
 
                     /*Membuat augmented matriks*/
                     Aug = new MATRIKS(M.NBrsEff, 2*M.NKolEff);
@@ -602,10 +603,15 @@ public class MATRIKS{
                     /*Menampilkan matriks invers*/
                     Inv.TulisMATRIKS();
                 }
+                else{
+                    System.out.println();
+                    System.out.println(">Pesan: Invers tidak dapat dicari");
+                    System.out.println();
+                }
             }
 
             /*METODE ADJOINT*/
-            public void InvAdj(){
+            public void InvAdj() throws IOException{
             /*Prekondisi: MATRIKS BUJUR SANGKAR (n x n)*/                
                 /*Menampilkan Invers Matriks*/
                 /*Metode Adjoint*/
@@ -614,9 +620,10 @@ public class MATRIKS{
                 MATRIKS Inv;
                 int i,j;
                 double det;
+                String pesan;
 
                 /*Algoritma*/
-                if(this.DetCof(this)!=0){
+                if((this.DetCof(this)!=0) && (this.NBrsEff==this.NKolEff)){
                     
                     /*Membuat matriks Adjoint dan
                     menghitung determinan Matriks*/
@@ -635,8 +642,24 @@ public class MATRIKS{
                     }
                     
                     /*Output Invers Matriks*/
+                    pesan = "Matriks Invers (Metode Adjoint)";
+                    System.out.println(pesan);
                     Inv.TulisMATRIKS();
+                    TulisFileMatrix("Hasil_Invers_Adj.txt", pesan);
                 }
+                else{
+                    System.out.println();
+                    System.out.println(">Pesan: Invers tidak dapat dicari");
+                    System.out.println();
+                }
+            }
+
+            public static void main(String[] args) throws IOException{
+
+                MATRIKS M = new MATRIKS(100,101);
+
+                M.BacaFileMatrix("Ariana.txt");
+                M.InvAdj();
             }
 
     }
