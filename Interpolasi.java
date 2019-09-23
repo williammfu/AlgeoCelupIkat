@@ -223,11 +223,4 @@ public class Interpolasi{
         System.out.println("======== TERIMA KASIH ========");
         System.out.close();
     }
-
-    public static void main(String[] args) throws IOException{
-
-        Interpolasi i = new Interpolasi();
-
-        i.IntPolKey();
-    }
 }
