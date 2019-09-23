@@ -10,6 +10,7 @@ public class Interpolasi{
     /***OUTPUT POLINOM HASIL INTERPOLASI***/
     public String MakePolinom(double a[]){
         /*Membuat string polinom p(x) dari elemen pada array*/
+        /*I.S. Interpolasi sudah terdefinisi, a*/
     
             /*Kamus*/
             String polinom;
@@ -24,7 +25,7 @@ public class Interpolasi{
             polinom += " ";
     
             /*Elemen selanjutnya*/
-            for(i=2; i<=a.length-1; i++){
+            for(i=2; i<=(a.length)-1; i++){
                 
                 if(a[i]<0){ /*Elemen negatif*/
                     polinom += " - ";
@@ -62,8 +63,8 @@ public class Interpolasi{
         int n;
         int i,j,k; /*variabel untuk looping*/
         double xi,yi; /*titik yang ingin ditaksir nilainya*/
-        double a[];
-
+        double a[]; /*Menampung koefisien polinom*/
+ 
         /*Algoritma*/
         System.out.print("Masukan banyaknya titik= ");
         n = input.nextInt();
@@ -132,10 +133,10 @@ public class Interpolasi{
 
         /*Kamus*/
         double xi,yi;
-        double a[]; /*Untuk menampung koefisien polinom*/
         Scanner input = new Scanner(System.in);
         MATRIKS Temp,Pol;
         int i,j;
+        double a[]; /*Array untuk menampung koefisien polinom*/
         String polinom;
 
         /*Algoritma*/

@@ -1,5 +1,5 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+
 
 public class SPL{
     // Atribut
@@ -149,36 +149,46 @@ public class SPL{
             }
         }
      }
-     public void TulisSPL(){
-         // Kamus
+     public void TulisSPL(String FileName) throws IOException{
+         /*Kamus*/
          int i,j;
-         // Algoritma 
+         FileWriter fw = new FileWriter(FileName);
+         BufferedWriter bw = new BufferedWriter(fw);
+         PrintWriter out = new PrintWriter(bw);
+
+         /*Algoritma*/ 
          if(solveable){
+            
+            out.println("Solusi Sistem Persamaan Linear");
+            System.out.println("Solusi Sistem Persamaan Linear");
             for(i = Solusi.GetLastIdxBrs(); i>= Solusi.GetFirstIdxBrs(); i--){
                 if(Bebas[i]){
                     System.out.printf("x%d :t%d ",i,i);
+                    out.printf("x%d :t%d ",i,i);
                 }
                 else{
                     System.out.printf("x%d :%.2f ",i,Solusi.GetElmt(i, i));
+                    out.printf("x%d :%.2f ",i,Solusi.GetElmt(i, i));
                 }
                 for(j = i+1; j<=Solusi.GetLastIdxKol(); j++){
                    if(Solusi.GetElmt(i, j)> 0){
                        System.out.printf("+%.2ft%d ",Solusi.GetElmt(i, j),j);
+                       out.printf("+%.2ft%d ",Solusi.GetElmt(i, j),j);
                    }
                    if(Solusi.GetElmt(i, j)< 0){
                        System.out.printf("%.2ft%d ",Solusi.GetElmt(i, j),j);
+                       out.printf("%.2ft%d ",Solusi.GetElmt(i, j),j);
                    }
                 }
                 System.out.println("");
+                out.println("");
             }
+            out.close();
+            System.out.println("======== OUTPUT FILE ========");
+            System.out.println();
+            System.out.println("Hasil telah berhasil ditulis pada file: ");
+            System.out.println(FileName); System.out.println();
+            System.out.println("======== TERIMA KASIH ========");            
          }
-         
-
      }
-
-    public void TulisSPLFile() throws IOException {
-    /*Menulis solusi SPL dalam sebuah file external*/
-
-    
-    }
 }
