@@ -148,16 +148,17 @@ public class SPL{
                 SolusiPerBaris(i);
             }
         }
-     }
-     public void TulisSPL(String FileName) throws IOException{
-         /*Kamus*/
-         int i,j;
-         FileWriter fw = new FileWriter(FileName);
-         BufferedWriter bw = new BufferedWriter(fw);
-         PrintWriter out = new PrintWriter(bw);
+    }
 
-         /*Algoritma*/ 
-         if(solveable){
+    public void TulisSPL(String FileName) throws IOException{
+        /*Kamus*/
+        int i,j;
+        FileWriter fw = new FileWriter(FileName);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter out = new PrintWriter(bw);
+
+        /*Algoritma*/ 
+        if(solveable){
             
             out.println("Solusi Sistem Persamaan Linear");
             System.out.println("Solusi Sistem Persamaan Linear");
@@ -182,13 +183,17 @@ public class SPL{
                 }
                 System.out.println("");
                 out.println("");
-            }
-            out.close();
-            System.out.println("======== OUTPUT FILE ========");
-            System.out.println();
-            System.out.println("Hasil telah berhasil ditulis pada file: ");
-            System.out.println(FileName); System.out.println();
-            System.out.println("======== TERIMA KASIH ========");            
-         }
-     }
+            }          
+        }
+        else{
+            out.println("SPL tidak memiliki solusi");
+            System.out.println("SPL tidak memiliki solusi");
+        }
+        out.close();
+        System.out.println("======== OUTPUT FILE ========");
+        System.out.println();
+        System.out.println("Hasil telah berhasil ditulis pada file: ");
+        System.out.println(FileName); System.out.println();
+        System.out.println("======== TERIMA KASIH ========");  
+    }
 }
