@@ -353,10 +353,8 @@ public class MATRIKS{
                             det += M.Mem[i][1]*DetCof(M.Minor(i,1));
                         }
                     }
-
                     return det;
                 }
-
             }
             
             public double Kofaktor(int m, int n) {
@@ -460,7 +458,24 @@ public class MATRIKS{
 		            }
 		        }
 		        input.close();
-	        }
+            }
+            
+            public void TulisFileMatrix(String FileName) throws IOException{
+
+                FileWriter fw = new FileWriter(FileName);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw);
+                
+                for(int i=1; i<=this.NBrsEff; i++){
+                    for(int j=1; j<=this.NKolEff; j++){
+                        out.printf("%.3f   ", this.Mem[i][j]);
+                    }
+                    out.println();
+                }
+
+                out.close();
+                
+            }
 
             /*** CRAMER'S RULE ***/
             public void CariMCrammer(){
@@ -623,4 +638,5 @@ public class MATRIKS{
                     Inv.TulisMATRIKS();
                 }
             }
+
     }

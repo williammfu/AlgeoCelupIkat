@@ -1,9 +1,10 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class SPL{
     // Atribut
     public MATRIKS Mtrx,Solusi; // untuk memasukkan persamaan
-     // untuk menampung solusi x1..xn
+    // untuk menampung solusi x1..xn
     public boolean [] Bebas;
     boolean solveable = true;
 	/* Status Bebas untuk x1 - xn sesuai dengan index dari array */
@@ -175,9 +176,9 @@ public class SPL{
 
      }
 
-     
+    public void TulisSPLFile() throws IOException {
+    /*Menulis solusi SPL dalam sebuah file external*/
 
-
-
-
+    
+    }
 }
