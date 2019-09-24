@@ -65,13 +65,12 @@ public class MATRIKS{
                 a = 0;
             }
             this.SetElmt(i, j, a);
-
         }
+
         public void KaliElmt(int i, int j, double X){
             if(this.GetElmt(i,j)!=0){
                 this.SetElmt(i, j, this.GetElmt(i,j)*X);
-            }
-            
+            }        
         }
 
     /* BLOK METHOD UNTUK OPERASI BARIS ELEMENTER */
@@ -353,6 +352,61 @@ public class MATRIKS{
                     return det;
                 }
             }
+
+            public double DetOBE(){
+            /*Menghasilkan Determinan Matriks*/
+            /*Metode Eliminasi Gauss (OBE)*/
+            /*Prekondisi: Matriks persegi*/
+                
+                /*Kamus*/
+                double det, min;
+                int i,j,k;
+                MATRIKS Temp;
+
+                /*Algoritma*/
+                Temp = new MATRIKS(this.NBrsEff, this.NKolEff);
+                for(i=1; i<=Temp.GetLastIdxBrs(); i++){
+                    for(j=1; j<=Temp.GetLastIdxKol();j++){
+                        Temp.Mem[i][j] = this.Mem[i][j];
+                    }
+                }
+                
+                det = 1;
+                if(Temp.GetElmt(1,1)==0){
+                    i=2;
+                    
+                    while((i<=Temp.GetLastIdxBrs()) && (Temp.Mem[i][1]==0)){ 
+                        i++;
+                    }
+                    
+                    if(i>Temp.GetLastIdxBrs()){
+                        return 0;
+                    }
+                    else{
+                        Temp.Swap(1,i);
+                        det *= -1;
+                    }
+                }
+
+                for(i=2; i<=Temp.GetLastIdxBrs(); i++){
+                    for(j=1; j<i; j++){
+                        min = -(Temp.GetElmt(i,j)/Temp.GetElmt(j, j));
+                        for(k=j; k<=Temp.GetLastIdxKol(); k++){
+                            Temp.Mem[i][k] += min*(GetElmt(j,k));
+                        }
+                    }
+                }
+
+                for(i=1; i<=Temp.GetLastIdxBrs(); i++){
+                    det *= Temp.GetElmtDiagonal(i);
+                }
+
+                if(det == -0){
+                    det = 0;
+                }
+
+                return det;
+            }
             
             public double Kofaktor(int m, int n) {
 
@@ -372,47 +426,89 @@ public class MATRIKS{
 
                 return kof;
             }
-
+            
             public MATRIKS MakeKofaktor(){
+            /*Menghasilkan Matriks Kofaktor*/
+            /*Prekondisi: Matriks Bujur Sangkar*/
+
+                /*Kamus*/
+                MATRIKS MKof = new MATRIKS(this.NBrsEff,this.NKolEff);
+                int i,j;
+
+                /*Algoritma*/
+                for(i=MKof.GetFirstIdxBrs(); i<=MKof.GetLastIdxBrs(); i++){
+                    for(j=MKof.GetFirstIdxKol(); j<=MKof.GetLastIdxKol(); j++){
+                        MKof.SetElmt(i,j,Kofaktor(i,j));
+                        if(MKof.GetElmt(i, j)== -0){/*Penanganan nilai -0*/
+                            MKof.SetElmt(i, j, 0);
+                        }                        
+                    }
+                }                
+                return MKof;
+            }
+
+            public void PrintKofaktor() throws IOException{
 
                 /*Menghasilkan sebuah matriks kofaktor dari matriks*/
                 /*Prekondisi: Matriks bujur sangkar*/
 
                 /*Kamus*/
                 MATRIKS MKof;
-                int i,j;
+                String pesan;
 
                 /*Algoritma*/
-		        MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
-                for(i=GetFirstIdxBrs(); i<=GetLastIdxBrs(); i++){
-                    for(j=GetFirstIdxKol(); j<=GetLastIdxKol(); j++){
-                        MKof.SetElmt(i,j,Kofaktor(i,j));
-                        if(MKof.GetElmt(i, j)== -0){/*Penanganan nilai -0*/
-                            MKof.SetElmt(i, j, 0);
-                        }                        
-                    }
+                if(this.NBrsEff==this.NKolEff){
+                    MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
+                    MKof = this.MakeKofaktor();
+                    pesan = "======= MATRIKS KOFAKTOR =======";
+                    System.out.println(pesan);
+                    System.out.println();
+                    MKof.TulisMATRIKS();
+                    /*Output ke file .txt*/
+                    MKof.TulisFileMatrix("Matriks_Kofaktor.txt", pesan); 
                 }
-                return MKof;
+                else{
+                    System.out.println("Matriks bukan SQUARE MATRIX");
+                    System.out.println("Matriks kofaktor tidak dapat dicari");
+                }
+                
             }
 
-            public void MakeAdjoint(){
+            public MATRIKS MakeAdjoint(){
+            /*Menghasilkan Matriks Adjoint*/
+            /*Prekondisi: Matriks bujur sangkar*/
+
+                /*Kamus*/
+                MATRIKS MAdj = new MATRIKS(this.NBrsEff,this.NKolEff);
+
+                /*Algoritma*/
+		        MAdj = this.MakeKofaktor();
+                MAdj.Transpose();
+                return MAdj;
+            }
+
+            public void PrintAdjoint() throws IOException{
             /*Prekondisi: matriks bujur sangkar*/
                 /*Menghasilkan matriks adjoint*/
                 /*Matriks adjoint merupakan 
                 transpose dari matriks kofaktor*/
 
                 /*Kamus*/
-                MATRIKS MKof;
-                int i,j;
+                MATRIKS MAdj;
 		    
                 /*Algoritma*/
-                MKof = new MATRIKS(this.NBrsEff, this.NKolEff);
-		        MKof = this.MakeKofaktor();
-                MKof.Transpose();
-                for(i=1; i<=this.GetLastIdxBrs(); i++){
-                    for(j=1; j<=this.GetLastIdxKol(); j++){
-                        this.Mem[i][j] = MKof.Mem[i][j];
-                    }
+                if(this.NBrsEff==this.NKolEff){
+                    MAdj = this.MakeAdjoint();
+                    String pesan = "======= MATRIKS ADJOINT =======";
+                    
+                    System.out.println("======= MATRIKS ADJOINT =======");
+                    System.out.println();
+                    MAdj.TulisMATRIKS(); System.out.println();
+                    MAdj.TulisFileMatrix("Matriks_Adjoint.txt", pesan);
+                }
+                else{
+                    System.out.println("Bukan Matriks Persegi");
+                    System.out.println("Matriks Adjoint tidak ada");
                 }
             }
 
@@ -541,7 +637,7 @@ public class MATRIKS{
         /**INVERS MATRIKS**/
             
             /*METODE OBE*/
-            public void InvOBE(MATRIKS M){
+            public void InvOBE(MATRIKS M) throws IOException{
             /*Menampilkan invers dari matriks*/
             /*I.S. Matriks bujur sangkar*/
             /*F.S. Menampilkan invers dari matriks
@@ -551,6 +647,7 @@ public class MATRIKS{
                 MATRIKS Aug, Inv;
                 int i,j,k;
                 int p,q,r;
+                String pesan;
 
                 /*Algoritma*/
                 if((this.DetCof(this)!=0)&&(this.NBrsEff==this.NKolEff)){
@@ -602,10 +699,17 @@ public class MATRIKS{
 
                     /*Menampilkan matriks invers*/
                     Inv.TulisMATRIKS();
-                }
-                else{
+                    pesan = "Matriks Invers (Metode Operasi Baris Elementer)";
                     System.out.println();
-                    System.out.println(">Pesan: Invers tidak dapat dicari");
+                    System.out.println(pesan);
+                    TulisFileMatrix("Hasil_Invers_OBE.txt", pesan);
+                    System.out.println();
+                }
+                else{/*Matriks tidak invertible*/
+                    pesan = "Invers tidak dapat dicari. Berikut adalah matriks awal";
+                    System.out.println();
+                    System.out.println(">>>> Pesan: Invers tidak dapat dicari");
+                    TulisFileMatrix("Hasil_Invers_OBE.txt", pesan);
                     System.out.println();
                 }
             }
@@ -648,18 +752,17 @@ public class MATRIKS{
                     TulisFileMatrix("Hasil_Invers_Adj.txt", pesan);
                 }
                 else{
+                    pesan = "Invers tidak dapat dicari. Berikut adalah matriks awal";
                     System.out.println();
-                    System.out.println(">Pesan: Invers tidak dapat dicari");
+                    System.out.println(">>>> Pesan: Invers tidak dapat dicari");
+                    TulisFileMatrix("Hasil_Invers_Adj.txt", pesan);
                     System.out.println();
                 }
             }
-
-            public static void main(String[] args) throws IOException{
-
-                MATRIKS M = new MATRIKS(100,101);
-
-                M.BacaFileMatrix("Ariana.txt");
-                M.InvAdj();
+        
+            public static void main(String[] args){
+                MATRIKS M1 = new MATRIKS(3,3);
+                M1.BacaMATRIKS();
+                System.out.printf("Determinan= %.3f", M1.DetOBE());
             }
-
     }

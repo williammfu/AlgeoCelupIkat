@@ -15,22 +15,22 @@ public class Main{
 
         /* Algoritma */
 
-        //MATRIKS M1 = new MATRIKS(3,3);
+
         //SPL S1 = new SPL(3);
-        SPL S2 = new SPL(6,6);
+        //SPL S2 = new SPL(6,6);
         //S1.BacaSPLFile("chinese.txt");
         //S1.BacaSPLKeyBoard();
         //S1.CekSolveAndBebas();
-        S2.BacaSPLKeyBoard();
-        System.out.println("Lalala");
-        S2.Mtrx.TulisMATRIKS();
-        System.out.println("Lalala");
-        S2.Mtrx.Gauss();
-        S2.Mtrx.TulisMATRIKS();
-        System.out.println("Lalala");
-        S2.UrutinGauss();
-        S2.Mtrx.TulisMATRIKS();
-        System.out.println("Lalala");
+        //S2.BacaSPLKeyBoard();
+        //System.out.println("Lalala");
+        //S2.Mtrx.TulisMATRIKS();
+        //System.out.println("Lalala");
+        //S2.Mtrx.Gauss();
+        //S2.Mtrx.TulisMATRIKS();
+        //System.out.println("Lalala");
+        //S2.UrutinGauss();
+        //S2.Mtrx.TulisMATRIKS();
+        //System.out.println("Lalala");
         //SPL S2 = new SPL(4);
         //S1.BacaSPLFile("chinese.txt");
         //S1.BacaSPLKeyBoard();
