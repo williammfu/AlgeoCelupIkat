@@ -164,21 +164,21 @@ public class SPL{
             System.out.println("Solusi Sistem Persamaan Linear");
             for(i = Solusi.GetLastIdxBrs(); i>= Solusi.GetFirstIdxBrs(); i--){
                 if(Bebas[i]){
-                    System.out.printf("x%d :t%d ",i,i);
-                    out.printf("x%d :t%d ",i,i);
+                    System.out.printf("x%d = t%d ",i,i);
+                    out.printf("x%d = t%d ",i,i);
                 }
                 else{
-                    System.out.printf("x%d :%.2f ",i,Solusi.GetElmt(i, i));
-                    out.printf("x%d :%.2f ",i,Solusi.GetElmt(i, i));
+                    System.out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
+                    out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
                 }
                 for(j = i+1; j<=Solusi.GetLastIdxKol(); j++){
                    if(Solusi.GetElmt(i, j)> 0){
-                       System.out.printf("+%.2ft%d ",Solusi.GetElmt(i, j),j);
-                       out.printf("+%.2ft%d ",Solusi.GetElmt(i, j),j);
+                       System.out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
+                       out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
                    }
                    if(Solusi.GetElmt(i, j)< 0){
-                       System.out.printf("%.2ft%d ",Solusi.GetElmt(i, j),j);
-                       out.printf("%.2ft%d ",Solusi.GetElmt(i, j),j);
+                       System.out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
+                       out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
                    }
                 }
                 System.out.println("");
