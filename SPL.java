@@ -1,12 +1,13 @@
 import java.io.*;
-
+import java.lang.Math; // untuk fungsi absolute
 
 public class SPL{
     // Atribut
     public MATRIKS Mtrx,Solusi; // untuk memasukkan persamaan
+    public double [] SolusiInv;
     // untuk menampung solusi x1..xn
     public boolean [] Bebas;
-    boolean solveable = true;
+    public boolean solveable = true;
 	/* Status Bebas untuk x1 - xn sesuai dengan index dari array */
     /* true jika ada variabel bebas
     false jika tidak */
@@ -125,6 +126,7 @@ public class SPL{
         }
     }
 
+
     public void SolusiByGaussJordan(){
         // Kamus
         int i,j;
@@ -192,17 +194,33 @@ public class SPL{
                     out.printf("x%d = t%d ",i,i);
                 }
                 else{
-                    System.out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
-                    out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
+                    if(Solusi.GetElmt(i, i) != 0){
+                        System.out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
+                        out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
+                    }   
                 }
                 for(j = i+1; j<=Solusi.GetLastIdxKol(); j++){
                    if(Solusi.GetElmt(i, j)> 0){
-                       System.out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
-                       out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
+                       if(Solusi.GetElmt(i, j) != 1){
+                            System.out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
+                            out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
+                       }
+                       else{
+                            System.out.printf("+ t%d ",j);
+                            out.printf("+ t%d ",j);
+                       }
+                       
                    }
                    if(Solusi.GetElmt(i, j)< 0){
-                       System.out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
-                       out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
+                       if(Solusi.GetElmt(i, j) != -1){
+                            System.out.printf("- %.2ft%d ",Math.abs(Solusi.GetElmt(i, j)),j);
+                            out.printf("- %.2ft%d ",Math.abs(Solusi.GetElmt(i, j)),j);
+                       }
+                       else{
+                            System.out.printf("- t%d ",j);
+                            out.printf("- t%d ",j); 
+                       }
+                       
                    }
                 }
                 System.out.println("");

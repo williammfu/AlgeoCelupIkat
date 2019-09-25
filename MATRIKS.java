@@ -355,7 +355,7 @@ public class MATRIKS{
                 }
             }
 
-            //public double DetOBE(){
+            //0 public double DetOBE(){
             /*Menghasilkan Determinan Matriks*/
             /*Metode Eliminasi Gauss (OBE)*/
             /*Prekondisi: Matriks persegi*/
