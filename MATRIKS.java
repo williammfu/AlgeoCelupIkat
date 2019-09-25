@@ -246,30 +246,32 @@ public class MATRIKS{
             boolean found = false;
                 
             /* Algoritma */
-                    detByGauss = 1;
-                    i1 = GetFirstIdxBrs();
-                    j = GetFirstIdxKol();
-                    while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
-                        do{
-                            Pivotting(j,i1);
-                            found = Math.round(Mem[i1][j] * 100000.0)/100000.0 != 0.0;
-                            if(!found){
-                                j++;
-                                detByGauss *= 0; // karena elemen  diagonal ditemukan 0
-                            }
-                        } while(j<=GetLastIdxKol() && !found);
-                        if (found){
-                            //ketemu elemen tak 0 di baris itu, langkah3
-                            //langkah3
-                            for(i2=i1+1; i2<=GetLastIdxBrs(); i2++){
-                                KurangiRow(i2,i1,j,GetElmt(i2, j)/GetElmt(i1,j)); // langkah 4 dan 5
-                            }
-                            detByGauss *= GetElmt(i1,j); // sblm dibikin 1 elemen diagonalnya detnya dikali dulu dgn elemen diagonal tsb.
-                            KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
-                            i1 ++; //langkah3
-                            j++; // ulangi dr langkah 1 untuk kolom selanjutnya
-                        }       
+            detByGauss = 1;
+            i1 = GetFirstIdxBrs();
+            j = GetFirstIdxKol();
+                    
+            while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
+                    do{
+                        Pivotting(j,i1);
+                        found = Math.round(Mem[i1][j] * 100000.0)/100000.0 != 0.0;
+                        if(!found){
+                            j++;
+                            detByGauss *= 0; // karena elemen  diagonal ditemukan 0
+                        }
+                    } while(j<=GetLastIdxKol() && !found);
+                        
+                    if (found){
+                        //ketemu elemen tak 0 di baris itu, langkah3
+                        //langkah3
+                        for(i2=i1+1; i2<=GetLastIdxBrs(); i2++){
+                            KurangiRow(i2,i1,j,GetElmt(i2, j)/GetElmt(i1,j)); // langkah 4 dan 5
                     }
+                        detByGauss *= GetElmt(i1,j); // sblm dibikin 1 elemen diagonalnya detnya dikali dulu dgn elemen diagonal tsb.
+                        KaliRow(i1, 1/GetElmt(i1,j));//ketemu elemen tak 0 di baris itu, langkah3
+                        i1 ++; //langkah3
+                        j++; // ulangi dr langkah 1 untuk kolom selanjutnya
+                    }       
+                }
             }
 
             public void Jordan ()
@@ -359,7 +361,8 @@ public class MATRIKS{
             /*Prekondisi: Matriks persegi*/
                 
                 /*Kamus*/
-                double det, min;
+                double det;
+                boolean found = false;
                 int i,j,k;
                 MATRIKS Temp;
 
@@ -371,21 +374,12 @@ public class MATRIKS{
                     }
                 }
                 
-                det = 1;
-                if(Temp.GetElmt(1,1)==0){
-                    i=2;
-                    
-                    while((i<=Temp.GetLastIdxBrs()) && (Temp.Mem[i][1]==0)){ 
-                        i++;
-                    }
-                    
-                    if(i>Temp.GetLastIdxBrs()){
-                        return 0;
-                    }
-                    else{
-                        Temp.Swap(1,i);
-                        det *= -1;
-                    }
+                i = 1;  j = 1;
+                while(i<=Temp.GetLastIdxBrs() && j<=GetLastIdxKol()){
+
+                    do{
+
+                    }while(j<=GetLastIdxKol() && !found);
                 }
 
                 for(i=2; i<=Temp.GetLastIdxBrs(); i++){
