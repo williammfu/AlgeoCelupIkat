@@ -39,6 +39,7 @@ public class Main{
         System.out.println("2. Input File External");
         System.out.println("");
 
+        System.out.print(">> Pilihan Anda: ");
         int pilihFile = in.nextInt();
         M = new MATRIKS(100,101);
         if(pilihFile == 1){
@@ -183,8 +184,9 @@ public class Main{
                 System.out.print(">> Pilihan Anda: ");
                 pilihan1 = in.nextInt();
                 
-                System.out.println("Perhatian: Matriks harus persegi");
                 M = TampilInput();
+                System.out.println("");
+                System.out.println("Perhatian: Matriks harus persegi");
 
                 if (pilihan1 == 1){/*Metode OBE*/
                     M.InvOBE(M);
@@ -198,18 +200,20 @@ public class Main{
             else if (pilihan == 4) { /*Matriks Kofaktor*/
 
                 System.out.println(" ");
-                System.out.println("Perhatian : Matriks harus persegi");
                 
                 M = TampilInput();
+                System.out.println("");
+                System.out.println("Perhatian: Matriks harus persegi");
                 M.PrintKofaktor();
             }
 
             else if (pilihan == 5) { /*Matriks Adjoint*/
 
                 System.out.println(" ");
-                System.out.println("Perhatian : Matriks harus persegi");
 
                 M = TampilInput();
+                System.out.println(" ");
+                System.out.println("Perhatian : Matriks harus persegi");
                 M.PrintAdjoint();
             }
 
