@@ -375,22 +375,40 @@ public class MATRIKS{
                 }
                 
                 i = 1;  j = 1;
-                while(i<=Temp.GetLastIdxBrs() && j<=GetLastIdxKol()){
+                while(i<=Temp.GetLastIdxBrs() && j<=Temp.GetLastIdxKol()){
 
                     do{
+                        Temp.Pivotting(j, i);
+                        found = Math.round(Mem[i][j]*100000.0)/100000.0 != 0.0;
+                        if(!found){
+                            j++;
+                            detByGauss *= 0;
+                        }
+                    }while(j<=Temp.GetLastIdxKol() && !found);
 
-                    }while(j<=GetLastIdxKol() && !found);
+                    if(found){
+                        for(k=i+1; k<=Temp.GetLastIdxBrs(); k++){
+                            if(Temp.Mem[i][j]!=0){
+                                Temp.KurangiRow(k, i, j, Temp.GetElmt(k, j)/Temp.GetElmt(i,j));
+                            }
+                        }
+                    }
+                    i++;
+                    j++;
                 }
+                Temp.TulisMATRIKS();
 
+                
                 for(i=2; i<=Temp.GetLastIdxBrs(); i++){
                     for(j=1; j<i; j++){
-                        min = -(Temp.GetElmt(i,j)/Temp.GetElmt(j, j));
+                        double min = -(Temp.GetElmt(i,j)/Temp.GetElmt(j, j));
                         for(k=j; k<=Temp.GetLastIdxKol(); k++){
-                            Temp.Mem[i][k] += min*(GetElmt(j,k));
+                            Temp.Mem[i][k] += min*(Temp.GetElmt(j,k));
                         }
                     }
                 }
 
+                det = 1;
                 for(i=1; i<=Temp.GetLastIdxBrs(); i++){
                     det *= Temp.GetElmtDiagonal(i);
                 }

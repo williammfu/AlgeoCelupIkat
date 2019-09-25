@@ -2,13 +2,18 @@ import java.io.*;
 import java.util.*;
 import java.util.Scanner; // untuk proses scan
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class Main{
     
     public static void TampilMenu(){
-        System.out.println("--------*** TUGAS BESAR 1 ALJABAR LINEAR & GEOMETRI ***--------");
-        System.out.println("----*** Sistem Persamaan Linier, Determinan, dan Aplikasinya ***----");
 
-        System.out.println("MENU");
+        System.out.println();
+        System.out.println("*             TUGAS BESAR 1 ALJABAR LINEAR & GEOMETRI              *");
+        System.out.println("*       Sistem Persamaan Linier, Determinan, dan Aplikasinya       *");
+
+        System.out.println();
+        System.out.println("========   MENU   ========");
         System.out.println("1. Sistem Persamaan Linier");
         System.out.println("2. Determinan");
         System.out.println("3. Matriks Balikan");
@@ -17,30 +22,76 @@ public class Main{
         System.out.println("6. Interpolasi Polinom");
         System.out.println("7. Keluar");
 
-        System.out.println(" ");        
+        System.out.println("");        
     }
+
+    public static MATRIKS TampilInput() throws IOException{
+    /*Menghasilkan matriks dari input sesuai keinginan pengguna*/
+    /*Prekondisi: Matriks tidak kosong*/
+        
+        /*Kamus*/
+        Scanner in = new Scanner(System.in);
+        MATRIKS M;
+
+        /*Algoritma*/
+        System.out.println("Pilih input matriks: ");
+        System.out.println("1. Input KEYBOARD");
+        System.out.println("2. Input File External");
+        System.out.println("");
+
+        int pilihFile = in.nextInt();
+        M = new MATRIKS(100,101);
+        if(pilihFile == 1){
+            System.out.print("Masukkan jumlah baris matriks Anda = ");
+            int baris = in.nextInt();
+            System.out.print("Masukkan jumlah kolom matriks Anda = ");
+            int kolom = in.nextInt();
+            
+            M = new MATRIKS(baris, kolom);
+            System.out.println("Silahkan masukkan elemen matriks sesuai ukuran yang Anda berikan");
+            System.out.println("Setiap elemen dipisahkan dengan sebuah spasi");
+            System.out.println("Setiap baris dipisahkan dengan ENTER");
+            M.BacaMATRIKS();
+            
+        }
+
+        else if(pilihFile == 2){
+            System.out.print("Masukkan nama file matriks yang ingin Anda gunakan: ");
+            String namafile = in.next();
+
+            M = new MATRIKS(100,101);
+            M.BacaFileMatrix(namafile);
+            System.out.println("Pembacaan berhasil");
+            
+        }
+
+        System.out.println();
+        in.close();
+        return M;
+    }
+
     public static void main(String args[]) throws IOException{
+        
         /* Kamus */
         int baris, kolom;
         double hasilDet;
         MATRIKS M, Mkof;
-        int j,k, pilihan, pilihan1;
+        int pilihan, pilihan1;
         Scanner in = new Scanner(System.in);
         int lanjut = 1; 
-        //MATRIKS M;
 
         /* Algoritma */      
         TampilMenu();
-        System.out.print("Masukkan pilihan Anda: ");
-        
+
+        System.out.print(">> Pilihan Anda: ");
     	pilihan = in.nextInt();
-
-
         System.out.println(" ");
 
         while (pilihan != 7 && lanjut == 1) {
+
             if (pilihan ==1){
-                System.out.println("/****MENCARI SOLUSI DARI SPL****/");
+                
+                System.out.println("======= MENCARI SOLUSI DARI SPL =======");
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
                 System.out.println("1. Metode Eliminasi Gauss ");
                 System.out.println("2. Metode Eliminasi Gauss-Jordan");
@@ -48,21 +99,14 @@ public class Main{
                 System.out.println("4. Kaidah Cramer");
                 System.out.println(" ");
 
+                System.out.print(">> Pilihan Anda: ");
                 pilihan1 = in.nextInt();
-                
 
                 System.out.println("Anda harus memasukan SPL dalam bentuk matriks augemented");
-                System.out.print("Masukkan jumlah baris matriks Anda = ");
-                baris = in.nextInt();
-                System.out.print("Masukkan jumlah kolom matriks Anda = ");
-                kolom = in.nextInt();
-                M = new MATRIKS(baris, kolom);
-                System.out.println("Masukkan SPL dalam bentuk matriks augmented");
-                M.BacaMATRIKS();
+                M = TampilInput();
 
                 if (pilihan1 == 1){
                     M.Gauss();
-                    
                 }
 
                 else if (pilihan1 == 2){
@@ -70,7 +114,7 @@ public class Main{
                     M.Jordan();
                 }
 
-                else if (pilihan == 3){
+                else if (pilihan1 == 3){
 
 
                 }
@@ -82,36 +126,27 @@ public class Main{
             } 
 
             else if (pilihan == 2) {
-                System.out.println("/****MENCARI DETERMINAN****/");
+                System.out.println("======= MENCARI DETERMINAN =======");
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
                 System.out.println("1. Metode OBE");
                 System.out.println("2. Metode Matriks Kofaktor");
-                System.out.println("3. Menggunakan Matriks Adjoin");
                 System.out.println(" ");
 
+                System.out.print(">> Pilihan Anda: ");
                 pilihan1 = in.nextInt();
-
                 System.out.println(" ");
-                
-                System.out.print("Masukkan jumlah baris dan kolom matriks Anda = ");
-                kolom = in.nextInt();
-                M = new MATRIKS(kolom, kolom);
-                System.out.println("Masukkan matriks yang ingin dicari matriks determinannya");
-                M.BacaMATRIKS();
 
+                M = TampilInput();
+                
                 System.out.println(" ");
                 System.out.print("Nilai determinan dari matriks tersebut = ");
+
                 if (pilihan1 == 1){
                     M.Gauss();
                 }
-
                 else if (pilihan == 2) {
                     hasilDet = M.DetCof(M);
                     System.out.printf("%.3f", hasilDet);
-                }
-
-                else if (pilihan == 3){
-                    
                 }
 
             }
@@ -200,7 +235,7 @@ public class Main{
             if (lanjut == 1){
 
                 TampilMenu();
-                System.out.print("Masukkan pilihan Anda: ");
+                System.out.print(">> Pilihan Anda: ");
         
     	        pilihan = in.nextInt();
 
@@ -208,7 +243,6 @@ public class Main{
             }
 
         }
-        System.out.println(" ");
         System.out.println("======= GOOD BYE =======");
         in.close();
 
