@@ -1,0 +1,7 @@
+Solusi Sistem Persamaan Linear
+x6 = t6 
+x5 = 1.00 + 1.00t6 
+x4 = -2.00  -1.00t6 
+x3 = t3 
+x2 = 1.00  -1.00t6 
+x1 = t1 

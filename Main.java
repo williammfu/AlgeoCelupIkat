@@ -106,12 +106,32 @@ public class Main{
                 M = TampilInput();
 
                 if (pilihan1 == 1){/*Gauss*/
-                    M.Gauss();
+                    /* Kamus */
+                    SPL splG;
+                    /* Algoritma */
+                    System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
+                    int jpers = in.nextInt();
+                    System.out.print("Masukkan variabel tak diketahui = ");
+                    int jvar = in.nextInt();
+                    splG = new SPL(jpers,jvar);
+                    splG.BacaSPLKeyBoard();
+                    splG.SolusiByGauss();
+                    splG.TulisSPL("Angels.txt");
+                    
                 }
 
                 else if (pilihan1 == 2){/*Gauss-Jordan*/
-                    M.Gauss();
-                    M.Jordan();
+                    /* Kamus */
+                    SPL splGJ;
+                    /* Algoritma */
+                    System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
+                    int jpers = in.nextInt();
+                    System.out.print("Masukkan variabel tak diketahui = ");
+                    int jvar = in.nextInt();
+                    splGJ = new SPL(jpers,jvar);
+                    splGJ.BacaSPLKeyBoard();
+                    splGJ.SolusiByGaussJordan();
+                    splGJ.TulisSPL("Angels.txt");
                 }
 
                 else if (pilihan1 == 3){/*Metode Balikan*/

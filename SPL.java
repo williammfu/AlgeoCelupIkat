@@ -40,7 +40,6 @@ public class SPL{
             Mtrx = MTemp;
         }
     }
-
      public void BacaSPLFile(String fileName) throws FileNotFoundException{
          /* Membaca SPL dari file eksternal */
          /* Kamus */
@@ -122,6 +121,31 @@ public class SPL{
                     Mtrx.Swap(i, k-1);
                 }
                
+            }
+        }
+    }
+
+    public void SolusiByGaussJordan(){
+        // Kamus
+        int i,j;
+        // Algoritma
+        Mtrx.Gauss();
+        Mtrx.Jordan();
+        UrutinGauss();
+        CekSolveAndBebas();
+        if(!solveable){
+            System.out.println("Solusi tidak ada bro!");
+        }
+        else{
+            // Inisialisasi matriks solusi
+            for(i = Solusi.GetFirstIdxBrs(); i<=Solusi.GetLastIdxBrs(); i++){
+                for(j = Solusi.GetFirstIdxKol(); j<=Solusi.GetLastIdxKol(); j++){
+                    Solusi.SetElmt(i, j, 0);
+                }
+            }
+            // Masukan solusi dari tiap variable ke matriks solusi
+            for(i = Solusi.GetLastIdxBrs(); i >= Solusi.GetFirstIdxBrs(); i--){
+                SolusiPerBaris(i);
             }
         }
     }

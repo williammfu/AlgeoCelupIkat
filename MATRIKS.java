@@ -355,26 +355,26 @@ public class MATRIKS{
                 }
             }
 
-            public double DetOBE(){
+            //public double DetOBE(){
             /*Menghasilkan Determinan Matriks*/
             /*Metode Eliminasi Gauss (OBE)*/
             /*Prekondisi: Matriks persegi*/
                 
                 /*Kamus*/
-                double det;
+             /*   double det;
                 boolean found = false;
                 int i,j,k;
-                MATRIKS Temp;
+                MATRIKS Temp; */
 
                 /*Algoritma*/
-                Temp = new MATRIKS(this.NBrsEff, this.NKolEff);
+              /*  Temp = new MATRIKS(this.NBrsEff, this.NKolEff);
                 for(i=1; i<=Temp.GetLastIdxBrs(); i++){
                     for(j=1; j<=Temp.GetLastIdxKol();j++){
                         Temp.Mem[i][j] = this.Mem[i][j];
                     }
                 }
 
-            }
+            } */
             
             public double Kofaktor(int m, int n) {
 
@@ -728,9 +728,9 @@ public class MATRIKS{
                 }
             }
         
-            public static void main(String[] args){
+            /*public static void main(String[] args){
                 MATRIKS M1 = new MATRIKS(3,3);
                 M1.BacaMATRIKS();
                 System.out.printf("Determinan= %.3f", M1.DetOBE());
-            }
+            }*/
     }
