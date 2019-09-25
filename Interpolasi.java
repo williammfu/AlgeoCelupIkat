@@ -178,7 +178,7 @@ public class Interpolasi{
 
         /*Polinom akan ditulis pada file output*/
         polinom = MakePolinom(a);
-        System.out.println(polinom);
+        
         
         /*Menghitung nilai polinom untuk xi*/
         /*Hasil disimpan pada yi*/
@@ -191,7 +191,6 @@ public class Interpolasi{
         String namaBaru = "hasil_" + filename;
 
         /*Masukin ke file external Hasil*/
-        input.close();
         this.outputPol(namaBaru, polinom, xi, yi);        
     }
 
@@ -222,6 +221,6 @@ public class Interpolasi{
         System.out.print(" '"); System.out.print(a + "'\n");
         System.out.println();
         System.out.println("======== TERIMA KASIH ========");
-        System.out.close();
+        
     }
 }
