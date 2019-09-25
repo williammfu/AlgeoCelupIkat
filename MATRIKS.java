@@ -355,26 +355,48 @@ public class MATRIKS{
                 }
             }
 
-            //0 public double DetOBE(){
-            /*Menghasilkan Determinan Matriks*/
-            /*Metode Eliminasi Gauss (OBE)*/
-            /*Prekondisi: Matriks persegi*/
-                
-                /*Kamus*/
-             /*   double det;
-                boolean found = false;
-                int i,j,k;
-                MATRIKS Temp; */
-
-                /*Algoritma*/
-              /*  Temp = new MATRIKS(this.NBrsEff, this.NKolEff);
-                for(i=1; i<=Temp.GetLastIdxBrs(); i++){
-                    for(j=1; j<=Temp.GetLastIdxKol();j++){
-                        Temp.Mem[i][j] = this.Mem[i][j];
+            public double DetOBE(){
+                /*Mengembalikan nilai determinan matriks*/
+                /*Metode: Operasi Baris Elementer*/
+                /*Prekondisi: Matriks bujur sangkar!*/
+                        
+                    /* Kamus */
+                    int i,j,k;
+                    boolean found = false;
+                        
+                    /* Algoritma */
+                    MATRIKS Temp = new MATRIKS(NBrsEff,NKolEff);
+                    for(i=1; i<=GetLastIdxBrs(); i++){
+                        for(j=1; j<=GetLastIdxKol(); j++){
+                            Temp.Mem[i][j] = this.Mem[i][j];
+                        }
                     }
-                }
-
-            } */
+    
+                    double det = 1;
+                    i = GetFirstIdxBrs();
+                    j = GetFirstIdxKol();
+                            
+                    while(i<=GetLastIdxBrs() && j<=GetLastIdxKol()){ 
+                            do{
+                                Temp.Pivotting(j,i);
+                                found = Math.round(Temp.Mem[i][j] * 100000.0)/100000.0 != 0.0;
+                                if(!found){
+                                    j++;
+                                    det *= 0; 
+                                }
+                            } while(j<=GetLastIdxKol() && !found);
+                                
+                            if (found){
+                                for(k=i+1; k<=GetLastIdxBrs(); k++){
+                                    Temp.KurangiRow(k,i,j,Temp.GetElmt(k, j)/Temp.GetElmt(i,j));
+                            }
+                                det *= Temp.GetElmt(i,j); 
+                                i++; 
+                                j++; 
+                            }       
+                        }
+                        return det;
+                    } 
             
             public double Kofaktor(int m, int n) {
 
@@ -683,13 +705,41 @@ public class MATRIKS{
             }
 
             /*METODE ADJOINT*/
-            public void InvAdj() throws IOException{
+            public MATRIKS InvAdj(){
+            /*Membuat matriks dengan metode Adjoint*/
+
+                /*Kamus*/
+                int i,j;
+                double det;
+                MATRIKS Inv;
+
+                /*Algoritma*/
+                
+                /*Membuat matriks Adjoint dan
+                menghitung determinan Matriks*/
+                det = this.DetCof(this);
+                Inv = this.MakeAdjoint();
+
+                /*Mengisi matriks Invers*/
+                for(i=1; i<=Inv.GetLastIdxBrs(); i++){
+                    for(j=1; j<=Inv.GetLastIdxKol(); j++){
+                        Inv.Mem[i][j] = (Inv.Mem[i][j]/det);
+                        if (Inv.Mem[i][j]== -0){
+                                Inv.Mem[i][j] = 0;
+                        }
+                    }
+                }
+
+                return Inv;
+            }
+
+            public void PrintInvAdj() throws IOException{
             /*Prekondisi: MATRIKS BUJUR SANGKAR (n x n)*/                
                 /*Menampilkan Invers Matriks*/
                 /*Metode Adjoint*/
 
                 /*Kamus*/
-                MATRIKS Inv;
+                MATRIKS Temp;
                 int i,j;
                 double det;
                 String pesan;
@@ -703,21 +753,19 @@ public class MATRIKS{
                     this.MakeAdjoint();
                     
                     /*Mengisi matriks Invers*/
-                    Inv = new MATRIKS(this.NBrsEff, this.NKolEff);
-                    for(i=1; i<=Inv.GetLastIdxBrs(); i++){
-                        for(j=1; j<=Inv.GetLastIdxKol(); j++){
-                            Inv.Mem[i][j] = (this.Mem[i][j]/det);
-                            if (Inv.Mem[i][j]== -0){
-                                Inv.Mem[i][j] = 0;
-                            }
+                    Temp = new MATRIKS(this.NBrsEff, this.NKolEff);
+                    for(i=1; i<=this.GetLastIdxBrs(); i++){
+                        for(j=1; j<=this.GetLastIdxKol(); j++){
+                            Temp.Mem[i][j] = this.Mem[i][j];
                         }
                     }
+                    Temp.InvAdj();
                     
                     /*Output Invers Matriks*/
                     pesan = "Matriks Invers (Metode Adjoint)";
                     System.out.println(pesan);
-                    Inv.TulisMATRIKS();
-                    TulisFileMatrix("Hasil_Invers_Adj.txt", pesan);
+                    Temp.TulisMATRIKS();
+                    Temp.TulisFileMatrix("Hasil_Invers_Adj.txt", pesan);
                 }
                 else{
                     pesan = "Invers tidak dapat dicari. Berikut adalah matriks awal";
@@ -727,10 +775,4 @@ public class MATRIKS{
                     System.out.println();
                 }
             }
-        
-            /*public static void main(String[] args){
-                MATRIKS M1 = new MATRIKS(3,3);
-                M1.BacaMATRIKS();
-                System.out.printf("Determinan= %.3f", M1.DetOBE());
-            }*/
     }

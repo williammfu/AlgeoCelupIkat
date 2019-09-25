@@ -39,6 +39,7 @@ public class Main{
         System.out.println("2. Input File External");
         System.out.println("");
 
+        System.out.print(">> Pilihan Anda: ");
         int pilihFile = in.nextInt();
         M = new MATRIKS(100,101);
         if(pilihFile == 1){
@@ -66,7 +67,6 @@ public class Main{
         }
 
         System.out.println();
-        in.close();
         return M;
     }
 
@@ -135,8 +135,16 @@ public class Main{
                 }
 
                 else if (pilihan1 == 3){/*Metode Balikan*/
-
-
+                    /* Kamus */
+                    SPL splB;
+                    /* Algoritma */
+                    System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
+                    int jpers = in.nextInt();
+                    System.out.print("Masukkan variabel tak diketahui = ");
+                    int jvar = in.nextInt();
+                    splB = new SPL(jpers,jvar);
+                    splB.BacaSPLKeyBoard();
+                    splB.SolusiByBalikan();
                 }
 
                 else if (pilihan1 == 4){/*Metode Aturan Crammer*/
@@ -183,41 +191,70 @@ public class Main{
                 System.out.print(">> Pilihan Anda: ");
                 pilihan1 = in.nextInt();
                 
-                System.out.println("Perhatian: Matriks harus persegi");
                 M = TampilInput();
+                System.out.println("");
+                System.out.println("Perhatian: Matriks harus persegi");
 
                 if (pilihan1 == 1){/*Metode OBE*/
                     M.InvOBE(M);
                 }
 
                 else if (pilihan1 == 2){/*Metode Adj/det(A)*/
-                    M.InvAdj();
+                    M.PrintInvAdj();
                 }
             }
             
             else if (pilihan == 4) { /*Matriks Kofaktor*/
 
                 System.out.println(" ");
-                System.out.println("Perhatian : Matriks harus persegi");
                 
                 M = TampilInput();
+                System.out.println("");
+                System.out.println("Perhatian: Matriks harus persegi");
                 M.PrintKofaktor();
             }
 
             else if (pilihan == 5) { /*Matriks Adjoint*/
 
                 System.out.println(" ");
-                System.out.println("Perhatian : Matriks harus persegi");
 
                 M = TampilInput();
+                System.out.println(" ");
+                System.out.println("Perhatian : Matriks harus persegi");
                 M.PrintAdjoint();
             }
 
             else if (pilihan == 6) { /*Interpolasi Polinom*/
-                System.out.println(" ");
-                System.out.println("===== Interpolasi Polinom =====");
                 
-            
+                System.out.println();
+                System.out.println("===== Interpolasi Polinom =====");
+                System.out.println();
+
+                System.out.println("Pilih input matriks: ");
+                System.out.println("1. Input KEYBOARD");
+                System.out.println("2. Input File External");
+                System.out.println("");
+
+                System.out.print(">> Pilihan Anda : ");
+                int pilihFile = in.nextInt();
+                System.out.println();
+
+                while( (pilihFile!=1) && (pilihFile !=2) ){
+                    System.out.println("Pilihan tidak valid");
+                    System.out.print(">> Pilihan Anda : ");
+                    pilihFile = in.nextInt();
+                    System.out.println();
+                }
+
+                Interpolasi I = new Interpolasi();
+                if(pilihFile==1){
+                    I.IntPolKey();
+                }
+                else if(pilihFile==2){
+                    System.out.print("Masukkan nama file matriks yang ingin gunakan: ");
+                    String namafile = in.next();
+                    I.IntPolFile(namafile);
+                }
             }
 
             System.out.println(" ");

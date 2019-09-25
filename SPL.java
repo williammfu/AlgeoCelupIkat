@@ -126,6 +126,41 @@ public class SPL{
         }
     }
 
+    public void SolusiByBalikan(String FileName)throws IOException{
+        FileWriter fw = new FileWriter(FileName);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter out = new PrintWriter(bw);
+        /* Kamus */
+        MATRIKS M1,M2, MSolusi;
+        int i,j;
+        /* Algoritma */
+        out.println("Solusi Sistem Persamaan Linear");
+        M1 = new MATRIKS(Mtrx.GetLastIdxBrs(), Mtrx.GetLastIdxKol()-1);
+        M2 = new MATRIKS(Mtrx.GetLastIdxBrs(), 1);
+        /* Salin matriks Mtrx index baris 1-baris terakhir dan index kolom 1-kolom terakhir-1 ke M1  */
+        for(i=1; i<=Mtrx.GetLastIdxBrs(); i++){
+            for(j=1; j<=Mtrx.GetLastIdxKol()-1; j++){
+                M1.SetElmt(i, j, Mtrx.GetElmt(i, j));
+            }
+        }
+        M1.TulisMATRIKS();
+        /* Salin matriks Mtrx index baris 1-baris terakhir dan index kolom terakhir ke M2 */
+        for(i=1; i<=Mtrx.GetLastIdxBrs(); i++){
+                M2.SetElmt(i, 1, Mtrx.GetElmt(i, Mtrx.GetLastIdxKol()));
+            }
+        M2.TulisMATRIKS();
+        M1 = M1.InvAdj();
+        //MSolusi = M1.KaliMatriks(M2);
+        M1.TulisMATRIKS();
+        //M1.PrintInvAdj();
+        MSolusi = new MATRIKS(M1.GetLastIdxBrs(), 1);
+        MSolusi = M1.KaliMatriks(M2);
+        for(i=1; i<=MSolusi.GetLastIdxBrs(); i++){
+            System.out.printf("X%d: %.2f\n",i,MSolusi.GetElmt(i, 1));
+            out.printf("X%d: %.2f\n",i,MSolusi.GetElmt(i, 1));
+        }
+        out.close();
+    }
 
     public void SolusiByGaussJordan(){
         // Kamus

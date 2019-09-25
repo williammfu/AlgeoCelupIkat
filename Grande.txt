@@ -1,0 +1,4 @@
+Solusi Sistem Persamaan Linear
+X1: -3.00
+X2: 2.00
+X3: 0.00
