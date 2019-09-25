@@ -18,7 +18,7 @@ public class Main{
         System.out.println("2. Determinan");
         System.out.println("3. Matriks Balikan");
         System.out.println("4. Matriks Kofaktor");
-        System.out.println("5. Adjoin");
+        System.out.println("5. Matriks Adjoint");
         System.out.println("6. Interpolasi Polinom");
         System.out.println("7. Keluar");
 
@@ -87,7 +87,7 @@ public class Main{
     	pilihan = in.nextInt();
         System.out.println(" ");
 
-        while (pilihan != 7 && lanjut == 1) {
+        while (pilihan != 7 && lanjut == 1) {/*SPL*/
 
             if (pilihan ==1){
                 
@@ -105,27 +105,28 @@ public class Main{
                 System.out.println("Anda harus memasukan SPL dalam bentuk matriks augemented");
                 M = TampilInput();
 
-                if (pilihan1 == 1){
+                if (pilihan1 == 1){/*Gauss*/
                     M.Gauss();
                 }
 
-                else if (pilihan1 == 2){
+                else if (pilihan1 == 2){/*Gauss-Jordan*/
                     M.Gauss();
                     M.Jordan();
                 }
 
-                else if (pilihan1 == 3){
+                else if (pilihan1 == 3){/*Metode Balikan*/
 
 
                 }
 
-                else if (pilihan1 == 4){
+                else if (pilihan1 == 4){/*Metode Aturan Crammer*/
                     M.CariMCrammer();
                 }
 
             } 
 
-            else if (pilihan == 2) {
+            else if (pilihan == 2) {/*Determinan*/
+
                 System.out.println("======= MENCARI DETERMINAN =======");
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
                 System.out.println("1. Metode OBE");
@@ -151,75 +152,50 @@ public class Main{
 
             }
 
-            else if (pilihan ==3) {
-                System.out.println("/****MENCARI MATRIKS BALIKAN****/");
+            else if (pilihan ==3) { /*Invers Matriks*/
+
+                System.out.println("======= MENCARI MATRIKS BALIKAN =======");
                 System.out.println("Pilih cara yang ingin Anda gunakan:");
                 System.out.println("1. Metode OBE");
                 System.out.println("2. Menggunakan Adjoin");
                 System.out.println(" ");
 
+                System.out.print(">> Pilihan Anda: ");
                 pilihan1 = in.nextInt();
                 
-                System.out.println(" ");
-                System.out.print("Masukkan jumlah baris dan kolom matriks Anda = ");
-                kolom = in.nextInt();
-                M = new MATRIKS(kolom, kolom);
-                System.out.println("Masukkan matriks yang ingin dicari matriks balikannya");
-                M.BacaMATRIKS();
+                System.out.println("Perhatian: Matriks harus persegi");
+                M = TampilInput();
 
-                System.out.println(" ");
-                System.out.println("Berikut matriks balikan dari matriks yang Anda input");
-
-                if (pilihan1 == 1){
+                if (pilihan1 == 1){/*Metode OBE*/
                     M.InvOBE(M);
-
                 }
 
-                else if (pilihan1 == 2){
+                else if (pilihan1 == 2){/*Metode Adj/det(A)*/
                     M.InvAdj();
                 }
             }
             
-            else if (pilihan == 4) {
+            else if (pilihan == 4) { /*Matriks Kofaktor*/
 
                 System.out.println(" ");
-                System.out.println("/****MENCARI MATRIKS KOFAKTOR****/");
-                System.out.print("Masukkan jumlah baris dan kolom matriks Anda = ");
-                kolom = in.nextInt();
-                M = new MATRIKS(kolom, kolom);
-                System.out.println("Masukkan matriks yang ingin dicari matriks kofaktornya");
-
-                M.BacaMATRIKS();
+                System.out.println("Perhatian : Matriks harus persegi");
                 
-                System.out.println(" ");
-                System.out.println("Berikut matriks kofaktor dari matriks yang Anda input");
-
-                Mkof = M.MakeKofaktor();
-                Mkof.TulisMATRIKS();                
-
+                M = TampilInput();
+                M.PrintKofaktor();
             }
 
-            else if (pilihan == 5) {
+            else if (pilihan == 5) { /*Matriks Adjoint*/
+
                 System.out.println(" ");
-                System.out.println("/****MENCARI MATRIKS ADJOIN****/");
-                System.out.print("Masukkan jumlah baris dan kolom matriks Anda = ");
-                kolom = in.nextInt();
-                M = new MATRIKS(kolom, kolom);
-                System.out.println("Masukkan matriks yang ingin dicari matriks adjoinnya");
+                System.out.println("Perhatian : Matriks harus persegi");
 
-                M.BacaMATRIKS();
-                
-                System.out.println(" ");
-                System.out.println("Berikut matriks adjoin dari matriks yang Anda input");
-
-                M.MakeAdjoint();
-                M.TulisMATRIKS();
-
+                M = TampilInput();
+                M.PrintAdjoint();
             }
 
-            else if (pilihan == 6) {
+            else if (pilihan == 6) { /*Interpolasi Polinom*/
                 System.out.println(" ");
-                System.out.println("/****INTERPOLASI POLINOM****/");
+                System.out.println("===== Interpolasi Polinom =====");
                 
             
             }
