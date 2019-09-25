@@ -214,10 +214,36 @@ public class Main{
             }
 
             else if (pilihan == 6) { /*Interpolasi Polinom*/
-                System.out.println(" ");
-                System.out.println("===== Interpolasi Polinom =====");
                 
-            
+                System.out.println();
+                System.out.println("===== Interpolasi Polinom =====");
+                System.out.println();
+
+                System.out.println("Pilih input matriks: ");
+                System.out.println("1. Input KEYBOARD");
+                System.out.println("2. Input File External");
+                System.out.println("");
+
+                System.out.print(">> Pilihan Anda : ");
+                int pilihFile = in.nextInt();
+                System.out.println();
+
+                while( (pilihFile!=1) && (pilihFile !=2) ){
+                    System.out.println("Pilihan tidak valid");
+                    System.out.print(">> Pilihan Anda : ");
+                    pilihFile = in.nextInt();
+                    System.out.println();
+                }
+
+                Interpolasi I = new Interpolasi();
+                if(pilihFile==1){
+                    I.IntPolKey();
+                }
+                else if(pilihFile==2){
+                    System.out.print("Masukkan nama file matriks yang ingin gunakan: ");
+                    String namafile = in.next();
+                    I.IntPolFile(namafile);
+                }
             }
 
             System.out.println(" ");
