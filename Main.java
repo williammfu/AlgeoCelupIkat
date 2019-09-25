@@ -144,7 +144,7 @@ public class Main{
                     int jvar = in.nextInt();
                     splB = new SPL(jpers,jvar);
                     splB.BacaSPLKeyBoard();
-                    splB.SolusiByBalikan();
+                    splB.SolusiByBalikan("SolusiDenganBalikan.txt");
                 }
 
                 else if (pilihan1 == 4){/*Metode Aturan Crammer*/
@@ -191,9 +191,11 @@ public class Main{
                 System.out.print(">> Pilihan Anda: ");
                 pilihan1 = in.nextInt();
                 
-                M = TampilInput();
                 System.out.println("");
                 System.out.println("Perhatian: Matriks harus persegi");
+                System.out.println("");
+                M = TampilInput();
+                
 
                 if (pilihan1 == 1){/*Metode OBE*/
                     M.InvOBE(M);
@@ -205,12 +207,12 @@ public class Main{
             }
             
             else if (pilihan == 4) { /*Matriks Kofaktor*/
-
-                System.out.println(" ");
                 
-                M = TampilInput();
                 System.out.println("");
                 System.out.println("Perhatian: Matriks harus persegi");
+                System.out.println("");
+                M = TampilInput();
+                
                 M.PrintKofaktor();
             }
 
@@ -218,9 +220,10 @@ public class Main{
 
                 System.out.println(" ");
 
-                M = TampilInput();
                 System.out.println(" ");
                 System.out.println("Perhatian : Matriks harus persegi");
+                M = TampilInput();
+                
                 M.PrintAdjoint();
             }
 
@@ -263,7 +266,9 @@ public class Main{
             System.out.println("2. Tidak");
             System.out.println(" ");
 
+            System.out.print(">> Pilihan Anda: ");
             lanjut = in.nextInt();
+            System.out.println(" ");
 
             if (lanjut == 1){
 
