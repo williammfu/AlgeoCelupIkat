@@ -191,7 +191,7 @@ public class Main{
                 }
 
                 else if (pilihan1 == 2){/*Metode Adj/det(A)*/
-                    M.InvAdj();
+                    M.PrintInvAdj();
                 }
             }
             

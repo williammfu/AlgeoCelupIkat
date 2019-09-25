@@ -761,7 +761,7 @@ public class MATRIKS{
                     /*Output Invers Matriks*/
                     pesan = "Matriks Invers (Metode Adjoint)";
                     System.out.println(pesan);
-                    Inv.TulisMATRIKS();
+                    Temp.TulisMATRIKS();
                     Temp.TulisFileMatrix("Hasil_Invers_Adj.txt", pesan);
                 }
                 else{
