@@ -220,9 +220,8 @@ public class Main{
             else if (pilihan == 5) { /*Matriks Adjoint*/
 
                 System.out.println(" ");
-
-                System.out.println(" ");
                 System.out.println("Perhatian : Matriks harus persegi");
+                System.out.println(" ");
                 M = TampilInput();
                 
                 M.PrintAdjoint();
