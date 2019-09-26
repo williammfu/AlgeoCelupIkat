@@ -21,18 +21,19 @@ public class Interpolasi{
             polinom += "p(x) = ";
             
             /*Elemen a^0*/
-            polinom += df2.format(a[1]);
-            polinom += " ";
+            polinom += df2.format(a[a.length-1]);
+            polinom += "x^";
+            polinom += Integer.toString(a.length-2);
     
             /*Elemen selanjutnya*/
-            for(i=2; i<=(a.length)-1; i++){
+            for(i=(a.length)-2; i>1; i--){
                 
                 if(a[i]<0){ /*Elemen negatif*/
                     polinom += " - ";
                     polinom += df2.format(Math.abs(a[i]));
                     polinom += "x";
     
-                    if((i-1)>1){
+                    if(i!=2){
                         polinom += "^";
                         polinom += Integer.toString(i-1);
                     }
@@ -42,11 +43,19 @@ public class Interpolasi{
                     polinom += df2.format(a[i]);
                     polinom += "x";
     
-                    if((i-1)>1){
+                    if(i!=2){
                         polinom += "^";
                         polinom += Integer.toString(i-1);
                     }
                 }
+            }
+            if(a[i]<0){
+                polinom += " - ";
+                polinom += df2.format(Math.abs(a[i]));
+            }
+            else{
+                polinom += " + ";
+                polinom += df2.format(a[i]);
             }
             return polinom;
         }    

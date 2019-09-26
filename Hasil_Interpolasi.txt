@@ -1,0 +1,5 @@
+
+Persamaan polinom hasil interpolasi:
+p(x) = 0.462x^1 - 0.462
+Nilai xi yang ingin dicari = 2.00000
+Nilai yi taksiran = 0.46200
