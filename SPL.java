@@ -213,6 +213,7 @@ public class SPL{
 
     public void TulisSPL(String FileName) throws IOException{
         /*Kamus*/
+        boolean isBerawal = false;
         int i,j;
         FileWriter fw = new FileWriter(FileName);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -232,7 +233,11 @@ public class SPL{
                     if(Solusi.GetElmt(i, i) != 0){
                         System.out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
                         out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
-                    }   
+                    }
+                    else{
+                        System.out.printf("x%d = ",i);
+                        out.printf("x%d = ",i);
+                    }
                 }
                 for(j = i+1; j<=Solusi.GetLastIdxKol(); j++){
                    if(Solusi.GetElmt(i, j)> 0){

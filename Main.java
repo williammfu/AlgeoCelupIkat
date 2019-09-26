@@ -30,10 +30,13 @@ public class Main{
     /*Prekondisi: Matriks tidak kosong*/
         
         /*Kamus*/
+        boolean isSPL;
         Scanner in = new Scanner(System.in);
         MATRIKS M;
 
         /*Algoritma*/
+        isSPL = false;
+
         System.out.println("Pilih input matriks: ");
         System.out.println("1. Input KEYBOARD");
         System.out.println("2. Input File External");
@@ -42,7 +45,7 @@ public class Main{
         System.out.print(">> Pilihan Anda: ");
         int pilihFile = in.nextInt();
         M = new MATRIKS(100,101);
-        if(pilihFile == 1){
+        if((pilihFile == 1) && (isSPL = false)){
             System.out.print("Masukkan jumlah baris matriks Anda = ");
             int baris = in.nextInt();
             System.out.print("Masukkan jumlah kolom matriks Anda = ");
@@ -53,8 +56,10 @@ public class Main{
             System.out.println("Setiap elemen dipisahkan dengan sebuah spasi");
             System.out.println("Setiap baris dipisahkan dengan ENTER");
             M.BacaMATRIKS();
-            
+        
         }
+
+
 
         else if(pilihFile == 2){
             System.out.print("Masukkan nama file matriks yang ingin Anda gunakan: ");
@@ -79,6 +84,7 @@ public class Main{
         int pilihan, pilihan1;
         Scanner in = new Scanner(System.in);
         int lanjut = 1; 
+        boolean isSPL;
 
         /* Algoritma */      
         TampilMenu();
@@ -103,6 +109,7 @@ public class Main{
                 pilihan1 = in.nextInt();
 
                 System.out.println("Anda harus memasukan SPL dalam bentuk matriks augemented");
+                isSPL = true;
                 M = TampilInput();
 
                 if (pilihan1 == 1){/*Gauss*/
