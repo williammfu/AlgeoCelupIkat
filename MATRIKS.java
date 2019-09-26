@@ -708,60 +708,62 @@ public class MATRIKS{
                 String pesan;
 
                 /*Algoritma*/
-                if((this.DetCof(this)!=0)&&(this.NBrsEff==this.NKolEff)){
+                if(this.NBrsEff==this.NKolEff){
 
-                    /*Membuat augmented matriks*/
-                    Aug = new MATRIKS(M.NBrsEff, 2*M.NKolEff);
+                    if(this.DetCof(this)!=0){
+                        /*Membuat augmented matriks*/
+                        Aug = new MATRIKS(M.NBrsEff, 2*M.NKolEff);
 
-                    /*Matriks identitas ditambahkan pada sebelah kanan matriks M*/
-                    for(i=1; i<=Aug.GetLastIdxBrs(); i++){//baris
-                        for(j=1; j<=Aug.GetLastIdxKol(); j++){//kolom
-                            
-                            if(i<=M.GetLastIdxBrs() && j<=M.GetLastIdxKol()){
-                                Aug.Mem[i][j] = M.Mem[i][j];
-                            }
-                            else{
-                                if((i+M.GetLastIdxBrs())==j){//elemen diagonal
-                                    Aug.Mem[i][j] = 1;
+                        /*Matriks identitas ditambahkan pada sebelah kanan matriks M*/
+                        for(i=1; i<=Aug.GetLastIdxBrs(); i++){//baris
+                            for(j=1; j<=Aug.GetLastIdxKol(); j++){//kolom
+                                
+                                if(i<=M.GetLastIdxBrs() && j<=M.GetLastIdxKol()){
+                                    Aug.Mem[i][j] = M.Mem[i][j];
                                 }
-                                else{//bukan elemen diagonal
-                                    Aug.Mem[i][j] = 0;
-                                }
-                            } 
-                        }
-                    }
-
-                    /*Melakukan eliminasi Gauss*/
-                    Aug.Gauss();
-
-                    /*Matriks M telah menjadi upper triangle, 
-                    M akan dijadikan matriks identitas*/
-                    for(p=Aug.GetLastIdxBrs()-1; p>=1; p--){
-                        for(r=Aug.GetLastIdxBrs(); r>p; r--){
-                            q = r;
-                            if(Aug.Mem[r][q]!=0){
-                                Aug.KurangiRow(p, r, q, Aug.Mem[p][q]/Aug.Mem[r][q]);
+                                else{
+                                    if((i+M.GetLastIdxBrs())==j){//elemen diagonal
+                                        Aug.Mem[i][j] = 1;
+                                    }
+                                    else{//bukan elemen diagonal
+                                        Aug.Mem[i][j] = 0;
+                                    }
+                                } 
                             }
                         }
-                    }
 
-                    /*Mengambil matriks invers dari 
-                    matriks augmented*/
-                    Inv = new MATRIKS(M.NBrsEff, M.NKolEff);
-                    for(i=1; i<=M.GetLastIdxBrs(); i++){
-                        for(j=M.GetLastIdxKol()+1; j<=Aug.GetLastIdxKol();j++){
-                            k = j-M.GetLastIdxKol();
-                            Inv.Mem[i][k] = Aug.Mem[i][j];
+                        /*Melakukan eliminasi Gauss*/
+                        Aug.Gauss();
+
+                        /*Matriks M telah menjadi upper triangle, 
+                        M akan dijadikan matriks identitas*/
+                        for(p=Aug.GetLastIdxBrs()-1; p>=1; p--){
+                            for(r=Aug.GetLastIdxBrs(); r>p; r--){
+                                q = r;
+                                if(Aug.Mem[r][q]!=0){
+                                    Aug.KurangiRow(p, r, q, Aug.Mem[p][q]/Aug.Mem[r][q]);
+                                }
+                            }
                         }
-                    }
 
-                    /*Menampilkan matriks invers*/
-                    pesan = "Matriks Invers (Metode Operasi Baris Elementer)";
-                    System.out.println(pesan);
-                    System.out.println();
-                    Inv.TulisMATRIKS();
-                    Inv.TulisFileMatrix("Hasil_Invers_OBE.txt", pesan);
-                    System.out.println();
+                        /*Mengambil matriks invers dari 
+                        matriks augmented*/
+                        Inv = new MATRIKS(M.NBrsEff, M.NKolEff);
+                        for(i=1; i<=M.GetLastIdxBrs(); i++){
+                            for(j=M.GetLastIdxKol()+1; j<=Aug.GetLastIdxKol();j++){
+                                k = j-M.GetLastIdxKol();
+                                Inv.Mem[i][k] = Aug.Mem[i][j];
+                            }
+                        }
+
+                        /*Menampilkan matriks invers*/
+                        pesan = "Matriks Invers (Metode Operasi Baris Elementer)";
+                        System.out.println(pesan);
+                        System.out.println();
+                        Inv.TulisMATRIKS();
+                        Inv.TulisFileMatrix("Hasil_Invers_OBE.txt", pesan);
+                        System.out.println();
+                    }
                 }
                 else{/*Matriks tidak invertible*/
                     pesan = "Invers tidak dapat dicari. Berikut adalah matriks awal";
