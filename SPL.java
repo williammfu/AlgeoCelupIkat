@@ -44,13 +44,33 @@ public class SPL{
      public void BacaSPLFile(String fileName) throws FileNotFoundException{
          /* Membaca SPL dari file eksternal */
          /* Kamus */
-         MATRIKS temp;
+         MATRIKS MTemp1,MTemp2;
+         int i,j;
          /* Algoritma */
-         temp = new MATRIKS(100, 101); // asumsi masukan matriks dari file tidak akan melebihi 100 baris dan 101 kolom
-         temp.BacaFileMatrix(fileName);
-         this.Mtrx = temp;
-         this.Solusi = new MATRIKS(temp.NKolEff-1,temp.NKolEff-1);
-         this.Bebas = new boolean [temp.NKolEff];
+         MTemp1 = new MATRIKS(100, 101); // asumsi masukan matriks dari file tidak akan melebihi 100 baris dan 101 kolom
+         MTemp1.BacaFileMatrix(fileName);
+         if(MTemp1.GetLastIdxKol()-1>MTemp1.GetLastIdxBrs()){
+            MTemp2 = new MATRIKS(MTemp1.GetLastIdxKol()-1, MTemp1.GetLastIdxKol());
+            for(i=MTemp1.GetFirstIdxBrs(); i<=MTemp1.GetLastIdxBrs(); i++){
+                for(j=MTemp1.GetFirstIdxKol(); j<=MTemp1.GetLastIdxKol(); j++){
+                    MTemp2.SetElmt(i, j, MTemp1.GetElmt(i, j));
+                }
+            }
+            for(i=MTemp1.GetLastIdxBrs()+1; i<=MTemp2.GetLastIdxBrs(); i++){
+                for(j=MTemp1.GetFirstIdxKol(); j<=MTemp1.GetLastIdxKol(); j++){
+                    MTemp2.SetElmt(i, j, 0);
+                }
+            }
+            Mtrx = MTemp2;
+            this.Solusi = new MATRIKS(MTemp2.NKolEff-1,MTemp2.NKolEff-1);
+            this.Bebas = new boolean [MTemp2.NKolEff];
+        }
+        else{
+            this.Mtrx = MTemp1;
+            this.Solusi = new MATRIKS(MTemp1.NKolEff-1,MTemp1.NKolEff-1);
+            this.Bebas = new boolean [MTemp1.NKolEff];
+        }
+         
 
      }
      public void CekSolveAndBebas(){
@@ -143,15 +163,12 @@ public class SPL{
                 M1.SetElmt(i, j, Mtrx.GetElmt(i, j));
             }
         }
-        M1.TulisMATRIKS();
         /* Salin matriks Mtrx index baris 1-baris terakhir dan index kolom terakhir ke M2 */
         for(i=1; i<=Mtrx.GetLastIdxBrs(); i++){
                 M2.SetElmt(i, 1, Mtrx.GetElmt(i, Mtrx.GetLastIdxKol()));
             }
-        M2.TulisMATRIKS();
         M1 = M1.InvAdj();
         //MSolusi = M1.KaliMatriks(M2);
-        M1.TulisMATRIKS();
         //M1.PrintInvAdj();
         MSolusi = new MATRIKS(M1.GetLastIdxBrs(), 1);
         MSolusi = M1.KaliMatriks(M2);
@@ -230,57 +247,30 @@ public class SPL{
                     out.printf("x%d = t%d ",i,i);
                 }
                 else{
-                    if(Math.round(Solusi.GetElmt(i, i)*1000000)/1000000 != 0){
-                        System.out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
-                        out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
-                        isBerawal = true;
-                    }   
-                    else{
-                        System.out.printf("x%d = ",i,Solusi.GetElmt(i, i));
-                        out.printf("x%d = ",i,Solusi.GetElmt(i, i));
-                        isBerawal = false;
-                    }
+                    System.out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
+                    out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
+                    isBerawal = true;
                 }
                 for(j = i+1; j<=Solusi.GetLastIdxKol(); j++){
                    if(Solusi.GetElmt(i, j)> 0){
-                       if(Math.round(Solusi.GetElmt(i, j)*1000000)/1000000 != 1){
-                           if(isBerawal){
-                                System.out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
-                                out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
-                           }
-                           else{
-                                System.out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
-                                out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
-                           }
+                        if(isBerawal){
+                            System.out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
+                            out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
                         }
-                       else{
-                           if(isBerawal){
-                                System.out.printf("+ t%d ",j);
-                                out.printf("+ t%d ",j);
-                           }
-                           else{
-                                System.out.printf(" t%d ",j);
-                                out.printf(" t%d ",j);
-                           }
-                            
-                       }
-                       
-                   }
+                        else{
+                            System.out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
+                            out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
+                        }
+                    }
                    if(Solusi.GetElmt(i, j)< 0){
-                       if(Solusi.GetElmt(i, j) != -1){
-                            System.out.printf("- %.2ft%d ",Math.abs(Solusi.GetElmt(i, j)),j);
-                            out.printf("- %.2ft%d ",Math.abs(Solusi.GetElmt(i, j)),j);
-                       }
-                       else{
-                            System.out.printf("- t%d ",j);
-                            out.printf("- t%d ",j); 
-                       }
-                       
-                   }
+                        System.out.printf("- %.2ft%d ",Math.abs(Solusi.GetElmt(i, j)),j);
+                        out.printf("- %.2ft%d ",Math.abs(Solusi.GetElmt(i, j)),j);
+                    }
                 }
                 System.out.println("");
-                out.println("");
-            }          
+                out.println(""); 
+            }
+                    
         }
         else{
             out.println("SPL tidak memiliki solusi");

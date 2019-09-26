@@ -106,24 +106,40 @@ public class Main{
                 System.out.print(">> Pilihan Anda: ");
                 pilihan1 = in.nextInt();
 
-                System.out.println("Anda harus memasukan SPL dalam bentuk matriks augemented");
+                /*System.out.println("Anda harus memasukan SPL dalam bentuk matriks augemented");
                 isSPL = true;
-                M = TampilInput();
+                M = TampilInput();*/
 
                 if (pilihan1 == 1){/*Gauss*/
                     
                     /* Kamus */
                     SPL splG;
-                    
+                    int pilihan5;
+                    String fileName;
                     /* Algoritma */
-                    System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
-                    int jpers = in.nextInt();
-                    System.out.print("Masukkan variabel tak diketahui = ");
-                    int jvar = in.nextInt();
-                    splG = new SPL(jpers,jvar);
-                    splG.BacaSPLKeyBoard();
-                    splG.SolusiByGauss();
-                    splG.TulisSPL("Angels.txt");
+                    System.out.println("Apakah masukan dari keyboard?");
+                    System.out.println("1.Ingin dari keyboard?");
+                    System.out.println("2.Ingin dari file?");
+                    pilihan5 = in.nextInt();
+                    if(pilihan5 == 1){
+                        System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
+                        int jpers = in.nextInt();
+                        System.out.print("Masukkan variabel tak diketahui = ");
+                        int jvar = in.nextInt();
+                        splG = new SPL(jpers,jvar);
+                        System.out.println("Masukkan persamaan dalam matriks augmented = ");
+                        splG.BacaSPLKeyBoard();
+                        splG.SolusiByGauss();
+                        splG.TulisSPL("HasilSPLGaussKey.txt");
+                    }
+                    else{
+                        System.out.printf("Masukkan nama file: ");
+                        fileName = in.next();
+                        splG = new SPL(100,101);
+                        splG.BacaSPLFile(fileName);
+                        splG.SolusiByGauss();
+                        splG.TulisSPL("HasilSPLGaussFile.txt");
+                    }
                     
                 }
 
@@ -131,35 +147,70 @@ public class Main{
                     
                     /* Kamus */
                     SPL splGJ;
-                    
+                    int pilihan6;
+                    String fileName;
+
                     /* Algoritma */
-                    System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
-                    int jpers = in.nextInt();
-                    System.out.print("Masukkan variabel tak diketahui = ");
-                    int jvar = in.nextInt();
-                    splGJ = new SPL(jpers,jvar);
-                    splGJ.BacaSPLKeyBoard();
-                    splGJ.SolusiByGaussJordan();
-                    splGJ.TulisSPL("Angels.txt");
+                    System.out.println("Apakah masukan dari keyboard?");
+                    System.out.println("1.Ingin dari keyboard?");
+                    System.out.println("2.Ingin dari file?");
+                    pilihan6 = in.nextInt();
+                    if(pilihan6 == 1){
+                        System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
+                        int jpers = in.nextInt();
+                        System.out.print("Masukkan variabel tak diketahui = ");
+                        int jvar = in.nextInt();
+                        splGJ = new SPL(jpers,jvar);
+                        System.out.println("Masukkan persamaan dalam matriks augmented = ");
+                        splGJ.BacaSPLKeyBoard();
+                        splGJ.SolusiByGaussJordan();
+                        splGJ.TulisSPL("HasilSPLGaussJordanKey.txt");
+                    }
+                    else{
+                        System.out.printf("Masukkan nama file: ");
+                        fileName = in.next();
+                        splGJ = new SPL(100,101);
+                        splGJ.BacaSPLFile(fileName);
+                        splGJ.SolusiByGaussJordan();
+                        splGJ.TulisSPL("HasilSPLGaussJordanFile.txt");
+                    }
                 }
 
                 else if (pilihan1 == 3){/*Metode Balikan*/
                     
                     /* Kamus */
                     SPL splB;
+                    int pilihan5;
+                    String fileName;
                     
                     /* Algoritma */
-                    System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
-                    int jpers = in.nextInt();
-                    System.out.print("Masukkan variabel tak diketahui = ");
-                    int jvar = in.nextInt();
-                    splB = new SPL(jpers,jvar);
-                    splB.BacaSPLKeyBoard();
-                    splB.SolusiByBalikan("SolusiDenganBalikan.txt");
+                    System.out.println("Apakah masukan dari keyboard?");
+                    System.out.println("1.Ingin dari keyboard?");
+                    System.out.println("2.Ingin dari file?");
+                    pilihan5 = in.nextInt();
+
+                    if(pilihan5 == 1){
+                        System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
+                        int jpers = in.nextInt();
+                        System.out.print("Masukkan variabel tak diketahui = ");
+                        int jvar = in.nextInt();
+                        splB = new SPL(jpers,jvar);
+                        System.out.println("Masukkan persamaan dalam matriks augmented = ");
+                        splB.BacaSPLKeyBoard();
+                        splB.SolusiByBalikan("SolusiDenganBalikan.txt");
+                    }
+                    else{
+                        System.out.printf("Masukkan nama file: ");
+                        fileName = in.next();
+                        splB = new SPL(100,101);
+                        splB.BacaSPLFile(fileName);
+                        splB.SolusiByBalikan("SolusiDenganBalikan.txt");
+                    }
+
                 }
 
                 else if (pilihan1 == 4){/*Metode Aturan Crammer*/
-                    M.CariMCrammer();
+                    //M.CariMCrammer();
                 }
 
             } 

@@ -253,7 +253,7 @@ public class MATRIKS{
             while(i1<=GetLastIdxBrs() && j<=GetLastIdxKol()){ // langkah 1
                     do{
                         Pivotting(j,i1);
-                        found = Math.round(Mem[i1][j] * 100000.0)/100000.0 != 0.0;
+                        found = Math.round(Mem[i1][j] * 1000000000000000000000000000000.0)/1000000000000000000000000000000.0 != 0.0;
                         if(!found){
                             j++;
                             detByGauss *= 0; // karena elemen  diagonal ditemukan 0
