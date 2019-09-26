@@ -30,12 +30,10 @@ public class Main{
     /*Prekondisi: Matriks tidak kosong*/
         
         /*Kamus*/
-        boolean isSPL;
         Scanner in = new Scanner(System.in);
         MATRIKS M;
 
         /*Algoritma*/
-        isSPL = false;
 
         System.out.println("Pilih input matriks: ");
         System.out.println("1. Input KEYBOARD");
@@ -45,7 +43,8 @@ public class Main{
         System.out.print(">> Pilihan Anda: ");
         int pilihFile = in.nextInt();
         M = new MATRIKS(100,101);
-        if((pilihFile == 1) && (isSPL = false)){
+        
+        if(pilihFile == 1){
             System.out.print("Masukkan jumlah baris matriks Anda = ");
             int baris = in.nextInt();
             System.out.print("Masukkan jumlah kolom matriks Anda = ");
@@ -58,8 +57,6 @@ public class Main{
             M.BacaMATRIKS();
         
         }
-
-
 
         else if(pilihFile == 2){
             System.out.print("Masukkan nama file matriks yang ingin Anda gunakan: ");

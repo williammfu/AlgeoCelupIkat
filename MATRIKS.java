@@ -746,7 +746,7 @@ public class MATRIKS{
                     pesan = "Matriks Invers (Metode Operasi Baris Elementer)";
                     System.out.println();
                     System.out.println(pesan);
-                    TulisFileMatrix("Hasil_Invers_OBE.txt", pesan);
+                    Inv.TulisFileMatrix("Hasil_Invers_OBE.txt", pesan);
                     System.out.println();
                 }
                 else{/*Matriks tidak invertible*/
