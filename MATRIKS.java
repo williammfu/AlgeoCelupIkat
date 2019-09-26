@@ -449,6 +449,7 @@ public class MATRIKS{
                     System.out.println("Determinan tidak dapat ditentukan.");
                     System.out.println();
                 }
+                out.print();
             }
             
             public double Kofaktor(int m, int n) {
