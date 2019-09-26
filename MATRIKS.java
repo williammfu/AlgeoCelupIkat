@@ -807,7 +807,7 @@ public class MATRIKS{
                 /*Metode Adjoint*/
 
                 /*Kamus*/
-                MATRIKS Temp;
+                MATRIKS Temp,Inv;
                 int i,j;
                 double det;
                 String pesan;
@@ -827,13 +827,13 @@ public class MATRIKS{
                             Temp.Mem[i][j] = this.Mem[i][j];
                         }
                     }
-                    Temp.InvAdj();
+                    Inv = Temp.InvAdj();
                     
                     /*Output Invers Matriks*/
                     pesan = "Matriks Invers (Metode Adjoint)";
                     System.out.println(pesan);
-                    Temp.TulisMATRIKS();
-                    Temp.TulisFileMatrix("Hasil_Invers_Adj.txt", pesan);
+                    Inv.TulisMATRIKS();
+                    Inv.TulisFileMatrix("Hasil_Invers_Adj.txt", pesan);
                 }
                 else{
                     pesan = "Invers tidak dapat dicari. Berikut adalah matriks awal";
