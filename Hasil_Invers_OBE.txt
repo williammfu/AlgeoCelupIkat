@@ -1,3 +1,0 @@
-Matriks Invers (Metode Operasi Baris Elementer)
-1.000   2.000   
-3.000   1.000   

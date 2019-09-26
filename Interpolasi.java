@@ -95,12 +95,12 @@ public class Interpolasi{
         Pol.Gauss();
 
         /*Back Subtitution, masuk ke array a*/
-        a = new double[n+1];
+        a = new double[Pol.GetLastIdxBrs()+1];
         a[Pol.GetLastIdxBrs()] = Pol.Mem[Pol.GetLastIdxBrs()][Pol.GetLastIdxKol()];
         for(i=Pol.GetLastIdxBrs()-1; i>=1 ;i--){
             a[i] = Pol.Mem[i][Pol.GetLastIdxKol()];
             for(j=Pol.GetLastIdxKol()-1; j>i; j--){
-                a[i] -= Pol.Mem[i][j]*a[j+1]; 
+                a[i] -= Pol.Mem[i][j]*a[j]; 
             }
         }
 

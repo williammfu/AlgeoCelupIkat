@@ -173,7 +173,6 @@ public class Main{
 
                 M = TampilInput();
                 
-                System.out.println(" ");
                 System.out.print("Nilai determinan dari matriks tersebut = ");
 
                 if (pilihan1 == 1){
@@ -288,7 +287,5 @@ public class Main{
 
         }
         System.out.println("======= GOOD BYE =======");
-        in.close();
-
     }
 }

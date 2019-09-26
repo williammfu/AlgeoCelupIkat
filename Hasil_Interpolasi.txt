@@ -1,0 +1,4 @@
+Persamaan polinom hasil interpolasi:
+p(x) = 0.676  + 0.227x - 0.006x^2
+Nilai xi yang ingin dicari = 9.20000
+Nilai yi taksiran = 2.21922
