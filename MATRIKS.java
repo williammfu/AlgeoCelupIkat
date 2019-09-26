@@ -756,10 +756,10 @@ public class MATRIKS{
                     }
 
                     /*Menampilkan matriks invers*/
-                    Inv.TulisMATRIKS();
                     pesan = "Matriks Invers (Metode Operasi Baris Elementer)";
-                    System.out.println();
                     System.out.println(pesan);
+                    System.out.println();
+                    Inv.TulisMATRIKS();
                     Inv.TulisFileMatrix("Hasil_Invers_OBE.txt", pesan);
                     System.out.println();
                 }
