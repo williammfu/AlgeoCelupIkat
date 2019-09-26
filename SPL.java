@@ -230,24 +230,39 @@ public class SPL{
                     out.printf("x%d = t%d ",i,i);
                 }
                 else{
-                    if(Solusi.GetElmt(i, i) != 0){
+                    if(Math.round(Solusi.GetElmt(i, i)*1000000)/1000000 != 0){
                         System.out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
                         out.printf("x%d = %.2f ",i,Solusi.GetElmt(i, i));
-                    }
+                        isBerawal = true;
+                    }   
                     else{
-                        System.out.printf("x%d = ",i);
-                        out.printf("x%d = ",i);
+                        System.out.printf("x%d = ",i,Solusi.GetElmt(i, i));
+                        out.printf("x%d = ",i,Solusi.GetElmt(i, i));
+                        isBerawal = false;
                     }
                 }
                 for(j = i+1; j<=Solusi.GetLastIdxKol(); j++){
                    if(Solusi.GetElmt(i, j)> 0){
-                       if(Solusi.GetElmt(i, j) != 1){
-                            System.out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
-                            out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
-                       }
+                       if(Math.round(Solusi.GetElmt(i, j)*1000000)/1000000 != 1){
+                           if(isBerawal){
+                                System.out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
+                                out.printf("+ %.2ft%d ",Solusi.GetElmt(i, j),j);
+                           }
+                           else{
+                                System.out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
+                                out.printf(" %.2ft%d ",Solusi.GetElmt(i, j),j);
+                           }
+                        }
                        else{
-                            System.out.printf("+ t%d ",j);
-                            out.printf("+ t%d ",j);
+                           if(isBerawal){
+                                System.out.printf("+ t%d ",j);
+                                out.printf("+ t%d ",j);
+                           }
+                           else{
+                                System.out.printf(" t%d ",j);
+                                out.printf(" t%d ",j);
+                           }
+                            
                        }
                        
                    }

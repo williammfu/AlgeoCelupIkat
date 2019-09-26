@@ -360,43 +360,96 @@ public class MATRIKS{
                 /*Metode: Operasi Baris Elementer*/
                 /*Prekondisi: Matriks bujur sangkar!*/
                         
-                    /* Kamus */
-                    int i,j,k;
-                    boolean found = false;
+                /* Kamus */
+                int i,j,k,p;
+                boolean found = false;
                         
-                    /* Algoritma */
-                    MATRIKS Temp = new MATRIKS(NBrsEff,NKolEff);
-                    for(i=1; i<=GetLastIdxBrs(); i++){
-                        for(j=1; j<=GetLastIdxKol(); j++){
-                            Temp.Mem[i][j] = this.Mem[i][j];
-                        }
+                /* Algoritma */
+                MATRIKS Temp = new MATRIKS(NBrsEff,NKolEff);
+                for(i=1; i<=GetLastIdxBrs(); i++){
+                    for(j=1; j<=GetLastIdxKol(); j++){
+                        Temp.Mem[i][j] = this.Mem[i][j];
                     }
+                }
     
-                    double det = 1;
-                    i = GetFirstIdxBrs();
-                    j = GetFirstIdxKol();
+                double det = 1;
+                i = GetFirstIdxBrs();
+                j = GetFirstIdxKol();
                             
-                    while(i<=GetLastIdxBrs() && j<=GetLastIdxKol()){ 
-                            do{
-                                Temp.Pivotting(j,i);
-                                found = Math.round(Temp.Mem[i][j] * 100000.0)/100000.0 != 0.0;
-                                if(!found){
-                                    j++;
-                                    det *= 0; 
-                                }
-                            } while(j<=GetLastIdxKol() && !found);
-                                
-                            if (found){
-                                for(k=i+1; k<=GetLastIdxBrs(); k++){
-                                    Temp.KurangiRow(k,i,j,Temp.GetElmt(k, j)/Temp.GetElmt(i,j));
+                while(i<=GetLastIdxBrs() && j<=GetLastIdxKol()){ 
+                        
+                    do{
+                        double max = Math.abs(Temp.Mem[i][j]);
+                        int idxBrsMax = i;
+                        for(p=i+1; p<=Temp.GetLastIdxBrs(); p++){
+                            if(Math.abs(Temp.Mem[p][j])>max){
+                                max = Math.abs(Temp.Mem[p][j]);
+                                idxBrsMax = p;
                             }
-                                det *= Temp.GetElmt(i,j); 
-                                i++; 
-                                j++; 
-                            }       
                         }
-                        return det;
-                    } 
+                        if(idxBrsMax > i){
+                            Temp.Swap(i,idxBrsMax);
+                            det *= -1;
+                        }
+                        found = Math.round(Temp.Mem[i][j] * 100000.0)/100000.0 != 0.0;
+                        if(!found){
+                            j++;
+                            det *= 0; 
+                        }
+                    } while(j<=GetLastIdxKol() && !found);
+                                
+                    if (found){
+                        for(k=i+1; k<=GetLastIdxBrs(); k++){
+                            Temp.KurangiRow(k,i,j,Temp.GetElmt(k, j)/Temp.GetElmt(i,j));
+                    }
+                        det *= Temp.GetElmt(i,j); 
+                        i++; 
+                        j++; 
+                    }       
+                }
+                return det;
+            }
+            
+            public void PrintDet(int pilihan) throws IOException{
+            /*Menampilkan determinan matriks sesuai metode yang diinginkan pengguna*/
+
+                /*Kamus*/
+                FileWriter fw = new FileWriter("Determinan.txt");
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw);
+                
+                /*Algoritma*/
+                if(this.NBrsEff==this.NKolEff){
+                    if(pilihan == 1){//OBE
+                        double det = this.DetOBE();
+                        out.println("Determinan matriks : Metode Gaussian Elimination");
+                        System.out.println("Determinan matriks : Metode Gaussian Elimination");
+                        out.printf("Det(M)  =   %.4f", det);
+                        System.out.printf("Det(M)  =   %.4f", det);
+                        System.out.println();
+
+                    }
+                    else{//KOFAKTOR
+                        double det = this.DetCof(this);
+                        out.println("Determinan matriks : Metode Cofactor Expansion");
+                        System.out.println("Determinan matriks : Metode Cofactor Expansion");
+                        out.printf("Det(M)  =   %.4f", det);
+                        System.out.printf("Det(M)  =   %.4f", det);
+                        System.out.println();
+                    }
+
+                    System.out.println("======== OUTPUT FILE ========");
+                    System.out.println();
+                    System.out.println("Hasil telah berhasil ditulis pada file: ");
+                    System.out.println("Determinan.txt"); System.out.println();
+                    System.out.println("======== =========== ========");
+                }
+                else{
+                    System.out.println();
+                    System.out.println("Determinan tidak dapat ditentukan.");
+                    System.out.println();
+                }
+            }
             
             public double Kofaktor(int m, int n) {
 

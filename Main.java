@@ -78,9 +78,7 @@ public class Main{
     public static void main(String args[]) throws IOException{
         
         /* Kamus */
-        int baris, kolom;
-        double hasilDet;
-        MATRIKS M, Mkof;
+        MATRIKS M;
         int pilihan, pilihan1;
         Scanner in = new Scanner(System.in);
         int lanjut = 1; 
@@ -113,8 +111,10 @@ public class Main{
                 M = TampilInput();
 
                 if (pilihan1 == 1){/*Gauss*/
+                    
                     /* Kamus */
                     SPL splG;
+                    
                     /* Algoritma */
                     System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
                     int jpers = in.nextInt();
@@ -128,8 +128,10 @@ public class Main{
                 }
 
                 else if (pilihan1 == 2){/*Gauss-Jordan*/
+                    
                     /* Kamus */
                     SPL splGJ;
+                    
                     /* Algoritma */
                     System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
                     int jpers = in.nextInt();
@@ -142,8 +144,10 @@ public class Main{
                 }
 
                 else if (pilihan1 == 3){/*Metode Balikan*/
+                    
                     /* Kamus */
                     SPL splB;
+                    
                     /* Algoritma */
                     System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
                     int jpers = in.nextInt();
@@ -172,19 +176,10 @@ public class Main{
                 pilihan1 = in.nextInt();
                 System.out.println(" ");
 
+                System.out.println("Perhatian : Matriks harus persegi");
                 M = TampilInput();
-                
-                System.out.println(" ");
-                System.out.print("Nilai determinan dari matriks tersebut = ");
 
-                if (pilihan1 == 1){
-                    M.Gauss();
-                }
-                else if (pilihan == 2) {
-                    hasilDet = M.DetCof(M);
-                    System.out.printf("%.3f", hasilDet);
-                }
-
+                M.PrintDet(pilihan1);
             }
 
             else if (pilihan ==3) { /*Invers Matriks*/
@@ -226,9 +221,8 @@ public class Main{
             else if (pilihan == 5) { /*Matriks Adjoint*/
 
                 System.out.println(" ");
-
-                System.out.println(" ");
                 System.out.println("Perhatian : Matriks harus persegi");
+                System.out.println(" ");
                 M = TampilInput();
                 
                 M.PrintAdjoint();
@@ -261,7 +255,7 @@ public class Main{
                     I.IntPolKey();
                 }
                 else if(pilihFile==2){
-                    System.out.print("Masukkan nama file matriks yang ingin gunakan: ");
+                    System.out.print("Masukkan nama file yang ingin gunakan: ");
                     String namafile = in.next();
                     I.IntPolFile(namafile);
                 }
@@ -289,7 +283,5 @@ public class Main{
 
         }
         System.out.println("======= GOOD BYE =======");
-        in.close();
-
     }
 }

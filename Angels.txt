@@ -2,5 +2,10 @@ Solusi Sistem Persamaan Linear
 x5 = t5 
 x4 = -1.00 + t5 
 x3 = t3 
+<<<<<<< HEAD
 + 2.00t5 
 x1 = 3.00 + 1.00t5 
+=======
+x2 =  2.00t5 
+x1 = 3.00 + t5 
+>>>>>>> 40d97ce9d91eede24e60c0dae398762719135e69
