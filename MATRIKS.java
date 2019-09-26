@@ -619,9 +619,14 @@ public class MATRIKS{
             }
 
             /*** CRAMER'S RULE ***/
-            public void CariMCrammer(){
+            public void CariMCrammer() throws IOException{
             /* Mengganti 1 kolom i dengan kolom terakhir matriks augmented lalu mencari determinan 
             dari matriks baru tersebut*/
+                
+                FileWriter fw = new FileWriter("Crammer_Hasil.txt");
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw);
+
                 int i, j, n, k;
                 double hasil;
 
@@ -638,9 +643,13 @@ public class MATRIKS{
 
                 if ((DetCof(Mtemp2) == 0) || (Mtemp2.NBrsEff != Mtemp2.NKolEff)) {
                     System.out.println("Solusi SPL tidak bisa dicari menggunakan metode ini");
+                    out.println("Solusi SPL tidak bisa dicari menggunakan metode ini");
                 }
 
                 else {
+                    out.println("Solusi SPL");
+                    System.out.println("Solusi SPL");
+                    System.out.println("Hasil dapat dilihat pada file Crammer_Hasil.txt" );
                     for (n = 1; n < this.GetLastIdxKol(); n++){
                         for (i = Mtemp.GetFirstIdxBrs(); i <= Mtemp.GetLastIdxBrs(); i++){
                             for (j = Mtemp.GetFirstIdxKol(); j <= Mtemp.GetLastIdxKol(); j++){
@@ -656,11 +665,16 @@ public class MATRIKS{
                         }
                         hasil = DetCof(Mtemp)/DetCof(Mtemp2);
                         System.out.print("X");
+                        out.print("X");
                         System.out.print(n);
+                        out.print(n);
                         System.out.print(" = ");
+                        out.print(" = ");
                         System.out.println(hasil);
+                        out.print(hasil);
                     }
-                }   
+                } 
+                out.close();  
             }
 
             public boolean CekBrsNolSemua(int brs,int finalKol){

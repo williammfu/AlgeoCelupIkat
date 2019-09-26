@@ -58,6 +58,7 @@ public class Main{
         
         }
 
+
         else if(pilihFile == 2){
             System.out.print("Masukkan nama file matriks yang ingin Anda gunakan: ");
             String namafile = in.next();
@@ -102,10 +103,6 @@ public class Main{
 
                 System.out.print(">> Pilihan Anda: ");
                 pilihan1 = in.nextInt();
-
-                /*System.out.println("Anda harus memasukan SPL dalam bentuk matriks augemented");
-                isSPL = true;
-                M = TampilInput();*/
 
                 if (pilihan1 == 1){/*Gauss*/
                     
@@ -207,7 +204,8 @@ public class Main{
                 }
 
                 else if (pilihan1 == 4){/*Metode Aturan Crammer*/
-                    //M.CariMCrammer();
+                    M = TampilInput();
+                    M.CariMCrammer();
                 }
 
             } 
