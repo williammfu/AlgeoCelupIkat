@@ -106,8 +106,10 @@ public class Main{
                 M = TampilInput();
 
                 if (pilihan1 == 1){/*Gauss*/
+                    
                     /* Kamus */
                     SPL splG;
+                    
                     /* Algoritma */
                     System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
                     int jpers = in.nextInt();
@@ -121,8 +123,10 @@ public class Main{
                 }
 
                 else if (pilihan1 == 2){/*Gauss-Jordan*/
+                    
                     /* Kamus */
                     SPL splGJ;
+                    
                     /* Algoritma */
                     System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
                     int jpers = in.nextInt();
@@ -135,8 +139,10 @@ public class Main{
                 }
 
                 else if (pilihan1 == 3){/*Metode Balikan*/
+                    
                     /* Kamus */
                     SPL splB;
+                    
                     /* Algoritma */
                     System.out.print("Masukkan jumlah persamaan yang diinginkan = ");
                     int jpers = in.nextInt();
@@ -254,7 +260,7 @@ public class Main{
                     I.IntPolKey();
                 }
                 else if(pilihFile==2){
-                    System.out.print("Masukkan nama file matriks yang ingin gunakan: ");
+                    System.out.print("Masukkan nama file yang ingin gunakan: ");
                     String namafile = in.next();
                     I.IntPolFile(namafile);
                 }

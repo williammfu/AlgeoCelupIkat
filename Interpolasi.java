@@ -62,7 +62,7 @@ public class Interpolasi{
         MATRIKS Temp, Pol;
         int n;
         int i,j,k; /*variabel untuk looping*/
-        double xi,yi; /*titik yang ingin ditaksir nilainya*/
+        double xi, yi; /*titik yang ingin ditaksir nilainya*/
         double a[]; /*Menampung koefisien polinom*/
  
         /*Algoritma*/
@@ -94,23 +94,14 @@ public class Interpolasi{
         /*Melakukan operasi Gauss*/
         Pol.Gauss();
 
-        /*Langkah 1 back sub*/
-        a = new double[n+1] ;
-         
-        for(i=Pol.GetLastIdxBrs()-1; i>=1; i--){
-            for(j=Pol.GetLastIdxBrs(); j>i; j--){
-                k = j;
-                if(Pol.Mem[j][k] != 0){
-                    Pol.KurangiRow(i,j,k,Pol.Mem[i][k]/Pol.Mem[j][k]);
-                }
-            }
-        }
-
-        /*Nilai koefisien polinom a0,a1,...,an 
-        akan disimpan pada sebuah array a*/
+        /*Back Subtitution, masuk ke array a*/
         a = new double[n+1];
-        for(i=1; i<a.length; i++){
+        a[Pol.GetLastIdxBrs()] = Pol.Mem[Pol.GetLastIdxBrs()][Pol.GetLastIdxKol()];
+        for(i=Pol.GetLastIdxBrs()-1; i>=1 ;i--){
             a[i] = Pol.Mem[i][Pol.GetLastIdxKol()];
+            for(j=Pol.GetLastIdxKol()-1; j>i; j--){
+                a[i] -= Pol.Mem[i][j]*a[j+1]; 
+            }
         }
 
         /*Menghitung nilai polinom untuk xi*/
@@ -161,24 +152,17 @@ public class Interpolasi{
         Pol.Gauss();
 
         /*Back Subtition, untuk mengisi array a*/
-        for(i=Pol.GetLastIdxBrs()-1; i>=1; i--){
-            for(j=Pol.GetLastIdxBrs(); j>i; j--){
-                int k = j;
-                if(Pol.Mem[j][k] != 0){
-                    Pol.KurangiRow(i,j,k,Pol.Mem[i][k]/Pol.Mem[j][k]);
-                }
-            }
-        }
-        
-        /*Mengisi array a*/
-        a = new double[Temp.NBrsEff+1];
-        for(i=1; i<=Pol.GetLastIdxBrs(); i++){
+        a = new double[Pol.GetLastIdxBrs()+1];
+        a[Pol.GetLastIdxBrs()] = Pol.Mem[Pol.GetLastIdxBrs()][Pol.GetLastIdxKol()];
+        for(i=Pol.GetLastIdxBrs()-1; i>=1 ;i--){
             a[i] = Pol.Mem[i][Pol.GetLastIdxKol()];
+            for(j=Pol.GetLastIdxKol()-1; j>i; j--){
+                a[i] -= Pol.Mem[i][j]*a[j]; 
+            }
         }
 
         /*Polinom akan ditulis pada file output*/
         polinom = MakePolinom(a);
-        
         
         /*Menghitung nilai polinom untuk xi*/
         /*Hasil disimpan pada yi*/
@@ -220,7 +204,7 @@ public class Interpolasi{
         System.out.print("Hasil telah disimpan pada file");
         System.out.print(" '"); System.out.print(a + "'\n");
         System.out.println();
-        System.out.println("======== TERIMA KASIH ========");
+        System.out.println("======== ============= ========");
         
     }
 }
