@@ -99,15 +99,15 @@ public class Interpolasi{
             for(i=Pol.GetLastIdxBrs()-1; i>=1 ;i--){
                 a[i] = Pol.Mem[i][Pol.GetLastIdxKol()];
                 for(j=Pol.GetLastIdxKol()-1; j>i; j--){
-                    a[i] -= Pol.Mem[i][j]*a[j+1]; 
+                    a[i] -= Pol.Mem[i][j]*a[j]; 
                 }
             }
     
             /*Menghitung nilai polinom untuk xi*/
             /*Hasil disimpan pada yi*/
             yi = 0;
-            for(i=1; i<=n; i++){
-                yi += Math.pow(xi,i-1)*a[i];
+            for(i=Pol.GetLastIdxBrs(); i>=1; i--){
+                yi += a[i]*Math.pow(xi,i-1);
             }
             String polinom = MakePolinom(a);
     
@@ -185,6 +185,7 @@ public class Interpolasi{
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter out = new PrintWriter(bw);
 
+        out.println();
         out.println("Persamaan polinom hasil interpolasi:");
         out.println(polinom);
 
