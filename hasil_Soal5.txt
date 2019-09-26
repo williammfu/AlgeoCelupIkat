@@ -1,5 +1,0 @@
-
-Persamaan polinom hasil interpolasi:
-p(x) = -4841876640386912  + 16985052312781.922x - 25535143790.888x^2 + 21327122.263x^3 - 10687.411x^4 + 3.213x^5 - 0.001x^6 + 0x^7
-Nilai xi yang ingin dicari = 1975.00000
-Nilai yi taksiran = 40.00000
