@@ -175,14 +175,7 @@ public class Main{
                 
                 System.out.print("Nilai determinan dari matriks tersebut = ");
 
-                if (pilihan1 == 1){
-                    hasilDet = M.DetOBE();
-                    System.out.printf("%.4f", hasilDet);
-                }
-                else if (pilihan == 2) {
-                    hasilDet = M.DetCof(M);
-                    System.out.printf("%.4f", hasilDet);
-                }
+                M.PrintDet(pilihan1);
 
             }
 

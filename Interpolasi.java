@@ -73,7 +73,7 @@ public class Interpolasi{
     
             /*Membuat sebuah matriks Temp berukuran (n x 2)*/
             System.out.println();
-            System.out.printf("Masukan %d  buah titik\n", n);
+            System.out.printf("Masukan %d buah titik\n", n);
             System.out.println("Antara x dan y dipisahkan dengan spasi");
             System.out.println("Setiap titik dipisahkan dengan ENTER");
             Temp = new MATRIKS(n,2);
