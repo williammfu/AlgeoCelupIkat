@@ -73,9 +73,7 @@ public class Main{
     public static void main(String args[]) throws IOException{
         
         /* Kamus */
-        int baris, kolom;
-        double hasilDet;
-        MATRIKS M, Mkof;
+        MATRIKS M;
         int pilihan, pilihan1;
         Scanner in = new Scanner(System.in);
         int lanjut = 1; 
@@ -171,12 +169,10 @@ public class Main{
                 pilihan1 = in.nextInt();
                 System.out.println(" ");
 
+                System.out.println("Perhatian : Matriks harus persegi");
                 M = TampilInput();
-                
-                System.out.print("Nilai determinan dari matriks tersebut = ");
 
                 M.PrintDet(pilihan1);
-
             }
 
             else if (pilihan ==3) { /*Invers Matriks*/
