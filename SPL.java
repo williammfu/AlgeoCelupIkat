@@ -76,20 +76,28 @@ public class SPL{
      public void CekSolveAndBebas(){
          /* Kamus */
          int i;
+         boolean BTemp[];
          /* Algoritma */
+         if(Mtrx.GetLastIdxKol()-1 < Mtrx.GetLastIdxBrs()){
+             BTemp = new boolean[Mtrx.GetLastIdxBrs()+1];
+         }
+         else{
+             BTemp = new boolean[Mtrx.GetLastIdxKol()];
+         }
          for (i = Mtrx.GetFirstIdxBrs(); i<= Mtrx.GetLastIdxBrs(); i++){
             if(Mtrx.CekBrsNolSemua(i,Mtrx.GetLastIdxKol())){
-                Bebas[i] = true;
+                BTemp[i] = true;
             }
             else if(Mtrx.CekBrsNolSemua(i,Mtrx.GetLastIdxKol()-1)){
                 System.out.println("Holaa");
                 solveable = false;
-                Bebas[i] = false;
+                BTemp[i] = false;
             }
             else{
-                Bebas[i] = false;
+                BTemp[i] = false;
             }
          }
+         Bebas = BTemp;
      }
 
      public void SolusiPerBaris(int i){
@@ -182,11 +190,30 @@ public class SPL{
     public void SolusiByGaussJordan(){
         // Kamus
         int i,j;
+        MATRIKS MTemp;
         // Algoritma
         Mtrx.Gauss();
         Mtrx.Jordan();
-        UrutinGauss();
-        CekSolveAndBebas();
+        // Pengecekan apakah jumlah kolom-1 lebih kecil dari jumlah baris
+        if(Mtrx.GetLastIdxKol()-1 < Mtrx.GetLastIdxBrs()){
+            CekSolveAndBebas();
+            MTemp = new MATRIKS(Mtrx.GetLastIdxKol()-1, Mtrx.GetLastIdxKol());
+            for(i=MTemp.GetFirstIdxBrs(); i<=MTemp.GetLastIdxBrs(); i++){
+                for(j=MTemp.GetFirstIdxKol(); j<=MTemp.GetLastIdxKol(); j++){
+                    MTemp.SetElmt(i,j,Mtrx.GetElmt(i,j));
+                }
+            }
+            this.Mtrx = MTemp;
+            this.Solusi = new MATRIKS(MTemp.NKolEff-1,MTemp.NKolEff-1);
+            if(solveable){
+                UrutinGauss();
+                CekSolveAndBebas();
+            }
+        }
+        else{
+            UrutinGauss();
+            CekSolveAndBebas();
+        }
         if(!solveable){
             System.out.println("Solusi tidak ada bro!");
         }
@@ -207,10 +234,29 @@ public class SPL{
      public void SolusiByGauss(){
         // Kamus
         int i,j;
+        MATRIKS MTemp;
         // Algoritma
         Mtrx.Gauss();
-        UrutinGauss();
-        CekSolveAndBebas();
+        // Pengecekan apakah jumlah kolom-1 lebih kecil dari jumlah baris
+        if(Mtrx.GetLastIdxKol()-1 < Mtrx.GetLastIdxBrs()){
+            CekSolveAndBebas();
+            MTemp = new MATRIKS(Mtrx.GetLastIdxKol()-1, Mtrx.GetLastIdxKol());
+            for(i=MTemp.GetFirstIdxBrs(); i<=MTemp.GetLastIdxBrs(); i++){
+                for(j=MTemp.GetFirstIdxKol(); j<=MTemp.GetLastIdxKol(); j++){
+                    MTemp.SetElmt(i,j,Mtrx.GetElmt(i,j));
+                }
+            }
+            this.Mtrx = MTemp;
+            this.Solusi = new MATRIKS(MTemp.NKolEff-1,MTemp.NKolEff-1);
+            if(solveable){
+                UrutinGauss();
+                CekSolveAndBebas();
+            }
+        }
+        else{
+            UrutinGauss();
+            CekSolveAndBebas();
+        }
         if(!solveable){
             System.out.println("Solusi tidak ada bro!");
         }
